@@ -2,11 +2,13 @@
 
 void CMainMenuGameState::Start()
 {
+	windowCenterX = APP_VIRTUAL_WIDTH / 2;
+	windowCenterY = APP_VIRTUAL_HEIGHT / 2;
 }
 
 void CMainMenuGameState::Update()
 {
-	if (App::GetController().CheckButton(XINPUT_GAMEPAD_A, true))
+	if (App::GetController().CheckButton(XINPUT_GAMEPAD_START, true))
 	{
 		ChangeState(GAMEPLAY);
 	}
@@ -14,9 +16,20 @@ void CMainMenuGameState::Update()
 
 void CMainMenuGameState::Render()
 {
-	App::Print(10, 60, "Main Menu ", 1.0f, 0.0f, 1.0f, GLUT_BITMAP_HELVETICA_10);
+	App::Print(windowCenterX, windowCenterY + windowCenterY/2, " Game Name ", 0, 1, 0, GLUT_BITMAP_TIMES_ROMAN_24);
+
+	App::Print(windowCenterX, windowCenterY - windowCenterY / 2,
+		" Press Enter/Start To Begin ", 0, 1, 0, GLUT_BITMAP_TIMES_ROMAN_24);
 }
 
 void CMainMenuGameState::Cleanup()
+{
+}
+
+void CMainMenuGameState::Pause()
+{
+}
+
+void CMainMenuGameState::Resume()
 {
 }

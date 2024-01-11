@@ -25,6 +25,9 @@
     <ClCompile Include="src\GameManager\CGameState.cpp" />
     <ClCompile Include="src\GameManager\GameStates\CMainMenuGameState.cpp" />
     <ClCompile Include="src\GameManager\GameStates\CGameplayGameState.cpp" />
+    <ClCompile Include="src\LevelManager\CLevelManager.cpp" />
+    <ClCompile Include="src\LevelManager\CBaseLevel.cpp" />
+    <ClCompile Include="src\LevelManager\Levels\CLevelOne.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
@@ -57,6 +60,9 @@
     <ClInclude Include="src\GameManager\EGameState.h" />
     <ClInclude Include="src\GameManager\GameStates\CMainMenuGameState.h" />
     <ClInclude Include="src\GameManager\GameStates\CGameplayGameState.h" />
+    <ClInclude Include="src\LevelManager\CLevelManager.h" />
+    <ClInclude Include="src\LevelManager\CBaseLevel.h" />
+    <ClInclude Include="src\LevelManager\Levels\CLevelOne.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="NextAPI">

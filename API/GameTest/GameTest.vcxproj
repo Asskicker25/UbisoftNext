@@ -182,6 +182,9 @@
     <ClInclude Include="App\SimpleController.h" />
     <ClInclude Include="App\SimpleSound.h" />
     <ClInclude Include="App\SimpleSprite.h" />
+    <ClInclude Include="src\LevelManager\Levels\CLevelOne.h" />
+    <ClInclude Include="src\LevelManager\CBaseLevel.h" />
+    <ClInclude Include="src\LevelManager\CLevelManager.h" />
     <ClInclude Include="src\GameManager\GameStates\CGameplayGameState.h" />
     <ClInclude Include="src\GameManager\GameStates\CMainMenuGameState.h" />
     <ClInclude Include="src\GameManager\EGameState.h" />
@@ -197,6 +200,9 @@
     <ClCompile Include="App\SimpleController.cpp" />
     <ClCompile Include="App\SimpleSound.cpp" />
     <ClCompile Include="App\SimpleSprite.cpp" />
+    <ClCompile Include="src\LevelManager\Levels\CLevelOne.cpp" />
+    <ClCompile Include="src\LevelManager\CBaseLevel.cpp" />
+    <ClCompile Include="src\LevelManager\CLevelManager.cpp" />
     <ClCompile Include="src\GameManager\GameStates\CGameplayGameState.cpp" />
     <ClCompile Include="src\GameManager\GameStates\CMainMenuGameState.cpp" />
     <ClCompile Include="src\GameManager\CGameManager.cpp" />

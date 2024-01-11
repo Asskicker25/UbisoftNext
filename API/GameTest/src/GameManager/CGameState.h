@@ -2,6 +2,7 @@
 
 #include "EGameState.h"
 #include "../../App/app.h"
+#include <string>
 
 class CGameManager;
 
@@ -17,10 +18,15 @@ public:
 
 	virtual void Cleanup() = 0;
 
+	virtual void Pause() = 0;
+	virtual void Resume() = 0;
+
 	void ChangeState(EGameState state);
 	void SetGameManager(CGameManager* gameManger);
 
 private:
+	
+	bool mIsPaused = false;
 	CGameManager* pGameManager = nullptr;
 
 };

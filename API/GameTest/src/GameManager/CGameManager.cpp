@@ -14,7 +14,8 @@ void CGameManager::Update()
 void CGameManager::Render()
 {
 	if (pCurrentGameState == nullptr) return;
-	
+
+	PrintGameState();
 	pCurrentGameState->Render();
 
 }
@@ -38,6 +39,7 @@ void CGameManager::ChangeState(EGameState state)
 	}
 
 	pCurrentGameState = mListOfStates[state];
+	eCurrentGameState = state;
 	pCurrentGameState->Start();
 
 }
@@ -45,4 +47,31 @@ void CGameManager::ChangeState(EGameState state)
 void CGameManager::Cleanup()
 {
 	pCurrentGameState->Cleanup();
+
+	std::unordered_map<EGameState, CGameState*>::iterator it;
+
+	for (it = mListOfStates.begin(); it != mListOfStates.end(); ++it)
+	{
+		delete it->second;
+		it->second = nullptr;
+	}
+
+	mListOfStates.clear();
+}
+
+void CGameManager::PrintGameState()
+{
+
+	switch (eCurrentGameState)
+	{
+	case MAIN_MENU:
+		mGameStateString = "Main Menu";
+		break;
+
+	case GAMEPLAY:
+		mGameStateString = "Gameplay";
+		break;
+	}
+
+	App::Print(10, 60, (mGameStateMessage + mGameStateString).c_str(), 1.0f, 0.0f, 1.0f, GLUT_BITMAP_HELVETICA_10);
 }

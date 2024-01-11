@@ -1,22 +1,33 @@
 #include "CGameplayGameState.h"
+#include "../../LevelManager/CLevelManager.h"
+
+
+CGameplayGameState::~CGameplayGameState()
+{
+}
 
 void CGameplayGameState::Start()
 {
+	CLevelManager::GetInstance().Start();
 }
 
 void CGameplayGameState::Update()
 {
-	if (App::GetController().CheckButton(XINPUT_GAMEPAD_A, true))
-	{
-		ChangeState(MAIN_MENU);
-	}
+	CLevelManager::GetInstance().Update();
 }
 
 void CGameplayGameState::Render()
 {
-	App::Print(10, 60, "GamePlay ", 1.0f, 0.0f, 1.0f, GLUT_BITMAP_HELVETICA_10);
 }
 
 void CGameplayGameState::Cleanup()
+{
+}
+
+void CGameplayGameState::Pause()
+{
+}
+
+void CGameplayGameState::Resume()
 {
 }

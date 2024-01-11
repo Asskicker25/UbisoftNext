@@ -11,6 +11,7 @@
 #include "src/GameManager/CGameManager.h"
 #include "src/GameManager/GameStates/CMainMenuGameState.h"
 #include "src/GameManager/GameStates/CGameplayGameState.h"
+#include "src/LevelManager/CLevelManager.h"
 
 
 CGameManager* pGameManager;
@@ -25,6 +26,7 @@ void Init()
 	pGameManager->ChangeState(MAIN_MENU);
 
 	pGameManager->Start();
+	CLevelManager::GetInstance().Start();
 }
 
 
@@ -42,4 +44,6 @@ void Render()
 void Shutdown()
 {	
 	pGameManager->Cleanup();
+	CLevelManager::GetInstance().Cleanup();
+
 }
