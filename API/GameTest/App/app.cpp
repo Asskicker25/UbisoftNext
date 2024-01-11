@@ -2,7 +2,6 @@
 // App.cpp
 // Implementation of the calls that are exposed via the App namespace.
 //---------------------------------------------------------------------------------
-#include "stdafx.h"
 //---------------------------------------------------------------------------------
 #include <string>
 #include "main.h"

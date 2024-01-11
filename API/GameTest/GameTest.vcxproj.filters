@@ -21,6 +21,10 @@
     <ClCompile Include="stb_image\stb_image.cpp">
       <Filter>stb_image</Filter>
     </ClCompile>
+    <ClCompile Include="src\GameManager\CGameManager.cpp" />
+    <ClCompile Include="src\GameManager\CGameState.cpp" />
+    <ClCompile Include="src\GameManager\GameStates\CMainMenuGameState.cpp" />
+    <ClCompile Include="src\GameManager\GameStates\CGameplayGameState.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
@@ -48,6 +52,11 @@
     <ClInclude Include="stb_image\stb_image.h">
       <Filter>stb_image</Filter>
     </ClInclude>
+    <ClInclude Include="src\GameManager\CGameManager.h" />
+    <ClInclude Include="src\GameManager\CGameState.h" />
+    <ClInclude Include="src\GameManager\EGameState.h" />
+    <ClInclude Include="src\GameManager\GameStates\CMainMenuGameState.h" />
+    <ClInclude Include="src\GameManager\GameStates\CGameplayGameState.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="NextAPI">
