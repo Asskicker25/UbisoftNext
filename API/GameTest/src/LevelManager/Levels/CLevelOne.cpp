@@ -18,6 +18,7 @@ void CLevelOne::Render()
 
 void CLevelOne::Cleanup()
 {
+	mIsLevelCompleted = false;
 }
 
 bool CLevelOne::IsLevelComplete()

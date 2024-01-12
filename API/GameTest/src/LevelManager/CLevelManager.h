@@ -8,6 +8,8 @@ class CLevelManager
 {
 
 public:
+	CLevelManager();
+
 	static CLevelManager& GetInstance();
 
 	void Start();
@@ -28,7 +30,7 @@ private:
 
 	std::vector<CBaseLevel*> mListOfLevels;
 
-	CBaseLevel* pCurrentLevel;
+	CBaseLevel* pCurrentLevel = nullptr;
 
 	int mCurrentLevelIndex = 0;
 

@@ -28,7 +28,6 @@ void Init()
 	pGameManager->ChangeState(MAIN_MENU);
 
 	pGameManager->Start();
-	CLevelManager::GetInstance().Start();
 }
 
 

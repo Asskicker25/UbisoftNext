@@ -2,13 +2,7 @@
 #include "Levels/CLevelOne.h"
 #include "../GameManager/CGameManager.h"
 
-CLevelManager& CLevelManager::GetInstance()
-{
-	static CLevelManager instance;
-	return instance;
-}
-
-void CLevelManager::Start()
+CLevelManager::CLevelManager()
 {
 	mWindowCenterX = APP_VIRTUAL_WIDTH / 2;
 	mWindowCenterY = APP_VIRTUAL_HEIGHT / 2;
@@ -17,7 +11,17 @@ void CLevelManager::Start()
 	AddLevel(new CLevelOne());
 	AddLevel(new CLevelOne());
 	AddLevel(new CLevelOne());
+}
 
+CLevelManager& CLevelManager::GetInstance()
+{
+	static CLevelManager instance;
+	return instance;
+}
+
+void CLevelManager::Start()
+{
+	mCurrentLevelIndex = 0;
 	pCurrentLevel = mListOfLevels[mCurrentLevelIndex];
 }
 

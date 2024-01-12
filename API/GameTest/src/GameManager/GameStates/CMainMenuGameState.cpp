@@ -1,4 +1,5 @@
 #include "CMainMenuGameState.h"
+#include "../../LevelManager/CLevelManager.h"
 
 void CMainMenuGameState::Start()
 {
@@ -10,6 +11,8 @@ void CMainMenuGameState::Update()
 {
 	if (App::GetController().CheckButton(XINPUT_GAMEPAD_START, true))
 	{
+		CLevelManager::GetInstance().Start();
+
 		ChangeState(GAMEPLAY);
 	}
 }
