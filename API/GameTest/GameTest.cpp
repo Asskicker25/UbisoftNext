@@ -11,6 +11,7 @@
 #include "src/GameManager/CGameManager.h"
 #include "src/GameManager/GameStates/CMainMenuGameState.h"
 #include "src/GameManager/GameStates/CGameplayGameState.h"
+#include "src/GameManager/GameStates/CLevelCompleteGameState.h"
 #include "src/LevelManager/CLevelManager.h"
 
 
@@ -22,6 +23,7 @@ void Init()
 
 	pGameManager->AddState(MAIN_MENU, new CMainMenuGameState());
 	pGameManager->AddState(GAMEPLAY, new CGameplayGameState());
+	pGameManager->AddState(LEVEL_COMPLETE, new CLevelCompleteGameState());
 
 	pGameManager->ChangeState(MAIN_MENU);
 

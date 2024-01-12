@@ -18,12 +18,11 @@ public:
 	void RemoveLevel(CBaseLevel* level);
 
 	void StartLevel();
-	void NextLevel();
+	bool NextLevel();
 
 	void Cleanup();
 
 	std::function<void()> OnNextLevel = nullptr;
-	std::function<void()> OnAllLevelsComplete = nullptr;
 
 private:
 
@@ -31,5 +30,8 @@ private:
 
 	CBaseLevel* pCurrentLevel;
 
-	int currentLevelIndex = 0;
+	int mCurrentLevelIndex = 0;
+
+	float mWindowCenterX = 0;
+	float mWindowCenterY = 0;
 };

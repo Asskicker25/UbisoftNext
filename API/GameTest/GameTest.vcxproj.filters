@@ -28,6 +28,7 @@
     <ClCompile Include="src\LevelManager\CLevelManager.cpp" />
     <ClCompile Include="src\LevelManager\CBaseLevel.cpp" />
     <ClCompile Include="src\LevelManager\Levels\CLevelOne.cpp" />
+    <ClCompile Include="src\GameManager\GameStates\CLevelCompleteGameState.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
@@ -63,6 +64,7 @@
     <ClInclude Include="src\LevelManager\CLevelManager.h" />
     <ClInclude Include="src\LevelManager\CBaseLevel.h" />
     <ClInclude Include="src\LevelManager\Levels\CLevelOne.h" />
+    <ClInclude Include="src\GameManager\GameStates\CLevelCompleteGameState.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="NextAPI">

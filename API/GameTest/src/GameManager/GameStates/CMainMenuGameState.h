@@ -17,8 +17,8 @@ public:
 
 
 private: 
-	float windowCenterX = 0;
-	float windowCenterY = 0;
+	float mWindowCenterX = 0;
+	float mWindowCenterY = 0;
 
 };
 

@@ -71,6 +71,10 @@ void CGameManager::PrintGameState()
 	case GAMEPLAY:
 		mGameStateString = "Gameplay";
 		break;
+
+	case LEVEL_COMPLETE:
+		mGameStateString = "Level Complete";
+		break;
 	}
 
 	App::Print(10, 60, (mGameStateMessage + mGameStateString).c_str(), 1.0f, 0.0f, 1.0f, GLUT_BITMAP_HELVETICA_10);

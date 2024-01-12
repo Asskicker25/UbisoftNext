@@ -1,5 +1,6 @@
 #pragma once
 
+#include "../../App/app.h"
 
 class CBaseLevel
 {

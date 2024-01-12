@@ -13,5 +13,8 @@ public:
 	void Render() override;
 	void Cleanup() override;
 	bool IsLevelComplete() override;
+
+private:
+	bool mIsLevelCompleted = false;
 };
 

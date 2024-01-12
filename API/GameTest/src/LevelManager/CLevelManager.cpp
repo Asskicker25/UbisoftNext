@@ -10,20 +10,42 @@ CLevelManager& CLevelManager::GetInstance()
 
 void CLevelManager::Start()
 {
+	mWindowCenterX = APP_VIRTUAL_WIDTH / 2;
+	mWindowCenterY = APP_VIRTUAL_HEIGHT / 2;
+
+	AddLevel(new CLevelOne());
+	AddLevel(new CLevelOne());
+	AddLevel(new CLevelOne());
 	AddLevel(new CLevelOne());
 
-	pCurrentLevel = mListOfLevels[currentLevelIndex];
+	pCurrentLevel = mListOfLevels[mCurrentLevelIndex];
 }
 
 void CLevelManager::Update()
 {
 	if (pCurrentLevel == nullptr) return;
 
+	if (pCurrentLevel->IsLevelComplete())
+	{
+		pCurrentLevel->Cleanup();
 
+		if (OnNextLevel == nullptr) return;
+
+		OnNextLevel();
+	}
+
+	pCurrentLevel->Update();
 }
 
 void CLevelManager::Render()
 {
+	if (pCurrentLevel == nullptr) return;
+
+	pCurrentLevel->Render();
+
+	App::Print(mWindowCenterX, 2 * mWindowCenterY - mWindowCenterY / 4,
+		("Level " + std::to_string( mCurrentLevelIndex + 1)).c_str(), 0, 1, 0, GLUT_BITMAP_TIMES_ROMAN_24);
+
 }
 
 void CLevelManager::AddLevel(CBaseLevel* level)
@@ -41,21 +63,18 @@ void CLevelManager::StartLevel()
 	pCurrentLevel->Start();
 }
 
-void CLevelManager::NextLevel()
+bool CLevelManager::NextLevel()
 {
-	currentLevelIndex++;
+	mCurrentLevelIndex++;
 
-	if (currentLevelIndex > mListOfLevels.size())
+	if (mCurrentLevelIndex >= mListOfLevels.size())
 	{
-		if (OnAllLevelsComplete != nullptr)
-		{
-			OnAllLevelsComplete();
-		}
+		return false;
 	}
+	
+	pCurrentLevel = mListOfLevels[mCurrentLevelIndex];
 
-	if (OnNextLevel == nullptr) return;
-
-	OnNextLevel();
+	return true;
 }
 
 void CLevelManager::Cleanup()

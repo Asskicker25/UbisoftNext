@@ -2,24 +2,21 @@
 
 #include "../CGameState.h"
 
-class CGameplayGameState : public CGameState
+class CLevelCompleteGameState : public CGameState
 {
 
 public:
-	CGameplayGameState();
-	~CGameplayGameState();
 
 	// Inherited via CGameState
 	void Start() override;
 	void Update() override;
 	void Render() override;
-
 	void Cleanup() override;
 	void Pause() override;
 	void Resume() override;
 
 private:
-	void ShowLevelComplete();
-
+	float mWindowCenterX = 0;
+	float mWindowCenterY = 0;
 };
 
