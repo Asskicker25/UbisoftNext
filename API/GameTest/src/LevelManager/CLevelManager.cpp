@@ -1,5 +1,6 @@
 #include "CLevelManager.h"
-#include "Levels/CLevelOne.h"
+#include "../Levels/CLevelOne.h"
+#include "../Levels/CLevelTwo.h"
 #include "../GameManager/CGameManager.h"
 
 CLevelManager::CLevelManager()
@@ -8,9 +9,7 @@ CLevelManager::CLevelManager()
 	mWindowCenterY = APP_VIRTUAL_HEIGHT / 2;
 
 	AddLevel(new CLevelOne());
-	AddLevel(new CLevelOne());
-	AddLevel(new CLevelOne());
-	AddLevel(new CLevelOne());
+	AddLevel(new CLevelTwo());
 }
 
 CLevelManager& CLevelManager::GetInstance()
@@ -32,10 +31,13 @@ void CLevelManager::Update()
 	if (pCurrentLevel->IsLevelComplete())
 	{
 		pCurrentLevel->Cleanup();
+		pCurrentLevel = nullptr;
 
 		if (OnNextLevel == nullptr) return;
 
 		OnNextLevel();
+
+		return;
 	}
 
 	pCurrentLevel->Update();
@@ -85,7 +87,7 @@ void CLevelManager::Cleanup()
 {
 	if (pCurrentLevel != nullptr)
 	{
-		pCurrentLevel->Cleanup();
+		pCurrentLevel->Shutdown();
 	}
 
 	for (CBaseLevel* level : mListOfLevels)

@@ -40,10 +40,16 @@ void CEntityManager::Cleanup()
 {
 	std::unordered_map<std::string, CEntity*>::iterator it;
 
-	for (it = mListOfEntities.begin(); it != mListOfEntities.end(); ++it)
+	while (mListOfEntities.size() != 0)
+	{
+		mListOfEntities.begin()->second->Cleanup();
+	}
+
+	/*for (it = mListOfEntities.begin(); it != mListOfEntities.end(); ++it)
 	{
 		it->second->Cleanup();
-	}
+		it->second = nullptr;
+	}*/
 }
 
 void CEntityManager::AddEntity(CEntity* entity)
@@ -63,7 +69,6 @@ void CEntityManager::AddEntity(std::string entityId, CEntity* entity)
 
 void CEntityManager::RemoveEntity(CEntity* entity)
 {
-
-	mListOfEntities[entity->mEntityId]->Cleanup();
+	//mListOfEntities[entity->mEntityId]->Cleanup();
 	mListOfEntities.erase(entity->mEntityId);
 }

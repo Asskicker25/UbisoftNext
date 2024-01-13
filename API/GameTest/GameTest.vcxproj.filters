@@ -27,11 +27,13 @@
     <ClCompile Include="src\GameManager\GameStates\CGameplayGameState.cpp" />
     <ClCompile Include="src\LevelManager\CLevelManager.cpp" />
     <ClCompile Include="src\LevelManager\CBaseLevel.cpp" />
-    <ClCompile Include="src\LevelManager\Levels\CLevelOne.cpp" />
+    <ClCompile Include="src\Levels\CLevelOne.cpp" />
     <ClCompile Include="src\GameManager\GameStates\CLevelCompleteGameState.cpp" />
     <ClCompile Include="src\EntityManager\CEntityManager.cpp" />
     <ClCompile Include="src\EntityManager\CEntity.cpp" />
     <ClCompile Include="src\Entities\CGameObject.cpp" />
+    <ClCompile Include="src\Timer\CTimer.cpp" />
+    <ClCompile Include="src\Levels\CLevelTwo.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
@@ -66,11 +68,13 @@
     <ClInclude Include="src\GameManager\GameStates\CGameplayGameState.h" />
     <ClInclude Include="src\LevelManager\CLevelManager.h" />
     <ClInclude Include="src\LevelManager\CBaseLevel.h" />
-    <ClInclude Include="src\LevelManager\Levels\CLevelOne.h" />
+    <ClInclude Include="src\Levels\CLevelOne.h" />
     <ClInclude Include="src\GameManager\GameStates\CLevelCompleteGameState.h" />
     <ClInclude Include="src\EntityManager\CEntityManager.h" />
     <ClInclude Include="src\EntityManager\CEntity.h" />
     <ClInclude Include="src\Entities\CGameObject.h" />
+    <ClInclude Include="src\Timer\CTimer.h" />
+    <ClInclude Include="src\Levels\CLevelTwo.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="NextAPI">

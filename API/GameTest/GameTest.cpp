@@ -13,6 +13,7 @@
 #include "src/GameManager/GameStates/CGameplayGameState.h"
 #include "src/GameManager/GameStates/CLevelCompleteGameState.h"
 #include "src/LevelManager/CLevelManager.h"
+#include "src/Timer/CTimer.h"
 
 
 CGameManager* pGameManager;
@@ -33,6 +34,7 @@ void Init()
 
 void Update(float deltaTime)
 {
+	CTimer::GetInstance().deltaTime = deltaTime;
 	pGameManager->Update();
 }
 
