@@ -1,7 +1,10 @@
 #include "CLevelOne.h"
 
+CGameObject* player;
+
 void CLevelOne::Start()
 {
+	player = new CGameObject();
 }
 
 void CLevelOne::Update()
@@ -19,6 +22,8 @@ void CLevelOne::Render()
 void CLevelOne::Cleanup()
 {
 	mIsLevelCompleted = false;
+
+	delete player;
 }
 
 bool CLevelOne::IsLevelComplete()

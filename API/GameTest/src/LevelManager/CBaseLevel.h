@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../../App/app.h"
+#include "../Entities/CGameObject.h"
 
 class CBaseLevel
 {

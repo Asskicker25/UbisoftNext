@@ -1,11 +1,15 @@
 #include "CGameManager.h"
+#include "../EntityManager/CEntityManager.h"
 
 void CGameManager::Start()
 {
+	CEntityManager::GetInstance().Start();
 }
 
 void CGameManager::Update()
 {
+	CEntityManager::GetInstance().Update();
+
 	if (pCurrentGameState == nullptr) return;
 
 	pCurrentGameState->Update();
@@ -13,6 +17,8 @@ void CGameManager::Update()
 
 void CGameManager::Render()
 {
+	CEntityManager::GetInstance().Render();
+
 	if (pCurrentGameState == nullptr) return;
 
 	PrintGameState();
@@ -46,6 +52,8 @@ void CGameManager::ChangeState(EGameState state)
 
 void CGameManager::Cleanup()
 {
+	CEntityManager::GetInstance().Cleanup();
+
 	pCurrentGameState->Cleanup();
 
 	std::unordered_map<EGameState, CGameState*>::iterator it;
