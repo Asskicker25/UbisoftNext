@@ -36,3 +36,8 @@ void CGameObject::OnDestroy()
 {
 	Cleanup();
 }
+
+void CGameObject::CopyFromOther(CGameObject* other)
+{
+	CEntity::CopyFromOther(other);
+}

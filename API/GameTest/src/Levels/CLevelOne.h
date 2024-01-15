@@ -2,6 +2,7 @@
 
 #include "../LevelManager/CBaseLevel.h"
 #include "../Player/CPlayer.h"
+#include "../ObjectPooling/ObjectPool.h"
 
 class CLevelOne : public CBaseLevel
 {
@@ -21,6 +22,6 @@ private:
 	bool mIsLevelCompleted = false;
 
 	CPlayer* pPlayer = nullptr;
-
+	CGameObjectPool mObjectPool;
 };
 

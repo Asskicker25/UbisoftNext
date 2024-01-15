@@ -37,6 +37,7 @@
     <ClCompile Include="src\Player\CPlayer.cpp" />
     <ClCompile Include="src\Player\CPlayerController.cpp" />
     <ClCompile Include="App\DataClasses.cpp" />
+    <ClCompile Include="src\ObjectPooling\ObjectPool.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
@@ -81,6 +82,7 @@
     <ClInclude Include="src\Player\CPlayer.h" />
     <ClInclude Include="src\Player\CPlayerController.h" />
     <ClInclude Include="App\DataClasses.h" />
+    <ClInclude Include="src\ObjectPooling\ObjectPool.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="NextAPI">

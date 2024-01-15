@@ -18,5 +18,6 @@ public:
 	virtual void Render();
 	virtual void Cleanup();
 	virtual void OnDestroy();
+	virtual void CopyFromOther(CGameObject* other);
 };
 

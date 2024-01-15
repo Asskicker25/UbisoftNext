@@ -16,6 +16,7 @@ public:
 	virtual void Render() = 0;
 	virtual void Cleanup() = 0;
 	virtual void OnDestroy() = 0;
+	virtual void CopyFromOther(CEntity* entity);
 
 	void Destroy();
 

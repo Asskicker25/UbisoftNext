@@ -17,6 +17,13 @@ CEntity::~CEntity()
 	CEntityManager::GetInstance().RemoveEntity(this);
 }
 
+void CEntity::CopyFromOther(CEntity* entity)
+{
+	this->mEntityId = entity->mEntityId;
+	this->mIsEnabled = entity->mIsEnabled;
+	this->mIsStartInvoked = false;
+}
+
 void CEntity::Destroy()
 {
 	OnDestroy();

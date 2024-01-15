@@ -5,6 +5,7 @@ void CLevelOne::Start()
 {	
 	pPlayer = new CPlayer();
 	pPlayer->pSprite->SetPosition(400, 400);
+	mObjectPool.SetPoolObject(pPlayer);
 }
 
 void CLevelOne::Update()
