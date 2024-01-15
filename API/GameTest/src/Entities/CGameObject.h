@@ -17,7 +17,6 @@ public:
 	virtual void Update();
 	virtual void Render();
 	virtual void Cleanup();
-	virtual void Destroy();
 	virtual void OnDestroy();
 };
 

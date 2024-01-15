@@ -1,6 +1,7 @@
 #include "CEntity.h"
 #include "CEntityManager.h"
 
+
 void CEntity::InitializeEntity(CEntity* entity)
 {
 	CEntityManager::GetInstance().AddEntity(entity);
@@ -14,4 +15,9 @@ CEntity::CEntity()
 CEntity::~CEntity()
 {
 	CEntityManager::GetInstance().RemoveEntity(this);
+}
+
+void CEntity::Destroy()
+{
+	OnDestroy();
 }

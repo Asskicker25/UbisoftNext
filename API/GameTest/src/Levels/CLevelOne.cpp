@@ -14,11 +14,21 @@ void CLevelOne::Update()
 		mIsLevelCompleted = true;
 	}
 
+	if (App::GetController().CheckButton(XINPUT_GAMEPAD_B, true))
+	{
+		pPlayer->Destroy();
+		pPlayer = nullptr;
+	}
+
+	if (pPlayer == nullptr) return;
+
 	pPlayer->Update();
 }
 
 void CLevelOne::Render()
 {
+	if (pPlayer == nullptr) return;
+
 	pPlayer->Render();
 }
 
@@ -26,6 +36,7 @@ void CLevelOne::Cleanup()
 {
 	mIsLevelCompleted = false;
 
+	if (pPlayer == nullptr) return;
 	pPlayer->Cleanup();
 }
 

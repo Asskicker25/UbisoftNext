@@ -32,10 +32,7 @@ void CGameObject::Cleanup()
 	delete this;
 }
 
-void CGameObject::Destroy()
-{
-}
-
 void CGameObject::OnDestroy()
 {
+	Cleanup();
 }

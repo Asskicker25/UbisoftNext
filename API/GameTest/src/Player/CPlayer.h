@@ -21,7 +21,6 @@ public:
 	void Update() override;
 	void Render() override;
 	void Cleanup() override;
-	void Destroy() override;
 	void OnDestroy() override;
 
 private:

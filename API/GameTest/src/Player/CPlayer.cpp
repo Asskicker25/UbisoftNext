@@ -54,11 +54,8 @@ void CPlayer::Cleanup()
 	CGameObject::Cleanup();
 }
 
-void CPlayer::Destroy()
-{
-}
-
 void CPlayer::OnDestroy()
 {
+	CGameObject::OnDestroy();
 }
 
