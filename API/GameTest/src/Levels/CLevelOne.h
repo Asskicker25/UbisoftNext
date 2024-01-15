@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../LevelManager/CBaseLevel.h"
+#include "../Player/CPlayer.h"
 
 class CLevelOne : public CBaseLevel
 {
@@ -18,5 +19,8 @@ public:
 
 private:
 	bool mIsLevelCompleted = false;
+
+	CPlayer* pPlayer = nullptr;
+
 };
 

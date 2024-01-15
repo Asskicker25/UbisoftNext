@@ -182,6 +182,9 @@
     <ClInclude Include="App\SimpleController.h" />
     <ClInclude Include="App\SimpleSound.h" />
     <ClInclude Include="App\SimpleSprite.h" />
+    <ClInclude Include="App\DataClasses.h" />
+    <ClInclude Include="src\Player\CPlayerController.h" />
+    <ClInclude Include="src\Player\CPlayer.h" />
     <ClInclude Include="src\Levels\CLevelTwo.h" />
     <ClInclude Include="src\Timer\CTimer.h" />
     <ClInclude Include="src\Entities\CGameObject.h" />
@@ -206,6 +209,9 @@
     <ClCompile Include="App\SimpleController.cpp" />
     <ClCompile Include="App\SimpleSound.cpp" />
     <ClCompile Include="App\SimpleSprite.cpp" />
+    <ClCompile Include="App\DataClasses.cpp" />
+    <ClCompile Include="src\Player\CPlayerController.cpp" />
+    <ClCompile Include="src\Player\CPlayer.cpp" />
     <ClCompile Include="src\Levels\CLevelTwo.cpp" />
     <ClCompile Include="src\Timer\CTimer.cpp" />
     <ClCompile Include="src\Entities\CGameObject.cpp" />

@@ -8,7 +8,7 @@ CGameObject::CGameObject()
 
 CGameObject::~CGameObject()
 {
-	delete sprite;
+	delete pSprite;
 }
 
 void CGameObject::Start()
@@ -17,12 +17,12 @@ void CGameObject::Start()
 
 void CGameObject::Update()
 {
-	sprite->Update(CTimer::GetInstance().deltaTime);
+	pSprite->Update(CTimer::GetInstance().deltaTime);
 }
 
 void CGameObject::Render()
 {
-	sprite->Draw();
+	pSprite->Draw();
 
 	App::Print(10, 70, "GameObject Render", 1.0f, 0.0f, 1.0f, GLUT_BITMAP_HELVETICA_10);
 }

@@ -7,17 +7,17 @@ class CGameObject : public CEntity
 
 public:
 
-	CSimpleSprite* sprite = nullptr;
+	CSimpleSprite* pSprite = nullptr;
 
 	CGameObject();
 	~CGameObject();
 
 	// Inherited via CEntity
-	void Start() override;
-	void Update() override;
-	void Render() override;
-	void Cleanup() override;
-	void Destroy() override;
-	void OnDestroy() override;
+	virtual void Start();
+	virtual void Update();
+	virtual void Render();
+	virtual void Cleanup();
+	virtual void Destroy();
+	virtual void OnDestroy();
 };
 

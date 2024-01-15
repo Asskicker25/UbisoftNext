@@ -48,5 +48,4 @@ void Shutdown()
 {	
 	pGameManager->Cleanup();
 	CLevelManager::GetInstance().Cleanup();
-
 }

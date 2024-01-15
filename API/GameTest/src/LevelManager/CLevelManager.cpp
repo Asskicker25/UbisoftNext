@@ -9,7 +9,7 @@ CLevelManager::CLevelManager()
 	mWindowCenterY = APP_VIRTUAL_HEIGHT / 2;
 
 	AddLevel(new CLevelOne());
-	AddLevel(new CLevelTwo());
+	//AddLevel(new CLevelTwo());
 }
 
 CLevelManager& CLevelManager::GetInstance()
