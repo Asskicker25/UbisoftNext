@@ -19,7 +19,6 @@ CEntity::~CEntity()
 
 void CEntity::CopyFromOther(CEntity* entity)
 {
-	this->mEntityId = entity->mEntityId;
 	this->mIsEnabled = entity->mIsEnabled;
 	this->mIsStartInvoked = false;
 }

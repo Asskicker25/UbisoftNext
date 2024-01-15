@@ -19,11 +19,41 @@
 
 std::map<const char *, CSimpleSprite::sTextureDef > CSimpleSprite::m_textures;
 
+CSimpleSprite::CSimpleSprite(CSimpleSprite* other)
+    : m_nColumns(other->m_nColumns)
+    , m_nRows(other->m_nRows)
+{
+    m_fileName = other->m_fileName;
+    if (LoadTexture(m_fileName))
+    {
+        CalculateUVs();
+        m_points[0] = -(m_width / 2.0f);
+        m_points[1] = -(m_height / 2.0f);
+        m_points[2] = m_width / 2.0f;
+        m_points[3] = -(m_height / 2.0f);
+        m_points[4] = m_width / 2.0f;
+        m_points[5] = m_height / 2.0f;
+        m_points[6] = -(m_width / 2.0f);
+        m_points[7] = m_height / 2.0f;
+    }
+
+    m_animations = other->m_animations;
+
+    float x, y;
+    other->GetPosition(x, y);
+    SetPosition(x, y);
+
+    SetScale(other->GetScale());
+    SetAngle(other->GetAngle());
+}
+
+
 //-----------------------------------------------------------------------------
 CSimpleSprite::CSimpleSprite(const char *fileName, unsigned int nColumns, unsigned int nRows)
 	: m_nColumns(nColumns)
 	, m_nRows(nRows)
 {
+    m_fileName = fileName;
 	if (LoadTexture(fileName))
 	{
 		CalculateUVs();
@@ -145,6 +175,7 @@ void CSimpleSprite::SetAnimation(int id)
     }
 	m_currentAnim = -1;
 }
+
 
 bool CSimpleSprite::LoadTexture(const char * filename)
 {

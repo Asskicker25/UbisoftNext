@@ -17,13 +17,6 @@ void CObjectPool<T>::SetPoolObject(T* poolObject)
 	Resize();
 }
 
-template<typename T>
-void CObjectPool<T>::Resize()
-{
-	mListOfObjects.resize(mListOfObjects.size() + mResizeAmount, new T());
-}
-
-
 
 #pragma endregion
 
@@ -42,4 +35,20 @@ void CGameObjectPool::SetPoolObject(CGameObject* poolObject)
 {
 	CObjectPool::SetPoolObject(poolObject);
 
+}
+
+void CGameObjectPool::Resize()
+{
+	int prevSize = mListOfObjects.size();
+	mListOfObjects.resize(mListOfObjects.size() + mResizeAmount);
+
+	for (int i = prevSize; i < mListOfObjects.size(); i++)
+	{
+		mListOfObjects[i] = new CGameObject();
+		mListOfObjects[i]->CopyFromOther(mPoolObject);
+		float x, y;
+		mListOfObjects[i]->pSprite->GetPosition(x, y);
+		x += i * 10;
+		mListOfObjects[i]->pSprite->SetPosition(x, y);
+	}
 }

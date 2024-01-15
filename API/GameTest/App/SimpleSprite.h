@@ -16,6 +16,7 @@ class CSimpleSprite
 {
 public:
     // If width, height and UV coords are not provided then they will be derived from the texture size.
+    CSimpleSprite(CSimpleSprite* other);
     CSimpleSprite(const char *fileName, unsigned int nColumns = 1, unsigned int nRows = 1 );
     void Update(float dt);
     void Draw();
@@ -63,6 +64,7 @@ private:
 	float m_blue = 1.0f;
     int     m_currentAnim = -1;
     float   m_animTime = 0.0F;
+    const char* m_fileName;
 
     struct sAnimation
     {

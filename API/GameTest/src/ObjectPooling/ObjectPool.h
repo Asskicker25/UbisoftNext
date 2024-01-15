@@ -11,15 +11,11 @@ public:
 	virtual T* SpawnObject() = 0;
 	virtual T* DestroyObject() = 0;
 	virtual void SetPoolObject(T* poolObject);
+	virtual void Resize() = 0;
 
 	int mResizeAmount = 10;
-
-private:
-	void Resize();
-
-
-	T* mPoolObject;
 	std::vector<T*> mListOfObjects;
+	T* mPoolObject;
 
 };
 
@@ -33,6 +29,10 @@ public:
 	CGameObject* SpawnObject() override;
 	CGameObject* DestroyObject() override;
 	void SetPoolObject(CGameObject* poolObject) override;
+
+
+	// Inherited via CObjectPool
+	void Resize() override;
 
 };
 

@@ -40,4 +40,9 @@ void CGameObject::OnDestroy()
 void CGameObject::CopyFromOther(CGameObject* other)
 {
 	CEntity::CopyFromOther(other);
+	
+	if (pSprite != nullptr) { delete pSprite; }
+
+	pSprite = new CSimpleSprite(other->pSprite);
+
 }
