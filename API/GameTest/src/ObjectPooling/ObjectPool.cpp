@@ -88,7 +88,7 @@ void CGameObjectPool::Resize()
 		//Misc
 		float x, y;
 		mListOfObjects[i]->pSprite->GetPosition(x, y);
-		x += i * 10;
+		x += i * 20;
 		mListOfObjects[i]->pSprite->SetPosition(x, y);
 	}
 }
