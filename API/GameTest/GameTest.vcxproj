@@ -183,6 +183,11 @@
     <ClInclude Include="App\SimpleSound.h" />
     <ClInclude Include="App\SimpleSprite.h" />
     <ClInclude Include="App\DataClasses.h" />
+    <ClInclude Include="src\Physics\Shapes\CPhysicsShapeCircle.h" />
+    <ClInclude Include="src\Physics\Physics_Utils.h" />
+    <ClInclude Include="src\Physics\Shapes\CPhysicsShapeBox.h" />
+    <ClInclude Include="src\Physics\CPhysicsBaseShape.h" />
+    <ClInclude Include="src\Physics\CPhysicsShape.h" />
     <ClInclude Include="src\ObjectPooling\ObjectPool.h" />
     <ClInclude Include="src\Player\CPlayerController.h" />
     <ClInclude Include="src\Player\CPlayer.h" />
@@ -213,6 +218,11 @@
     <ClCompile Include="App\SimpleSound.cpp" />
     <ClCompile Include="App\SimpleSprite.cpp" />
     <ClCompile Include="App\DataClasses.cpp" />
+    <ClCompile Include="src\Physics\Shapes\CPhysicsShapeCircle.cpp" />
+    <ClCompile Include="src\Physics\Physics_Utils.cpp" />
+    <ClCompile Include="src\Physics\Shapes\CPhysicsShapeBox.cpp" />
+    <ClCompile Include="src\Physics\CPhysicsBaseShape.cpp" />
+    <ClCompile Include="src\Physics\CPhysicsShape.cpp" />
     <ClCompile Include="src\ObjectPooling\ObjectPool.cpp" />
     <ClCompile Include="src\Player\CPlayerController.cpp" />
     <ClCompile Include="src\Player\CPlayer.cpp" />

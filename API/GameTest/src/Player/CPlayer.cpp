@@ -1,4 +1,5 @@
 #include "CPlayer.h"
+#include "../Physics/Physics_Utils.h"
 
 class CPlayer::Pimpl
 {
@@ -22,7 +23,7 @@ CPlayer::CPlayer() :
 	pSprite->CreateAnimation(WALK_LEFT, speed, { 7, 8, 9, 10, 11 });
 
 	pPlayerController = new CPlayerController(this->pSprite);
-
+	pPhysicsShape = new CPhysicsShape(this->pSprite, CIRCLE);
 }
 
 void CPlayer::Start()

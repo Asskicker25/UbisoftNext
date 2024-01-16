@@ -9,6 +9,7 @@ CGameObject::CGameObject()
 CGameObject::~CGameObject()
 {
 	delete pSprite;
+	delete pPhysicsShape;
 }
 
 void CGameObject::Start()
@@ -25,6 +26,7 @@ void CGameObject::Render()
 	if (!mIsVisible) return;
 
 	pSprite->Draw();
+	pPhysicsShape->Render();
 
 	App::Print(10, 70, "GameObject Render", 1.0f, 0.0f, 1.0f, GLUT_BITMAP_HELVETICA_10);
 }

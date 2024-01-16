@@ -40,6 +40,11 @@
     <ClCompile Include="src\ObjectPooling\ObjectPool.cpp" />
     <ClCompile Include="src\TimerEvents\CTimerEventsHandler.cpp" />
     <ClCompile Include="src\TimerEvents\CTimerEvents.cpp" />
+    <ClCompile Include="src\Physics\CPhysicsShape.cpp" />
+    <ClCompile Include="src\Physics\CPhysicsBaseShape.cpp" />
+    <ClCompile Include="src\Physics\Shapes\CPhysicsShapeBox.cpp" />
+    <ClCompile Include="src\Physics\Physics_Utils.cpp" />
+    <ClCompile Include="src\Physics\Shapes\CPhysicsShapeCircle.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
@@ -87,6 +92,11 @@
     <ClInclude Include="src\ObjectPooling\ObjectPool.h" />
     <ClInclude Include="src\TimerEvents\CTimerEventsHandler.h" />
     <ClInclude Include="src\TimerEvents\CTimerEvents.h" />
+    <ClInclude Include="src\Physics\CPhysicsShape.h" />
+    <ClInclude Include="src\Physics\CPhysicsBaseShape.h" />
+    <ClInclude Include="src\Physics\Shapes\CPhysicsShapeBox.h" />
+    <ClInclude Include="src\Physics\Physics_Utils.h" />
+    <ClInclude Include="src\Physics\Shapes\CPhysicsShapeCircle.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="NextAPI">

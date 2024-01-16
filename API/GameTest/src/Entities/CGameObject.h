@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../EntityManager/CEntity.h"
+#include "../Physics/CPhysicsShape.h"
 
 class CGameObject : public CEntity
 {
@@ -10,6 +11,7 @@ public:
 	bool mIsVisible = true;
 
 	CSimpleSprite* pSprite = nullptr;
+	CPhysicsShape* pPhysicsShape = nullptr;
 
 	CGameObject();
 	~CGameObject();
