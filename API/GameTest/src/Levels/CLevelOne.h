@@ -23,8 +23,11 @@ private:
 	void HandleInput();
 
 	bool mIsLevelCompleted = false;
+	bool isColliding = false;
 
 	CPlayer* pPlayer = nullptr;
+	CGameObject* collider = nullptr;
+
 	CGameObjectPool mObjectPool;
 };
 

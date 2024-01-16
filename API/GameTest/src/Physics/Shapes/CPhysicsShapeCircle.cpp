@@ -1,5 +1,9 @@
 #include "CPhysicsShapeCircle.h"
 
+CPhysicsShapeCircle::CPhysicsShapeCircle() : CPhysicsBaseShape()
+{
+}
+
 CPhysicsShapeCircle::CPhysicsShapeCircle(CSimpleSprite* sprite) : CPhysicsBaseShape(sprite)
 {
 	CalculateShape();
@@ -23,16 +27,28 @@ void CPhysicsShapeCircle::CalculateShape()
 
 SCircle CPhysicsShapeCircle::GetCircle()
 {
-	float x, y;
-
-	pSprite->GetPosition(x, y);
-
 	SCircle circle = mCircle;
 
-	circle.mCenter = Vector2(x, y);
+	if (pSprite != nullptr)
+	{
+		float x, y;
+		pSprite->GetPosition(x, y);
+		circle.mCenter = Vector2(x, y);
+	}
+
 	circle.mRadius *= mScale.x;
 
 	return circle;
+}
+
+void CPhysicsShapeCircle::SetCenter(float x, float y)
+{
+	mCircle.mCenter = Vector2(x, y);
+}
+
+void CPhysicsShapeCircle::SetRadius(float radius)
+{
+	mCircle.mRadius = radius;
 }
 
 void CPhysicsShapeCircle::Render()

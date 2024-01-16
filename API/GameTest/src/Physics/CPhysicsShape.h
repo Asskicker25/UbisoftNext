@@ -16,8 +16,8 @@ public:
 	void InitializePhysics(EPhysicsShape shapeType);
 	void Render();
 
-	CPhysicsBaseShape* mShape = nullptr;
+	CPhysicsBaseShape* pShape = nullptr;
 private:
-	CSimpleSprite* mSprite = nullptr;
+	CSimpleSprite* pSprite = nullptr;
 };
 

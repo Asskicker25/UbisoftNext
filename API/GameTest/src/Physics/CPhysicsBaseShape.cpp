@@ -1,12 +1,16 @@
 #include "CPhysicsBaseShape.h"
 
+CPhysicsBaseShape::CPhysicsBaseShape()
+{
+}
+
 CPhysicsBaseShape::CPhysicsBaseShape(CSimpleSprite* sprite)
 {
 	this->pSprite = sprite;
 }
 
-void CPhysicsBaseShape::SetScale(Vector2 scale)
+void CPhysicsBaseShape::SetScale(float x, float y)
 {
-	mScale = scale;
+	mScale = Vector2(x,y);
 }
 

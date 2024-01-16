@@ -13,8 +13,8 @@ bool CheckCollision(CPhysicsShape& a, CPhysicsShape& b)
 		switch (b.mShapeType)
 		{
 		case CIRCLE:
-			return CircleVsCircle(dynamic_cast<CPhysicsShapeCircle*>(a.mShape)->GetCircle(),
-				dynamic_cast<CPhysicsShapeCircle*>(b.mShape)->GetCircle());
+			return CircleVsCircle(dynamic_cast<CPhysicsShapeCircle*>(a.pShape)->GetCircle(),
+				dynamic_cast<CPhysicsShapeCircle*>(b.pShape)->GetCircle());
 
 		case BOX: 
 			break;

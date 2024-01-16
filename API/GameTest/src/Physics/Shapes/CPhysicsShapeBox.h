@@ -6,6 +6,7 @@
 class CPhysicsShapeBox : public CPhysicsBaseShape
 {
 public:
+	CPhysicsShapeBox();
 	CPhysicsShapeBox(CSimpleSprite* sprite);
 	void CalculateShape() override;
 	void Render() override;

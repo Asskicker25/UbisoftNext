@@ -1,5 +1,9 @@
 #include "CPhysicsShapeBox.h"
 
+CPhysicsShapeBox::CPhysicsShapeBox() : CPhysicsBaseShape()
+{
+}
+
 CPhysicsShapeBox::CPhysicsShapeBox(CSimpleSprite* sprite) : CPhysicsBaseShape(sprite)
 {
 	CalculateShape();

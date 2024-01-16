@@ -2,6 +2,8 @@
 
 #include "../EntityManager/CEntity.h"
 #include "../Physics/CPhysicsShape.h"
+#include "../Physics/Shapes/CPhysicsShapeCircle.h"
+#include "../Physics/Shapes/CPhysicsShapeBox.h"
 
 class CGameObject : public CEntity
 {

@@ -1,10 +1,10 @@
 #include "CPhysicsShape.h"
-#include "Shapes/CPhysicsShapeCircle.h"
-#include "Shapes/CPhysicsShapeBox.h"
+#include "../Physics/Shapes/CPhysicsShapeBox.h"
+#include "../Physics/Shapes/CPhysicsShapeCircle.h"
 
 CPhysicsShape::CPhysicsShape(CSimpleSprite* sprite, EPhysicsShape shapeType)
 {
-	this->mSprite = sprite;
+	this->pSprite = sprite;
 	InitializePhysics(shapeType);
 }
 
@@ -13,10 +13,10 @@ void CPhysicsShape::InitializePhysics(EPhysicsShape shapeType)
 	switch (shapeType)
 	{
 	case CIRCLE:
-		mShape = new CPhysicsShapeCircle(mSprite);
+		pShape = pSprite == nullptr ? new CPhysicsShapeCircle() : new CPhysicsShapeCircle(pSprite);
 		break;
 	case BOX:
-		mShape = new CPhysicsShapeBox(mSprite);
+		pShape = pSprite == nullptr ? new CPhysicsShapeBox() :  new CPhysicsShapeBox(pSprite);
 		break;
 	default:
 		break;
@@ -26,5 +26,5 @@ void CPhysicsShape::InitializePhysics(EPhysicsShape shapeType)
 
 void CPhysicsShape::Render()
 {
-	mShape->Render();
+	pShape->Render();
 }
