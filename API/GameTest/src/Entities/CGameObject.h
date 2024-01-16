@@ -7,6 +7,8 @@ class CGameObject : public CEntity
 
 public:
 
+	bool mIsVisible = true;
+
 	CSimpleSprite* pSprite = nullptr;
 
 	CGameObject();

@@ -14,6 +14,7 @@
 #include "src/GameManager/GameStates/CLevelCompleteGameState.h"
 #include "src/LevelManager/CLevelManager.h"
 #include "src/Timer/CTimer.h"
+#include "src/TimerEvents/CTimerEventsHandler.h"
 
 
 CGameManager* pGameManager;
@@ -29,6 +30,7 @@ void Init()
 	pGameManager->ChangeState(MAIN_MENU);
 
 	pGameManager->Start();
+	CTimerEventsHandler::GetInstance().Start();
 }
 
 
@@ -36,6 +38,7 @@ void Update(float deltaTime)
 {
 	CTimer::GetInstance().deltaTime = deltaTime;
 	pGameManager->Update();
+	CTimerEventsHandler::GetInstance().Update();
 }
 
 
@@ -48,4 +51,5 @@ void Shutdown()
 {	
 	pGameManager->Cleanup();
 	CLevelManager::GetInstance().Cleanup();
+	CTimerEventsHandler::GetInstance().Cleanup();
 }

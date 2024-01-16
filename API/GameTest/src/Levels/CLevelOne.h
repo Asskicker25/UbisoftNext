@@ -19,6 +19,9 @@ public:
 
 
 private:
+
+	void HandleInput();
+
 	bool mIsLevelCompleted = false;
 
 	CPlayer* pPlayer = nullptr;

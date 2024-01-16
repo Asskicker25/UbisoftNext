@@ -38,6 +38,8 @@
     <ClCompile Include="src\Player\CPlayerController.cpp" />
     <ClCompile Include="App\DataClasses.cpp" />
     <ClCompile Include="src\ObjectPooling\ObjectPool.cpp" />
+    <ClCompile Include="src\TimerEvents\CTimerEventsHandler.cpp" />
+    <ClCompile Include="src\TimerEvents\CTimerEvents.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
@@ -83,6 +85,8 @@
     <ClInclude Include="src\Player\CPlayerController.h" />
     <ClInclude Include="App\DataClasses.h" />
     <ClInclude Include="src\ObjectPooling\ObjectPool.h" />
+    <ClInclude Include="src\TimerEvents\CTimerEventsHandler.h" />
+    <ClInclude Include="src\TimerEvents\CTimerEvents.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="NextAPI">

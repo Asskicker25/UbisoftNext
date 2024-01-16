@@ -10,16 +10,7 @@ void CLevelOne::Start()
 
 void CLevelOne::Update()
 {
-	if (App::GetController().CheckButton(XINPUT_GAMEPAD_START, true))
-	{
-		mIsLevelCompleted = true;
-	}
-
-	if (App::GetController().CheckButton(XINPUT_GAMEPAD_B, true))
-	{
-		pPlayer->Destroy();
-		pPlayer = nullptr;
-	}
+	HandleInput();
 
 	if (pPlayer == nullptr) return;
 
@@ -36,6 +27,7 @@ void CLevelOne::Render()
 void CLevelOne::Cleanup()
 {
 	mIsLevelCompleted = false;
+	mObjectPool.Cleanup();
 
 	if (pPlayer == nullptr) return;
 	pPlayer->Cleanup();
@@ -49,5 +41,24 @@ void CLevelOne::Shutdown()
 bool CLevelOne::IsLevelComplete()
 {
 	return mIsLevelCompleted;
+}
+
+void CLevelOne::HandleInput()
+{
+	if (App::GetController().CheckButton(XINPUT_GAMEPAD_START, true))
+	{
+		mIsLevelCompleted = true;
+	}
+
+	if (App::GetController().CheckButton(XINPUT_GAMEPAD_B, true))
+	{
+		pPlayer->Destroy();
+		pPlayer = nullptr;
+	}
+
+	if (App::GetController().CheckButton(XINPUT_GAMEPAD_A, true))
+	{
+		mObjectPool.DestroyObject( mObjectPool.SpawnObject(), 3.0f);
+	}
 }
 
