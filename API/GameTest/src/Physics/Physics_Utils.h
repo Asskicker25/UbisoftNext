@@ -30,3 +30,5 @@ extern bool CheckCollision(CPhysicsShape& a, CPhysicsShape& b);
 
 extern bool CircleVsCircle(SCircle& a, SCircle& b);
 extern bool BoxVsBox(SBox& a, SBox& b);
+
+extern bool CircleVsBox(SCircle& circle, SBox box);

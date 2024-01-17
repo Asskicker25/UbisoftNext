@@ -13,6 +13,7 @@ public:
 
 	SBox GetBox();
 
+
 private:
 	SBox mBox;
 };

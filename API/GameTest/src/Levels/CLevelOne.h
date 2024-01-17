@@ -26,7 +26,8 @@ private:
 	bool isColliding = false;
 
 	CPlayer* pPlayer = nullptr;
-	CGameObject* collider = nullptr;
+	CGameObject* mCircleCollider = nullptr;
+	CGameObject* mBoxCollider = nullptr;
 
 	CGameObjectPool mObjectPool;
 };

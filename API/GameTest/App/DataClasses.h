@@ -45,4 +45,9 @@ struct Vector2
 	{
 		return { x + other.x, y + other.y };
 	}
+
+	Vector2 operator*(const float& other) const
+	{
+		return { x * other, y * other };
+	}
 };

@@ -5,6 +5,7 @@
 CPhysicsShape::CPhysicsShape(CSimpleSprite* sprite, EPhysicsShape shapeType)
 {
 	this->pSprite = sprite;
+	this->mShapeType = shapeType;
 	InitializePhysics(shapeType);
 }
 

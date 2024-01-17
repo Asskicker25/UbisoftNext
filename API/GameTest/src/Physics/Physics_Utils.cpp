@@ -17,7 +17,9 @@ bool CheckCollision(CPhysicsShape& a, CPhysicsShape& b)
 				dynamic_cast<CPhysicsShapeCircle*>(b.pShape)->GetCircle());
 
 		case BOX: 
-			break;
+
+			return CircleVsBox(dynamic_cast<CPhysicsShapeCircle*>(a.pShape)->GetCircle(),
+				dynamic_cast<CPhysicsShapeBox*>(b.pShape)->GetBox());
 		}
 
 		break;
@@ -31,9 +33,14 @@ bool CheckCollision(CPhysicsShape& a, CPhysicsShape& b)
 		switch (b.mShapeType)
 		{
 		case CIRCLE:
-			break;
+
+			return CircleVsBox(dynamic_cast<CPhysicsShapeCircle*>(b.pShape)->GetCircle(),
+				dynamic_cast<CPhysicsShapeBox*>(a.pShape)->GetBox());
+
 		case BOX:
-			break;
+
+			return BoxVsBox(dynamic_cast<CPhysicsShapeBox*>(a.pShape)->GetBox(),
+				dynamic_cast<CPhysicsShapeBox*>(b.pShape)->GetBox());
 		}
 
 		break;
@@ -66,4 +73,16 @@ bool BoxVsBox(SBox& a, SBox& b)
     }
 
     return true;
+}
+
+bool CircleVsBox(SCircle& circle, SBox box)
+{
+	float closestX = max(box.mMinPoint.x, min(circle.mCenter.x, box.mMaxPoint.x));
+	float closestY = max(box.mMinPoint.y, min(circle.mCenter.y, box.mMaxPoint.y));
+
+	float distanceX = circle.mCenter.x - closestX;
+	float distanceY = circle.mCenter.y - closestY;
+
+	float distanceSquared = (distanceX * distanceX) + (distanceY * distanceY);
+	return distanceSquared < (circle.mRadius * circle.mRadius);
 }

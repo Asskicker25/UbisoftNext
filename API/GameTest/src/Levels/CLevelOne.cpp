@@ -7,11 +7,18 @@ void CLevelOne::Start()
 	pPlayer->pSprite->SetPosition(400, 400);
 	mObjectPool.SetPoolObject(pPlayer);
 
-	collider = new CGameObject();
-	collider->pPhysicsShape = new CPhysicsShape(nullptr,CIRCLE);
-	CPhysicsShapeCircle* circle = (CPhysicsShapeCircle*)collider->pPhysicsShape->pShape;
+	mCircleCollider = new CGameObject();
+	mCircleCollider->pPhysicsShape = new CPhysicsShape(nullptr,CIRCLE);
+	CPhysicsShapeCircle* circle = (CPhysicsShapeCircle*)mCircleCollider->pPhysicsShape->pShape;
 	circle->SetCenter(700, 400);
 	circle->SetRadius(20);
+
+	mBoxCollider = new CGameObject();
+	mBoxCollider->pPhysicsShape = new CPhysicsShape(nullptr, BOX);
+	CPhysicsShapeBox* box = (CPhysicsShapeBox*)mBoxCollider->pPhysicsShape->pShape;
+	box->SetScale(100, 100);
+	box->SetOffset(200, 400);
+	
 }
 
 void CLevelOne::Update()
@@ -20,7 +27,12 @@ void CLevelOne::Update()
 
 	if (pPlayer == nullptr) return;
 
-	isColliding = CheckCollision(*pPlayer->pPhysicsShape, *collider->pPhysicsShape);
+	isColliding = CheckCollision(*pPlayer->pPhysicsShape, *mCircleCollider->pPhysicsShape);
+
+	if (!isColliding)
+	{
+		isColliding = CheckCollision(*pPlayer->pPhysicsShape, *mBoxCollider->pPhysicsShape);
+	}
 
 	pPlayer->Update();
 }

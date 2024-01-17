@@ -20,7 +20,7 @@ void CPhysicsShapeCircle::CalculateShape()
 
 	float radius = height;
 
-	radius = (width > height ? width * 0.5f : radius * 0.5f) * pSprite->GetScale();
+	radius = (width > height ? width * 0.5f : radius * 0.5f);
 
 	mCircle.mRadius = radius;
 }
@@ -34,7 +34,10 @@ SCircle CPhysicsShapeCircle::GetCircle()
 		float x, y;
 		pSprite->GetPosition(x, y);
 		circle.mCenter = Vector2(x, y);
+		circle.mRadius *= pSprite->GetScale();
 	}
+
+	circle.mCenter = circle.mCenter + mOffset;
 
 	circle.mRadius *= mScale.x;
 
