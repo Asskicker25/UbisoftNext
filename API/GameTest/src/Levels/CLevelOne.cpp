@@ -9,18 +9,21 @@ void CLevelOne::Start()
 	mObjectPool.SetPoolObject(pPlayer);
 
 	mCircleCollider = new CGameObject();
+	mCircleCollider->mName = "Circle";
 	mCircleCollider->pPhysicsShape = new CPhysicsShape(nullptr, CIRCLE);
 	CPhysicsShapeCircle* circle = (CPhysicsShapeCircle*)mCircleCollider->pPhysicsShape->pShape;
 	circle->SetCenter(700, 400);
 	circle->SetRadius(20);
 
 	mBoxCollider = new CGameObject();
+	mBoxCollider->mName = "Box";
 	mBoxCollider->pPhysicsShape = new CPhysicsShape(nullptr, BOX);
 	CPhysicsShapeBox* box = (CPhysicsShapeBox*)mBoxCollider->pPhysicsShape->pShape;
 	box->SetScale(100, 100);
 	box->SetOffset(200, 400);
 
 	mLineCollider = new CGameObject();
+	mLineCollider->mName = "Line";
 	mLineCollider->pPhysicsShape = new CPhysicsShape(nullptr, LINE);
 	CPhysicsShapeLine* line = (CPhysicsShapeLine*)mLineCollider->pPhysicsShape->pShape;
 	line->SetLine(200, 600, 700, 600);
@@ -35,21 +38,15 @@ void CLevelOne::Update()
 
 	mCollisionMessage = "";
 
-	if (CheckCollision(*pPlayer->pPhysicsShape, *mLineCollider->pPhysicsShape))
-	{
-		mCollisionMessage += "Line | ";
-	}
+	std::vector<CGameObject*> collidedObjects;
 
-	if (CheckCollision(*pPlayer->pPhysicsShape, *mBoxCollider->pPhysicsShape))
+	if (CheckCollisionWithTag(pPlayer->pPhysicsShape, "Untagged", collidedObjects))
 	{
-		mCollisionMessage += "Box | ";
+		for (CGameObject* gameObject : collidedObjects)
+		{
+			mCollisionMessage += gameObject->mName + " | ";
+		}
 	}
-
-	if (CheckCollision(*pPlayer->pPhysicsShape, *mCircleCollider->pPhysicsShape))
-	{
-		mCollisionMessage += "Circle | ";
-	}
-
 
 	pPlayer->Update();
 }

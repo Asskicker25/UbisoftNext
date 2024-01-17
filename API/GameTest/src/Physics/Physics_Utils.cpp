@@ -3,30 +3,34 @@
 #include "Shapes/CPhysicsShapeCircle.h"
 #include "Shapes/CPhysicsShapeLine.h"
 #include "CPhysicsShape.h"
+#include "../EntityManager/CEntityManager.h"
+#include "../Entities/CGameObject.h"
 
 
-bool CheckCollision(CPhysicsShape& a, CPhysicsShape& b)
+bool CheckCollision(CPhysicsShape* a, CPhysicsShape* b)
 {
-	switch (a.mShapeType)
+	if (a == nullptr || b == nullptr || a == b) return false;
+
+	switch (a->mShapeType)
 	{
 #pragma region CIRCLE
 
 	case CIRCLE:
 
-		switch (b.mShapeType)
+		switch (b->mShapeType)
 		{
 		case CIRCLE:
-			return CircleVsCircle(dynamic_cast<CPhysicsShapeCircle*>(a.pShape)->GetCircle(),
-				dynamic_cast<CPhysicsShapeCircle*>(b.pShape)->GetCircle());
+			return CircleVsCircle(dynamic_cast<CPhysicsShapeCircle*>(a->pShape)->GetCircle(),
+				dynamic_cast<CPhysicsShapeCircle*>(b->pShape)->GetCircle());
 
 		case BOX: 
 
-			return CircleVsBox(dynamic_cast<CPhysicsShapeCircle*>(a.pShape)->GetCircle(),
-				dynamic_cast<CPhysicsShapeBox*>(b.pShape)->GetBox());
+			return CircleVsBox(dynamic_cast<CPhysicsShapeCircle*>(a->pShape)->GetCircle(),
+				dynamic_cast<CPhysicsShapeBox*>(b->pShape)->GetBox());
 
 		case LINE: 
-			return CircleVsLine(dynamic_cast<CPhysicsShapeCircle*>(a.pShape)->GetCircle(),
-				dynamic_cast<CPhysicsShapeLine*>(b.pShape)->GetLine());
+			return CircleVsLine(dynamic_cast<CPhysicsShapeCircle*>(a->pShape)->GetCircle(),
+				dynamic_cast<CPhysicsShapeLine*>(b->pShape)->GetLine());
 		}
 
 		break;
@@ -37,21 +41,21 @@ bool CheckCollision(CPhysicsShape& a, CPhysicsShape& b)
 
 	case BOX:
 
-		switch (b.mShapeType)
+		switch (b->mShapeType)
 		{
 		case CIRCLE:
 
-			return CircleVsBox(dynamic_cast<CPhysicsShapeCircle*>(b.pShape)->GetCircle(),
-				dynamic_cast<CPhysicsShapeBox*>(a.pShape)->GetBox());
+			return CircleVsBox(dynamic_cast<CPhysicsShapeCircle*>(b->pShape)->GetCircle(),
+				dynamic_cast<CPhysicsShapeBox*>(a->pShape)->GetBox());
 
 		case BOX:
 
-			return BoxVsBox(dynamic_cast<CPhysicsShapeBox*>(a.pShape)->GetBox(),
-				dynamic_cast<CPhysicsShapeBox*>(b.pShape)->GetBox());
+			return BoxVsBox(dynamic_cast<CPhysicsShapeBox*>(a->pShape)->GetBox(),
+				dynamic_cast<CPhysicsShapeBox*>(b->pShape)->GetBox());
 
 		case LINE:
-			return BoxVsLine(dynamic_cast<CPhysicsShapeBox*>(a.pShape)->GetBox(),
-				dynamic_cast<CPhysicsShapeLine*>(b.pShape)->GetLine());
+			return BoxVsLine(dynamic_cast<CPhysicsShapeBox*>(a->pShape)->GetBox(),
+				dynamic_cast<CPhysicsShapeLine*>(b->pShape)->GetLine());
 		}
 
 		break;
@@ -61,20 +65,20 @@ bool CheckCollision(CPhysicsShape& a, CPhysicsShape& b)
 #pragma region LINE
 	case LINE:
 
-		switch (b.mShapeType)
+		switch (b->mShapeType)
 		{
 		case CIRCLE:
-			return CircleVsLine(dynamic_cast<CPhysicsShapeCircle*>(b.pShape)->GetCircle(),
-				dynamic_cast<CPhysicsShapeLine*>(a.pShape)->GetLine());
+			return CircleVsLine(dynamic_cast<CPhysicsShapeCircle*>(b->pShape)->GetCircle(),
+				dynamic_cast<CPhysicsShapeLine*>(a->pShape)->GetLine());
 
 		case BOX:
 
-			return BoxVsLine(dynamic_cast<CPhysicsShapeBox*>(b.pShape)->GetBox(),
-				dynamic_cast<CPhysicsShapeLine*>(a.pShape)->GetLine());
+			return BoxVsLine(dynamic_cast<CPhysicsShapeBox*>(b->pShape)->GetBox(),
+				dynamic_cast<CPhysicsShapeLine*>(a->pShape)->GetLine());
 
 		case LINE:
-			return LineVsLine(dynamic_cast<CPhysicsShapeLine*>(a.pShape)->GetLine(),
-				dynamic_cast<CPhysicsShapeLine*>(b.pShape)->GetLine());
+			return LineVsLine(dynamic_cast<CPhysicsShapeLine*>(a->pShape)->GetLine(),
+				dynamic_cast<CPhysicsShapeLine*>(b->pShape)->GetLine());
 		}
 
 		break;
@@ -84,6 +88,26 @@ bool CheckCollision(CPhysicsShape& a, CPhysicsShape& b)
 
 
 	return false;
+}
+
+bool CheckCollisionWithTag(CPhysicsShape* a, const std::string& tag, std::vector<CGameObject*>& collidedObjects)
+{
+	std::vector<CEntity*> listOfEntities = CEntityManager::GetInstance().GetEntitiesWithTag(tag);
+
+	for (CEntity* entity : listOfEntities)
+	{
+		if (CGameObject* gameObject = dynamic_cast<CGameObject*> (entity))
+		{
+			if (CheckCollision(a, gameObject->pPhysicsShape))
+			{
+				collidedObjects.push_back(gameObject);
+			}
+		}
+	}
+
+	if (collidedObjects.size() == 0) return false;
+
+	return true;
 }
 
 bool CircleVsCircle(SCircle& a, SCircle& b)

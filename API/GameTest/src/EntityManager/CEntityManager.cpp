@@ -72,3 +72,18 @@ void CEntityManager::RemoveEntity(CEntity* entity)
 	//mListOfEntities[entity->mEntityId]->Cleanup();
 	mListOfEntities.erase(entity->mEntityId);
 }
+
+std::vector<CEntity*> CEntityManager::GetEntitiesWithTag(const std::string& tag)
+{
+	std::vector<CEntity*> entitiesWithTag;
+	std::unordered_map<std::string, CEntity*>::iterator it;
+
+	for (it = mListOfEntities.begin(); it != mListOfEntities.end(); ++it)
+	{
+		if (it->second->mTag != tag) continue;
+		
+		entitiesWithTag.push_back(it->second);
+	}
+
+	return entitiesWithTag;
+}

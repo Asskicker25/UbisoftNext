@@ -19,6 +19,8 @@ public:
 	void AddEntity(std::string entityId , CEntity* entity);
 	void RemoveEntity(CEntity* entity);
 
+	std::vector<CEntity*> GetEntitiesWithTag(const std::string& tag);
+
 private:
 	std::unordered_map<std::string, CEntity*> mListOfEntities;
 

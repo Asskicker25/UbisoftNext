@@ -11,6 +11,7 @@ class CGameObject : public CEntity
 public:
 
 	bool mIsVisible = true;
+	std::string mName = "Unnamed";
 
 	CSimpleSprite* pSprite = nullptr;
 	CPhysicsShape* pPhysicsShape = nullptr;

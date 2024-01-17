@@ -1,7 +1,9 @@
 #pragma once
 #include "../../App/app.h"
+#include <string>
 
 class CPhysicsShape;
+class CGameObject;
 
 struct SCircle
 {
@@ -44,7 +46,8 @@ struct SLine
 	Vector2 mEndPoint;
 };
 
-extern bool CheckCollision(CPhysicsShape& a, CPhysicsShape& b);
+extern bool CheckCollision(CPhysicsShape* a, CPhysicsShape* b);
+extern bool CheckCollisionWithTag(CPhysicsShape* a,const std::string& tag, std::vector<CGameObject*>& collidedObjects);
 
 extern bool CircleVsCircle(SCircle& a, SCircle& b);
 extern bool BoxVsBox(SBox& a, SBox& b);
@@ -53,3 +56,4 @@ extern bool LineVsLine(SLine& a, SLine& b);
 extern bool CircleVsBox(SCircle& circle, SBox& box);
 extern bool CircleVsLine(SCircle& circle, SLine& line);
 extern bool BoxVsLine(SBox& box, SLine& line);
+

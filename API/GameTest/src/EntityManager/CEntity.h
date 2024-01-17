@@ -23,6 +23,7 @@ public:
 	virtual void InitializeEntity(CEntity* entity);
 
 	std::string mEntityId = "";
+	std::string mTag = "Untagged";
 	bool mIsEnabled = true;
 	bool mIsStartInvoked = false;
 };
