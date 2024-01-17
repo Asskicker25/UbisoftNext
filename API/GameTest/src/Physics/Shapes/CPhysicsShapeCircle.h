@@ -1,7 +1,6 @@
 #pragma once
 
 #include "../CPhysicsBaseShape.h"
-#include "../Physics_Utils.h"
 
 class CPhysicsShapeCircle : public CPhysicsBaseShape
 {

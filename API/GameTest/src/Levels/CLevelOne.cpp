@@ -1,14 +1,15 @@
 #include "CLevelOne.h"
 #include "../Physics/Physics_Utils.h"
+#include "../Physics/Shapes/CPhysicsShapeLine.h"
 
 void CLevelOne::Start()
-{	
+{
 	pPlayer = new CPlayer();
 	pPlayer->pSprite->SetPosition(400, 400);
 	mObjectPool.SetPoolObject(pPlayer);
 
 	mCircleCollider = new CGameObject();
-	mCircleCollider->pPhysicsShape = new CPhysicsShape(nullptr,CIRCLE);
+	mCircleCollider->pPhysicsShape = new CPhysicsShape(nullptr, CIRCLE);
 	CPhysicsShapeCircle* circle = (CPhysicsShapeCircle*)mCircleCollider->pPhysicsShape->pShape;
 	circle->SetCenter(700, 400);
 	circle->SetRadius(20);
@@ -18,7 +19,12 @@ void CLevelOne::Start()
 	CPhysicsShapeBox* box = (CPhysicsShapeBox*)mBoxCollider->pPhysicsShape->pShape;
 	box->SetScale(100, 100);
 	box->SetOffset(200, 400);
-	
+
+	mLineCollider = new CGameObject();
+	mLineCollider->pPhysicsShape = new CPhysicsShape(nullptr, LINE);
+	CPhysicsShapeLine* line = (CPhysicsShapeLine*)mLineCollider->pPhysicsShape->pShape;
+	line->SetLine(200, 600, 700, 600);
+
 }
 
 void CLevelOne::Update()
@@ -27,12 +33,23 @@ void CLevelOne::Update()
 
 	if (pPlayer == nullptr) return;
 
-	isColliding = CheckCollision(*pPlayer->pPhysicsShape, *mCircleCollider->pPhysicsShape);
+	mCollisionMessage = "";
 
-	if (!isColliding)
+	if (CheckCollision(*pPlayer->pPhysicsShape, *mLineCollider->pPhysicsShape))
 	{
-		isColliding = CheckCollision(*pPlayer->pPhysicsShape, *mBoxCollider->pPhysicsShape);
+		mCollisionMessage += "Line | ";
 	}
+
+	if (CheckCollision(*pPlayer->pPhysicsShape, *mBoxCollider->pPhysicsShape))
+	{
+		mCollisionMessage += "Box | ";
+	}
+
+	if (CheckCollision(*pPlayer->pPhysicsShape, *mCircleCollider->pPhysicsShape))
+	{
+		mCollisionMessage += "Circle | ";
+	}
+
 
 	pPlayer->Update();
 }
@@ -43,10 +60,7 @@ void CLevelOne::Render()
 
 	pPlayer->Render();
 
-	if (isColliding)
-	{
-		App::Print(10, 100, "Collision", 1.0f, 0.0f, 1.0f, GLUT_BITMAP_HELVETICA_10);
-	}
+	App::Print(10, 100, ("Collision : " + mCollisionMessage).c_str(), 1.0f, 0.0f, 1.0f, GLUT_BITMAP_HELVETICA_10);
 }
 
 void CLevelOne::Cleanup()
@@ -83,7 +97,7 @@ void CLevelOne::HandleInput()
 
 	if (App::GetController().CheckButton(XINPUT_GAMEPAD_A, true))
 	{
-		mObjectPool.DestroyObject( mObjectPool.SpawnObject(), 3.0f);
+		mObjectPool.DestroyObject(mObjectPool.SpawnObject(), 3.0f);
 	}
 }
 

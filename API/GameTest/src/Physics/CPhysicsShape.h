@@ -5,6 +5,7 @@ enum EPhysicsShape
 {
 	CIRCLE,
 	BOX,
+	LINE
 };
 
 class CPhysicsShape

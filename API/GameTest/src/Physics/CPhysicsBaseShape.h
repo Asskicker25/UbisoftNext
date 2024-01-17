@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../../App/app.h"
+#include "Physics_Utils.h"
 
 class CSimpleSprite;
 

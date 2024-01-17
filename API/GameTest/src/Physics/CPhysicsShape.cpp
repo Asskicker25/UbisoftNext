@@ -1,6 +1,8 @@
 #include "CPhysicsShape.h"
 #include "../Physics/Shapes/CPhysicsShapeBox.h"
 #include "../Physics/Shapes/CPhysicsShapeCircle.h"
+#include "../Physics/Shapes/CPhysicsShapeLine.h"
+
 
 CPhysicsShape::CPhysicsShape(CSimpleSprite* sprite, EPhysicsShape shapeType)
 {
@@ -19,6 +21,8 @@ void CPhysicsShape::InitializePhysics(EPhysicsShape shapeType)
 	case BOX:
 		pShape = pSprite == nullptr ? new CPhysicsShapeBox() :  new CPhysicsShapeBox(pSprite);
 		break;
+	case LINE : 
+		pShape = new CPhysicsShapeLine();
 	default:
 		break;
 	}

@@ -23,11 +23,12 @@ private:
 	void HandleInput();
 
 	bool mIsLevelCompleted = false;
-	bool isColliding = false;
+	std::string mCollisionMessage = "";
 
 	CPlayer* pPlayer = nullptr;
 	CGameObject* mCircleCollider = nullptr;
 	CGameObject* mBoxCollider = nullptr;
+	CGameObject* mLineCollider = nullptr;
 
 	CGameObjectPool mObjectPool;
 };

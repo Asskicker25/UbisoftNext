@@ -183,6 +183,7 @@
     <ClInclude Include="App\SimpleSound.h" />
     <ClInclude Include="App\SimpleSprite.h" />
     <ClInclude Include="App\DataClasses.h" />
+    <ClInclude Include="src\Physics\Shapes\CPhysicsShapeLine.h" />
     <ClInclude Include="src\Physics\Shapes\CPhysicsShapeCircle.h" />
     <ClInclude Include="src\Physics\Physics_Utils.h" />
     <ClInclude Include="src\Physics\Shapes\CPhysicsShapeBox.h" />
@@ -218,6 +219,7 @@
     <ClCompile Include="App\SimpleSound.cpp" />
     <ClCompile Include="App\SimpleSprite.cpp" />
     <ClCompile Include="App\DataClasses.cpp" />
+    <ClCompile Include="src\Physics\Shapes\CPhysicsShapeLine.cpp" />
     <ClCompile Include="src\Physics\Shapes\CPhysicsShapeCircle.cpp" />
     <ClCompile Include="src\Physics\Physics_Utils.cpp" />
     <ClCompile Include="src\Physics\Shapes\CPhysicsShapeBox.cpp" />

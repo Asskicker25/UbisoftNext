@@ -45,6 +45,7 @@
     <ClCompile Include="src\Physics\Shapes\CPhysicsShapeBox.cpp" />
     <ClCompile Include="src\Physics\Physics_Utils.cpp" />
     <ClCompile Include="src\Physics\Shapes\CPhysicsShapeCircle.cpp" />
+    <ClCompile Include="src\Physics\Shapes\CPhysicsShapeLine.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
@@ -97,6 +98,7 @@
     <ClInclude Include="src\Physics\Shapes\CPhysicsShapeBox.h" />
     <ClInclude Include="src\Physics\Physics_Utils.h" />
     <ClInclude Include="src\Physics\Shapes\CPhysicsShapeCircle.h" />
+    <ClInclude Include="src\Physics\Shapes\CPhysicsShapeLine.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="NextAPI">
