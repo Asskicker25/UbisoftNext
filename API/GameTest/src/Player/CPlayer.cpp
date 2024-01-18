@@ -24,6 +24,7 @@ CPlayer::CPlayer() :
 		
 	pPlayerController = new CPlayerController(this->pSprite);
 	pPhysicsShape = new CPhysicsShape(this->pSprite, BOX);
+	mTag = "Player";
 
 }
 

@@ -50,8 +50,8 @@ void CPlayerController::HandleMove()
 		float x, y;
 		pSprite->GetPosition(x, y);
 
-		x += mMoveDir.x * mMoveSpeed * CTimer::GetInstance().deltaTime;
-		y += mMoveDir.y * mMoveSpeed * CTimer::GetInstance().deltaTime;
+		x += mMoveDir.x * mMoveSpeed * CTimer::GetInstance().mDeltaTime;
+		y += mMoveDir.y * mMoveSpeed * CTimer::GetInstance().mDeltaTime;
 
 		pSprite->SetPosition(x, y);
 	}

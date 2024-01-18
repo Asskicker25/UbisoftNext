@@ -95,6 +95,51 @@ void CSimpleControllers::Update()
 
 		m_Controllers[0].m_state.Gamepad.wButtons = buttons;
 	}
+	else if (numControllers == 1)
+	{
+		m_Controllers[1].m_bConnected = true;
+		WORD buttons = 0;
+		m_Controllers[1].m_state.Gamepad.sThumbLX = 0;
+		m_Controllers[1].m_state.Gamepad.sThumbLY = 0;
+		m_Controllers[1].m_state.Gamepad.sThumbRX = 0;
+		m_Controllers[1].m_state.Gamepad.sThumbRY = 0;
+		m_Controllers[1].m_state.Gamepad.bLeftTrigger = 0;
+		m_Controllers[1].m_state.Gamepad.bRightTrigger = 0;
+
+		if (App::IsKeyPressed(APP_PAD_EMUL_LEFT_THUMB_LEFT)) m_Controllers[1].m_state.Gamepad.sThumbLX = -32767;
+		if (App::IsKeyPressed(APP_PAD_EMUL_LEFT_THUMB_RIGHT)) m_Controllers[1].m_state.Gamepad.sThumbLX = 32767;
+		if (App::IsKeyPressed(APP_PAD_EMUL_LEFT_THUMB_UP)) m_Controllers[1].m_state.Gamepad.sThumbLY = 32767;
+		if (App::IsKeyPressed(APP_PAD_EMUL_LEFT_THUMB_DOWN)) m_Controllers[1].m_state.Gamepad.sThumbLY = -32767;
+		if (App::IsKeyPressed(APP_PAD_EMUL_BUTTON_ALT_A)) buttons |= XINPUT_GAMEPAD_A;
+		if (App::IsKeyPressed(APP_PAD_EMUL_START)) buttons |= XINPUT_GAMEPAD_START;
+
+		if (App::IsKeyPressed(APP_PAD_EMUL_RIGHT_THUMB_LEFT)) m_Controllers[1].m_state.Gamepad.sThumbRX = -32767;
+		if (App::IsKeyPressed(APP_PAD_EMUL_RIGHT_THUMB_RIGHT)) m_Controllers[1].m_state.Gamepad.sThumbRX = 32767;
+		if (App::IsKeyPressed(APP_PAD_EMUL_RIGHT_THUMB_UP)) m_Controllers[1].m_state.Gamepad.sThumbRY = -32767;
+		if (App::IsKeyPressed(APP_PAD_EMUL_RIGHT_THUMB_DOWN)) m_Controllers[1].m_state.Gamepad.sThumbRY = 32767;
+
+		if (App::IsKeyPressed(APP_PAD_EMUL_DPAD_UP))   buttons |= XINPUT_GAMEPAD_DPAD_UP;
+		if (App::IsKeyPressed(APP_PAD_EMUL_DPAD_DOWN)) buttons |= XINPUT_GAMEPAD_DPAD_DOWN;
+		if (App::IsKeyPressed(APP_PAD_EMUL_DPAD_LEFT)) buttons |= XINPUT_GAMEPAD_DPAD_LEFT;
+		if (App::IsKeyPressed(APP_PAD_EMUL_DPAD_RIGHT))buttons |= XINPUT_GAMEPAD_DPAD_RIGHT;
+
+		if (App::IsKeyPressed(APP_PAD_EMUL_BUTTON_BACK)) buttons |= XINPUT_GAMEPAD_BACK;
+
+		if (App::IsKeyPressed(APP_PAD_EMUL_BUTTON_A)) buttons |= XINPUT_GAMEPAD_A;
+		if (App::IsKeyPressed(APP_PAD_EMUL_BUTTON_B)) buttons |= XINPUT_GAMEPAD_B;
+		if (App::IsKeyPressed(APP_PAD_EMUL_BUTTON_X)) buttons |= XINPUT_GAMEPAD_X;
+		if (App::IsKeyPressed(APP_PAD_EMUL_BUTTON_Y)) buttons |= XINPUT_GAMEPAD_Y;
+
+		if (App::IsKeyPressed(APP_PAD_EMUL_LEFT_TRIGGER)) m_Controllers[1].m_state.Gamepad.bLeftTrigger = 255;
+		if (App::IsKeyPressed(APP_PAD_EMUL_RIGHT_TRIGGER)) m_Controllers[1].m_state.Gamepad.bRightTrigger = 255;
+
+		if (App::IsKeyPressed(APP_PAD_EMUL_BUTTON_LEFT_THUMB)) buttons |= XINPUT_GAMEPAD_LEFT_THUMB;
+		if (App::IsKeyPressed(APP_PAD_EMUL_BUTTON_RIGHT_THUMB)) buttons |= XINPUT_GAMEPAD_RIGHT_THUMB;
+		if (App::IsKeyPressed(APP_PAD_EMUL_BUTTON_LEFT_SHOULDER)) buttons |= XINPUT_GAMEPAD_LEFT_SHOULDER;
+		if (App::IsKeyPressed(APP_PAD_EMUL_BUTTON_RIGHT_SHOULDER)) buttons |= XINPUT_GAMEPAD_RIGHT_SHOULDER;
+
+		m_Controllers[1].m_state.Gamepad.wButtons = buttons;
+	}
 
 	for (DWORD i = 0; i < MAX_CONTROLLERS; i++)
 	{

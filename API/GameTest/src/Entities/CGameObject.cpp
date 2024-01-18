@@ -22,7 +22,7 @@ void CGameObject::Update()
 	if (pSprite == nullptr) return;
 
 	// Update the sprite with the current delta time.
-	pSprite->Update(CTimer::GetInstance().deltaTime);
+	pSprite->Update(CTimer::GetInstance().mDeltaTime);
 }
 
 void CGameObject::Render()
@@ -65,10 +65,13 @@ void CGameObject::CopyFromOther(CGameObject* other)
 	// Delete the existing sprite instance.
 	if (pSprite != nullptr) { delete pSprite; }
 
+	// Create a new sprite instance and copy data from the other game object's sprite.
 	pSprite = new CSimpleSprite(other->pSprite);
 
+	// Delete the existing physicsShape instance.
 	if (pPhysicsShape != nullptr) { delete pPhysicsShape; }
 
+	// Create a new physicsShape instance and copy data from the other game object's physicsShape.
 	pPhysicsShape = new CPhysicsShape(pSprite, other->pPhysicsShape);
 
 }

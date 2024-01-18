@@ -7,30 +7,30 @@
 #include "../Entities/CGameObject.h"
 
 
-bool CheckCollision(CPhysicsShape* a, CPhysicsShape* b)
+bool CheckCollision(CPhysicsShape* self, CPhysicsShape* rename)
 {
-	if (a == nullptr || b == nullptr || a == b) return false;
+	if (self == nullptr || rename == nullptr || self == rename) return false;
 
-	switch (a->mShapeType)
+	switch (self->mShapeType)
 	{
 #pragma region CIRCLE
 
 	case CIRCLE:
 
-		switch (b->mShapeType)
+		switch (rename->mShapeType)
 		{
 		case CIRCLE:
-			return CircleVsCircle(dynamic_cast<CPhysicsShapeCircle*>(a->pShape)->GetCircle(),
-				dynamic_cast<CPhysicsShapeCircle*>(b->pShape)->GetCircle());
+			return CircleVsCircle(dynamic_cast<CPhysicsShapeCircle*>(self->pShape)->GetCircle(),
+				dynamic_cast<CPhysicsShapeCircle*>(rename->pShape)->GetCircle());
 
 		case BOX: 
 
-			return CircleVsBox(dynamic_cast<CPhysicsShapeCircle*>(a->pShape)->GetCircle(),
-				dynamic_cast<CPhysicsShapeBox*>(b->pShape)->GetBox());
+			return CircleVsBox(dynamic_cast<CPhysicsShapeCircle*>(self->pShape)->GetCircle(),
+				dynamic_cast<CPhysicsShapeBox*>(rename->pShape)->GetBox());
 
 		case LINE: 
-			return CircleVsLine(dynamic_cast<CPhysicsShapeCircle*>(a->pShape)->GetCircle(),
-				dynamic_cast<CPhysicsShapeLine*>(b->pShape)->GetLine());
+			return CircleVsLine(dynamic_cast<CPhysicsShapeCircle*>(self->pShape)->GetCircle(),
+				dynamic_cast<CPhysicsShapeLine*>(rename->pShape)->GetLine());
 		}
 
 		break;
@@ -41,21 +41,21 @@ bool CheckCollision(CPhysicsShape* a, CPhysicsShape* b)
 
 	case BOX:
 
-		switch (b->mShapeType)
+		switch (rename->mShapeType)
 		{
 		case CIRCLE:
 
-			return CircleVsBox(dynamic_cast<CPhysicsShapeCircle*>(b->pShape)->GetCircle(),
-				dynamic_cast<CPhysicsShapeBox*>(a->pShape)->GetBox());
+			return CircleVsBox(dynamic_cast<CPhysicsShapeCircle*>(rename->pShape)->GetCircle(),
+				dynamic_cast<CPhysicsShapeBox*>(self->pShape)->GetBox());
 
 		case BOX:
 
-			return BoxVsBox(dynamic_cast<CPhysicsShapeBox*>(a->pShape)->GetBox(),
-				dynamic_cast<CPhysicsShapeBox*>(b->pShape)->GetBox());
+			return BoxVsBox(dynamic_cast<CPhysicsShapeBox*>(self->pShape)->GetBox(),
+				dynamic_cast<CPhysicsShapeBox*>(rename->pShape)->GetBox());
 
 		case LINE:
-			return BoxVsLine(dynamic_cast<CPhysicsShapeBox*>(a->pShape)->GetBox(),
-				dynamic_cast<CPhysicsShapeLine*>(b->pShape)->GetLine());
+			return BoxVsLine(dynamic_cast<CPhysicsShapeBox*>(self->pShape)->GetBox(),
+				dynamic_cast<CPhysicsShapeLine*>(rename->pShape)->GetLine());
 		}
 
 		break;
@@ -65,20 +65,20 @@ bool CheckCollision(CPhysicsShape* a, CPhysicsShape* b)
 #pragma region LINE
 	case LINE:
 
-		switch (b->mShapeType)
+		switch (rename->mShapeType)
 		{
 		case CIRCLE:
-			return CircleVsLine(dynamic_cast<CPhysicsShapeCircle*>(b->pShape)->GetCircle(),
-				dynamic_cast<CPhysicsShapeLine*>(a->pShape)->GetLine());
+			return CircleVsLine(dynamic_cast<CPhysicsShapeCircle*>(rename->pShape)->GetCircle(),
+				dynamic_cast<CPhysicsShapeLine*>(self->pShape)->GetLine());
 
 		case BOX:
 
-			return BoxVsLine(dynamic_cast<CPhysicsShapeBox*>(b->pShape)->GetBox(),
-				dynamic_cast<CPhysicsShapeLine*>(a->pShape)->GetLine());
+			return BoxVsLine(dynamic_cast<CPhysicsShapeBox*>(rename->pShape)->GetBox(),
+				dynamic_cast<CPhysicsShapeLine*>(self->pShape)->GetLine());
 
 		case LINE:
-			return LineVsLine(dynamic_cast<CPhysicsShapeLine*>(a->pShape)->GetLine(),
-				dynamic_cast<CPhysicsShapeLine*>(b->pShape)->GetLine());
+			return LineVsLine(dynamic_cast<CPhysicsShapeLine*>(self->pShape)->GetLine(),
+				dynamic_cast<CPhysicsShapeLine*>(rename->pShape)->GetLine());
 		}
 
 		break;
@@ -91,24 +91,24 @@ bool CheckCollision(CPhysicsShape* a, CPhysicsShape* b)
 }
 
 
-bool CheckRayCast(CPhysicsShape* a, SLine& line)
+bool CheckRayCast(CPhysicsShape* other, SLine& line)
 {
-	if (a == nullptr) return false;
+	if (other == nullptr) return false;
 
-	switch (a->mShapeType)
+	switch (other->mShapeType)
 	{
 
 	case CIRCLE:
 
-		return CircleVsLine(dynamic_cast<CPhysicsShapeCircle*>(a->pShape)->GetCircle(), line);
+		return CircleVsLine(dynamic_cast<CPhysicsShapeCircle*>(other->pShape)->GetCircle(), line);
 
 	case BOX:
 
-		return BoxVsLine(dynamic_cast<CPhysicsShapeBox*>(a->pShape)->GetBox(), line);
+		return BoxVsLine(dynamic_cast<CPhysicsShapeBox*>(other->pShape)->GetBox(), line);
 
 	case LINE:
 
-		return LineVsLine(dynamic_cast<CPhysicsShapeLine*>(a->pShape)->GetLine(), line);
+		return LineVsLine(dynamic_cast<CPhysicsShapeLine*>(other->pShape)->GetLine(), line);
 
 	}
 
@@ -116,7 +116,7 @@ bool CheckRayCast(CPhysicsShape* a, SLine& line)
 }
 
 
-bool CheckCollisionWithTag(CPhysicsShape* a, const std::string& tag, std::vector<CGameObject*>& collidedObjects)
+bool CheckCollisionWithTag(CPhysicsShape* self, const std::string& tag, std::vector<CGameObject*>& collidedObjects)
 {
 	std::vector<CEntity*> listOfEntities = CEntityManager::GetInstance().GetEntitiesWithTag(tag);
 
@@ -126,7 +126,7 @@ bool CheckCollisionWithTag(CPhysicsShape* a, const std::string& tag, std::vector
 
 		if (CGameObject* gameObject = dynamic_cast<CGameObject*> (entity))
 		{
-			if (CheckCollision(a, gameObject->pPhysicsShape))
+			if (CheckCollision(self, gameObject->pPhysicsShape))
 			{
 				collidedObjects.push_back(gameObject);
 			}
@@ -138,13 +138,13 @@ bool CheckCollisionWithTag(CPhysicsShape* a, const std::string& tag, std::vector
 	return true;
 }
 
-bool Raycast(CPhysicsShape* a, Vector2 startPoint, Vector2 direction, float distance)
+bool Raycast(CPhysicsShape* other, Vector2 startPoint, Vector2 direction, float distance)
 {
 	SLine line;
 	line.mStartPoint = startPoint;
 	line.mEndPoint = startPoint + (direction * distance);
 
-	if (CheckRayCast(a, line)) return true;
+	if (CheckRayCast(other, line)) return true;
 
 	return false;
 }

@@ -3,7 +3,6 @@
 #include "../Physics/Shapes/CPhysicsShapeCircle.h"
 #include "../Physics/Shapes/CPhysicsShapeLine.h"
 
-
 CPhysicsShape::CPhysicsShape(CSimpleSprite* sprite, CPhysicsShape* physicsShape)
 {
 	this->pSprite = sprite;
@@ -16,6 +15,11 @@ CPhysicsShape::CPhysicsShape(CSimpleSprite* sprite, EPhysicsShape shapeType)
 	this->pSprite = sprite;
 	this->mShapeType = shapeType;
 	InitializePhysics(mShapeType);
+}
+
+CPhysicsShape::~CPhysicsShape()
+{
+	delete pShape;
 }
 
 void CPhysicsShape::InitializePhysics(EPhysicsShape shapeType)

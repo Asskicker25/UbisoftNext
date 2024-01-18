@@ -22,12 +22,12 @@ void CObjectPool<T>::Cleanup()
 	mListOfObjects.clear();
 }
 
-
 #pragma endregion
 
 
 CGameObject* CGameObjectPool::SpawnObject()
 {
+	// Iterate through the list to find an inactive CGameObject.
 	for (CGameObject* gameObject : mListOfObjects)
 	{
 		if (gameObject->mIsVisible == false)
@@ -39,6 +39,7 @@ CGameObject* CGameObjectPool::SpawnObject()
 		}
 	}
 
+	// If no inactive CGameObjects are found, resize the pool and return the last element.
 	int listSize = mListOfObjects.size();
 
 	Resize();
@@ -52,7 +53,6 @@ void CGameObjectPool::DestroyObject(CGameObject* poolObject)
 	poolObject->mIsVisible = false;
 }
 
-
 void CGameObjectPool::DestroyObject(CGameObject* poolObject, float delayTime)
 {
 	CTimerEventsHandler::GetInstance().AddDelay([poolObject]()
@@ -61,6 +61,7 @@ void CGameObjectPool::DestroyObject(CGameObject* poolObject, float delayTime)
 			poolObject->mIsVisible = false;
 		}, delayTime);
 }
+
 
 void CGameObjectPool::SetPoolObject(CGameObject* poolObject)
 {
@@ -75,9 +76,13 @@ void CGameObjectPool::Cleanup()
 
 void CGameObjectPool::Resize()
 {
+	// Store the previous size of the pool.
 	int prevSize = mListOfObjects.size();
+
+	// Resize the pool by adding elements.
 	mListOfObjects.resize(mListOfObjects.size() + mResizeAmount);
 
+	// Initialize new elements in the pool.
 	for (int i = prevSize; i < mListOfObjects.size(); i++)
 	{
 		mListOfObjects[i] = new CGameObject();
@@ -85,7 +90,7 @@ void CGameObjectPool::Resize()
 		mListOfObjects[i]->mIsEnabled = false;
 		mListOfObjects[i]->mIsVisible = false;
 
-		//Misc
+		// Misc: Adjust position for visual separation.
 		float x, y;
 		mListOfObjects[i]->pSprite->GetPosition(x, y);
 		x += i * 20;

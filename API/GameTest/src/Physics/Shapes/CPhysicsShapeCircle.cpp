@@ -11,10 +11,13 @@ CPhysicsShapeCircle::CPhysicsShapeCircle(CSimpleSprite* sprite) : CPhysicsBaseSh
 
 void CPhysicsShapeCircle::CalculateShape()
 {
+
+	// Sets the sprite position as the Circle center
 	float x, y;
 	pSprite->GetPosition(x, y);
 	mCircle.mCenter = Vector2(x, y);
 
+	// Calculates radius from the sprite height and widht
 	float height = pSprite->GetHeight();
 	float width = pSprite->GetWidth();
 
@@ -29,6 +32,7 @@ SCircle CPhysicsShapeCircle::GetCircle()
 {
 	SCircle circle = mCircle;
 
+	// Updates the center of the circle if a sprite is assosicated to the shape
 	if (pSprite != nullptr)
 	{
 		float x, y;
@@ -37,8 +41,10 @@ SCircle CPhysicsShapeCircle::GetCircle()
 		circle.mRadius *= pSprite->GetScale();
 	}
 
+	// Updates the center of the circle with the offset
 	circle.mCenter = circle.mCenter + mOffset;
 
+	// Updates the radius based on the scale
 	circle.mRadius *= mScale.x;
 
 	return circle;

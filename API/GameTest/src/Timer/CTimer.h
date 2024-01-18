@@ -6,6 +6,7 @@ public:
 
 	static CTimer& GetInstance();
 
-	float deltaTime = 0;
+	float mDeltaTime = 0;
+	float mGameTime = 0;
 };
 

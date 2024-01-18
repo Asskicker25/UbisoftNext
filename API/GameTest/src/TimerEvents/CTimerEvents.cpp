@@ -8,7 +8,7 @@ CTimerEvents::CTimerEvents()
 
 void CTimerEvents::Update()
 {
-	mCurrentTime += CTimer::GetInstance().deltaTime/ 1000.0f;
+	mCurrentTime += CTimer::GetInstance().mDeltaTime/ 1000.0f;
 
 	if (mCurrentTime >= mDelayTime)
 	{

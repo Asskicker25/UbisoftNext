@@ -82,6 +82,11 @@ void CLevelOne::Cleanup()
 
 	if (pPlayer == nullptr) return;
 	pPlayer->Cleanup();
+	pPlayer = nullptr;
+
+	mCircleCollider->Cleanup();
+	mBoxCollider->Cleanup();
+	mLineCollider->Cleanup();
 }
 
 void CLevelOne::Shutdown()
@@ -101,7 +106,7 @@ void CLevelOne::HandleInput()
 		mIsLevelCompleted = true;
 	}
 
-	if (App::GetController().CheckButton(XINPUT_GAMEPAD_B, true))
+	if (App::GetController().CheckButton(XINPUT_GAMEPAD_X, true))
 	{
 		pPlayer->Destroy();
 		pPlayer = nullptr;

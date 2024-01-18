@@ -5,6 +5,7 @@
 class CPhysicsShape;
 class CGameObject;
 
+// Structure representing a circle in 2D space.
 struct SCircle
 {
 	SCircle() 
@@ -17,6 +18,7 @@ struct SCircle
 	float mRadius;
 };
 
+// Structure representing an axis-aligned box in 2D space.
 struct SBox
 {
 	SBox()
@@ -29,6 +31,7 @@ struct SBox
 	Vector2 mMaxPoint;
 };
 
+// Structure representing a line segment in 2D space.
 struct SLine
 {
 	SLine()
@@ -46,9 +49,10 @@ struct SLine
 	Vector2 mEndPoint;
 };
 
-extern bool CheckCollision(CPhysicsShape* a, CPhysicsShape* b);
-extern bool CheckCollisionWithTag(CPhysicsShape* a,const std::string& tag, std::vector<CGameObject*>& collidedObjects);
-extern bool Raycast(CPhysicsShape* a, Vector2 startPoint, Vector2 direction, float distance);
+// Function declarations for collision detection and raycasting functions.
+extern bool CheckCollision(CPhysicsShape* self, CPhysicsShape* other);
+extern bool CheckCollisionWithTag(CPhysicsShape* self,const std::string& tag, std::vector<CGameObject*>& collidedObjects);
+extern bool Raycast(CPhysicsShape* other, Vector2 startPoint, Vector2 direction, float distance);
 extern bool RaycastWithTag(const std::string& tag, Vector2 startPoint, Vector2 direction, float distance, std::vector<CGameObject*>& collidedObjects);
 
 extern bool CircleVsCircle(SCircle& a, SCircle& b);
@@ -58,5 +62,5 @@ extern bool LineVsLine(SLine& a, SLine& b);
 extern bool CircleVsBox(SCircle& circle, SBox& box);
 extern bool CircleVsLine(SCircle& circle, SLine& line);
 extern bool BoxVsLine(SBox& box, SLine& line);
-extern bool CheckRayCast(CPhysicsShape* a, SLine& line);
+extern bool CheckRayCast(CPhysicsShape* other, SLine& line);
 

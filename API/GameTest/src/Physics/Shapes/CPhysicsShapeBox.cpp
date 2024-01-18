@@ -2,6 +2,8 @@
 
 CPhysicsShapeBox::CPhysicsShapeBox() : CPhysicsBaseShape()
 {
+	// Set default box dimensions.
+
 	mBox.mMinPoint = Vector2(-1, -1);
 	mBox.mMaxPoint = Vector2(1, 1);
 }
@@ -13,10 +15,10 @@ CPhysicsShapeBox::CPhysicsShapeBox(CSimpleSprite* sprite) : CPhysicsBaseShape(sp
 
 void CPhysicsShapeBox::CalculateShape()
 {
-	
 
 	if (pSprite == nullptr) return;
 
+	// Calculate box dimensions based on sprite size.
 	float extendX = pSprite->GetWidth() * 0.5f;
 	float extendY = pSprite->GetHeight() * 0.5f;
 
@@ -29,14 +31,14 @@ SBox CPhysicsShapeBox::GetBox()
 {
 	SBox box = mBox;
 
-	
-
+	// Apply scaling to box dimensions.
 	box.mMinPoint.x *= mScale.x;
 	box.mMinPoint.y *= mScale.y;
 
 	box.mMaxPoint.x *= mScale.x;
 	box.mMaxPoint.y *= mScale.y;
 
+	// Adjust box position based on sprite and scaling.
 	if (pSprite != nullptr)
 	{
 
@@ -54,6 +56,7 @@ SBox CPhysicsShapeBox::GetBox()
 
 	}
 
+	// Apply offset to box position.
 	box.mMinPoint = box.mMinPoint + mOffset;
 	box.mMaxPoint = box.mMaxPoint + mOffset;
 

@@ -36,7 +36,7 @@ void Init()
 
 void Update(float deltaTime)
 {
-	CTimer::GetInstance().deltaTime = deltaTime;
+	CTimer::GetInstance().mDeltaTime = deltaTime;
 	pGameManager->Update();
 	CTimerEventsHandler::GetInstance().Update();
 }

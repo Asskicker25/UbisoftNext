@@ -12,12 +12,14 @@ SLine CPhysicsShapeLine::GetLine()
 {
 	SLine line = mLine;
 
+	// Apply scale to the line coordinates.
 	line.mStartPoint.x *= mScale.x;
 	line.mStartPoint.y *= mScale.y;
 
 	line.mEndPoint.x *= mScale.x;
 	line.mEndPoint.y *= mScale.y;
 
+	// Apply offset to the line coordinates.
 	line.mStartPoint = line.mStartPoint + mOffset;
 	line.mEndPoint = line.mEndPoint + mOffset;
 
