@@ -21,9 +21,10 @@ CPlayer::CPlayer() :
 	pSprite->CreateAnimation(IDLE_LEFT, speed, { 1 });
 	pSprite->CreateAnimation(WALK_RIGHT, speed, { 2, 3, 4, 5, 6 });
 	pSprite->CreateAnimation(WALK_LEFT, speed, { 7, 8, 9, 10, 11 });
-
+		
 	pPlayerController = new CPlayerController(this->pSprite);
-	pPhysicsShape = new CPhysicsShape(this->pSprite, CIRCLE);
+	pPhysicsShape = new CPhysicsShape(this->pSprite, BOX);
+
 }
 
 void CPlayer::Start()

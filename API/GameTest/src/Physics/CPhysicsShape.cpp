@@ -4,11 +4,18 @@
 #include "../Physics/Shapes/CPhysicsShapeLine.h"
 
 
+CPhysicsShape::CPhysicsShape(CSimpleSprite* sprite, CPhysicsShape* physicsShape)
+{
+	this->pSprite = sprite;
+	this->mShapeType = physicsShape->mShapeType;
+	InitializePhysics(mShapeType);
+}
+
 CPhysicsShape::CPhysicsShape(CSimpleSprite* sprite, EPhysicsShape shapeType)
 {
 	this->pSprite = sprite;
 	this->mShapeType = shapeType;
-	InitializePhysics(shapeType);
+	InitializePhysics(mShapeType);
 }
 
 void CPhysicsShape::InitializePhysics(EPhysicsShape shapeType)

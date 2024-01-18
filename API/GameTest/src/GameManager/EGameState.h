@@ -1,5 +1,6 @@
 #pragma once
 
+// Represents the possible states of the game.
 enum EGameState
 {
 	MAIN_MENU = 0,

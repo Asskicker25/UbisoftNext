@@ -14,14 +14,17 @@ void CEntityManager::Update()
 {
 	std::unordered_map<std::string, CEntity*>::iterator it;
 
+	// Iterate through all entities and invoke their Start and Update methods.
 	for (it = mListOfEntities.begin(); it != mListOfEntities.end(); ++it)
 	{
+		// If Start has not been invoked yet and the entity is enabled, invoke Start.
 		if (!it->second->mIsStartInvoked && it->second->mIsEnabled)
 		{
 			it->second->Start();
 			it->second->mIsStartInvoked = true;
 		}
 
+		// Update the entity.
 		it->second->Update();
 	}
 }
@@ -30,6 +33,7 @@ void CEntityManager::Render()
 {
 	std::unordered_map<std::string, CEntity*>::iterator it;
 
+	// Iterate through all entities and invoke their Render methods.
 	for (it = mListOfEntities.begin(); it != mListOfEntities.end(); ++it)
 	{
 		it->second->Render();
@@ -40,6 +44,7 @@ void CEntityManager::Cleanup()
 {
 	std::unordered_map<std::string, CEntity*>::iterator it;
 
+	// Iterate through all entities, invoke their Cleanup methods, and clear the entity list.
 	while (mListOfEntities.size() != 0)
 	{
 		mListOfEntities.begin()->second->Cleanup();
@@ -52,6 +57,7 @@ void CEntityManager::Cleanup()
 	}*/
 }
 
+// Adds an entity to the entity manager with a generated ID.
 void CEntityManager::AddEntity(CEntity* entity)
 {
 	std::string entityId = std::to_string(mEntityCount);
@@ -59,6 +65,7 @@ void CEntityManager::AddEntity(CEntity* entity)
 	AddEntity(entityId, entity);
 }
 
+// Adds an entity to the entity manager with a specified ID.
 void CEntityManager::AddEntity(std::string entityId, CEntity* entity)
 {
 	mListOfEntities[entityId] = entity;
@@ -67,12 +74,14 @@ void CEntityManager::AddEntity(std::string entityId, CEntity* entity)
 	mEntityCount++;
 }
 
+// Removes an entity from the entity manager.
 void CEntityManager::RemoveEntity(CEntity* entity)
 {
 	//mListOfEntities[entity->mEntityId]->Cleanup();
 	mListOfEntities.erase(entity->mEntityId);
 }
 
+// Retrieves all entities with a specific tag.
 std::vector<CEntity*> CEntityManager::GetEntitiesWithTag(const std::string& tag)
 {
 	std::vector<CEntity*> entitiesWithTag;

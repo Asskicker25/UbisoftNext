@@ -11,6 +11,8 @@ enum EPhysicsShape
 class CPhysicsShape
 {
 public:
+
+	CPhysicsShape(CSimpleSprite* sprite, CPhysicsShape* physicsShape);
 	CPhysicsShape(CSimpleSprite* sprite, EPhysicsShape shapeType);
 	EPhysicsShape mShapeType = EPhysicsShape::CIRCLE;
 

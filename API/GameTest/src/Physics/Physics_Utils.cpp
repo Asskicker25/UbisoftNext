@@ -122,6 +122,8 @@ bool CheckCollisionWithTag(CPhysicsShape* a, const std::string& tag, std::vector
 
 	for (CEntity* entity : listOfEntities)
 	{
+		if (!entity->mIsEnabled) continue;
+
 		if (CGameObject* gameObject = dynamic_cast<CGameObject*> (entity))
 		{
 			if (CheckCollision(a, gameObject->pPhysicsShape))
@@ -157,6 +159,8 @@ bool RaycastWithTag(const std::string& tag, Vector2 startPoint, Vector2 directio
 
 	for (CEntity* entity : listOfEntities)
 	{
+		if (!entity->mIsEnabled) continue;
+
 		if (CGameObject* gameObject = dynamic_cast<CGameObject*> (entity))
 		{
 			if (CheckRayCast(gameObject->pPhysicsShape, line))

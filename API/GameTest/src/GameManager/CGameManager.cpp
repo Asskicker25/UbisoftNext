@@ -1,11 +1,13 @@
 #include "CGameManager.h"
 #include "../EntityManager/CEntityManager.h"
 
+// Initiates the game manager and starts the entity manager.
 void CGameManager::Start()
 {
 	CEntityManager::GetInstance().Start();
 }
 
+// Updates the entity manager and the current game state (if available).
 void CGameManager::Update()
 {
 	CEntityManager::GetInstance().Update();
@@ -15,6 +17,7 @@ void CGameManager::Update()
 	pCurrentGameState->Update();
 }
 
+//  Renders the entity manager, prints the current game state, and renders the current game state (if available).
 void CGameManager::Render()
 {
 	CEntityManager::GetInstance().Render();
@@ -26,17 +29,20 @@ void CGameManager::Render()
 
 }
 
+// Adds a new game state to the manager.
 void CGameManager::AddState(EGameState state, CGameState* stateInstance)
 {
 	stateInstance->SetGameManager(this);
 	mListOfStates[state] = stateInstance;
 }
 
+// Removes a game state from the manager.
 void CGameManager::RemoveState(EGameState state)
 {
 	mListOfStates.erase(state);
 }
 
+// Changes the current game state.
 void CGameManager::ChangeState(EGameState state)
 {
 	if (pCurrentGameState != nullptr)
@@ -50,6 +56,7 @@ void CGameManager::ChangeState(EGameState state)
 
 }
 
+// Cleans up resources and performs necessary tasks before exiting the game.
 void CGameManager::Cleanup()
 {
 	CEntityManager::GetInstance().Cleanup();
@@ -67,6 +74,7 @@ void CGameManager::Cleanup()
 	mListOfStates.clear();
 }
 
+// Prints the current game state to the console.
 void CGameManager::PrintGameState()
 {
 
