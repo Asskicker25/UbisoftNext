@@ -37,6 +37,7 @@ void CLevelOne::Update()
 	if (pPlayer == nullptr) return;
 
 	mCollisionMessage = "";
+	mRaycastMessage = "";
 
 	std::vector<CGameObject*> collidedObjects;
 
@@ -45,6 +46,19 @@ void CLevelOne::Update()
 		for (CGameObject* gameObject : collidedObjects)
 		{
 			mCollisionMessage += gameObject->mName + " | ";
+		}
+	}
+
+	float x, y;
+	pPlayer->pSprite->GetPosition(x, y);
+
+	std::vector<CGameObject*> rayCastObjects;
+
+	if (RaycastWithTag("Untagged", Vector2(x, y), Vector2(0, 1), 200, rayCastObjects))
+	{
+		for (CGameObject* gameObject : rayCastObjects)
+		{
+			mRaycastMessage += gameObject->mName + " | ";
 		}
 	}
 
@@ -58,6 +72,7 @@ void CLevelOne::Render()
 	pPlayer->Render();
 
 	App::Print(10, 100, ("Collision : " + mCollisionMessage).c_str(), 1.0f, 0.0f, 1.0f, GLUT_BITMAP_HELVETICA_10);
+	App::Print(10, 110, ("Raycast : " + mRaycastMessage).c_str(), 1.0f, 0.0f, 1.0f, GLUT_BITMAP_HELVETICA_10);
 }
 
 void CLevelOne::Cleanup()

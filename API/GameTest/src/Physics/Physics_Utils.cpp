@@ -90,6 +90,32 @@ bool CheckCollision(CPhysicsShape* a, CPhysicsShape* b)
 	return false;
 }
 
+
+bool CheckRayCast(CPhysicsShape* a, SLine& line)
+{
+	if (a == nullptr) return false;
+
+	switch (a->mShapeType)
+	{
+
+	case CIRCLE:
+
+		return CircleVsLine(dynamic_cast<CPhysicsShapeCircle*>(a->pShape)->GetCircle(), line);
+
+	case BOX:
+
+		return BoxVsLine(dynamic_cast<CPhysicsShapeBox*>(a->pShape)->GetBox(), line);
+
+	case LINE:
+
+		return LineVsLine(dynamic_cast<CPhysicsShapeLine*>(a->pShape)->GetLine(), line);
+
+	}
+
+	return false;
+}
+
+
 bool CheckCollisionWithTag(CPhysicsShape* a, const std::string& tag, std::vector<CGameObject*>& collidedObjects)
 {
 	std::vector<CEntity*> listOfEntities = CEntityManager::GetInstance().GetEntitiesWithTag(tag);
@@ -99,6 +125,41 @@ bool CheckCollisionWithTag(CPhysicsShape* a, const std::string& tag, std::vector
 		if (CGameObject* gameObject = dynamic_cast<CGameObject*> (entity))
 		{
 			if (CheckCollision(a, gameObject->pPhysicsShape))
+			{
+				collidedObjects.push_back(gameObject);
+			}
+		}
+	}
+
+	if (collidedObjects.size() == 0) return false;
+
+	return true;
+}
+
+bool Raycast(CPhysicsShape* a, Vector2 startPoint, Vector2 direction, float distance)
+{
+	SLine line;
+	line.mStartPoint = startPoint;
+	line.mEndPoint = startPoint + (direction * distance);
+
+	if (CheckRayCast(a, line)) return true;
+
+	return false;
+}
+
+bool RaycastWithTag(const std::string& tag, Vector2 startPoint, Vector2 direction, float distance, std::vector<CGameObject*>& collidedObjects)
+{
+	std::vector<CEntity*> listOfEntities = CEntityManager::GetInstance().GetEntitiesWithTag(tag);
+
+	SLine line;
+	line.mStartPoint = startPoint;
+	line.mEndPoint = startPoint + (direction * distance);
+
+	for (CEntity* entity : listOfEntities)
+	{
+		if (CGameObject* gameObject = dynamic_cast<CGameObject*> (entity))
+		{
+			if (CheckRayCast(gameObject->pPhysicsShape, line))
 			{
 				collidedObjects.push_back(gameObject);
 			}
@@ -209,3 +270,4 @@ bool BoxVsLine(SBox& box, SLine& line)
 
 	return false;
 }
+

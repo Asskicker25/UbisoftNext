@@ -24,6 +24,7 @@ private:
 
 	bool mIsLevelCompleted = false;
 	std::string mCollisionMessage = "";
+	std::string mRaycastMessage = "";
 
 	CPlayer* pPlayer = nullptr;
 	CGameObject* mCircleCollider = nullptr;
