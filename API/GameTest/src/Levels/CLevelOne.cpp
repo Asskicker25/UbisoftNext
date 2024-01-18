@@ -7,6 +7,7 @@ void CLevelOne::Start()
 	pPlayer = new CPlayer();
 	pPlayer->pSprite->SetPosition(400, 400);
 	mObjectPool.SetPoolObject(pPlayer);
+	pPlayer->mIsEnabled = true;
 
 	mCircleCollider = new CGameObject();
 	mCircleCollider->mName = "Circle";
@@ -61,15 +62,12 @@ void CLevelOne::Update()
 			mRaycastMessage += gameObject->mName + " | ";
 		}
 	}
-
-	pPlayer->Update();
+	
 }
 
 void CLevelOne::Render()
 {
 	if (pPlayer == nullptr) return;
-
-	pPlayer->Render();
 
 	App::Print(10, 100, ("Collision : " + mCollisionMessage).c_str(), 1.0f, 0.0f, 1.0f, GLUT_BITMAP_HELVETICA_10);
 	App::Print(10, 110, ("Raycast : " + mRaycastMessage).c_str(), 1.0f, 0.0f, 1.0f, GLUT_BITMAP_HELVETICA_10);
@@ -89,11 +87,6 @@ void CLevelOne::Cleanup()
 	mLineCollider->Cleanup();
 }
 
-void CLevelOne::Shutdown()
-{
-}
-
-
 bool CLevelOne::IsLevelComplete()
 {
 	return mIsLevelCompleted;
@@ -110,6 +103,12 @@ void CLevelOne::HandleInput()
 	{
 		pPlayer->Destroy();
 		pPlayer = nullptr;
+	}
+
+	if (App::GetController().CheckButton(XINPUT_GAMEPAD_Y, true))
+	{
+		pPlayer->mOpacity -= 0.1f;
+		
 	}
 
 	if (App::GetController().CheckButton(XINPUT_GAMEPAD_A, true))

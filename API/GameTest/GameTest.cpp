@@ -15,6 +15,7 @@
 #include "src/LevelManager/CLevelManager.h"
 #include "src/Timer/CTimer.h"
 #include "src/TimerEvents/CTimerEventsHandler.h"
+#include "src/EntityManager/CEntityManager.h"
 
 
 CGameManager* pGameManager;
@@ -51,5 +52,6 @@ void Shutdown()
 {	
 	pGameManager->Cleanup();
 	CLevelManager::GetInstance().Cleanup();
+	CEntityManager::GetInstance().Cleanup();
 	CTimerEventsHandler::GetInstance().Cleanup();
 }

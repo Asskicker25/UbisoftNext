@@ -26,4 +26,5 @@ void CEntity::CopyFromOther(CEntity* entity)
 void CEntity::Destroy()
 {
 	OnDestroy();
+	OnDestroyEvent.Invoke();
 }

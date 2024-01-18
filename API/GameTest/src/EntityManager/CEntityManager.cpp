@@ -18,7 +18,10 @@ void CEntityManager::Update()
 	for (it = mListOfEntities.begin(); it != mListOfEntities.end(); ++it)
 	{
 		// If Start has not been invoked yet and the entity is enabled, invoke Start.
-		if (!it->second->mIsStartInvoked && it->second->mIsEnabled)
+
+		if (!it->second->mIsEnabled) continue;
+
+		if (!it->second->mIsStartInvoked)
 		{
 			it->second->Start();
 			it->second->mIsStartInvoked = true;

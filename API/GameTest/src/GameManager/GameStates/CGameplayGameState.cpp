@@ -4,17 +4,18 @@
 // Sets up a callback function for the OnNextLevel event in the level manager.
 CGameplayGameState::CGameplayGameState()
 {
-	// Using a lambda function as a callback to show the level complete state when the next level is reached.x
-	CLevelManager::GetInstance().OnNextLevel = [this]()
-	{
-		ShowLevelComplete();
-	}; 
+	// Using a lambda function as a callback to show the level complete state when the next level is reached.
+	CLevelManager::GetInstance().OnNextLevel.Subscribe("ShowLevelComplete", [this]()
+		{
+			ShowLevelComplete();
+
+		});
 
 }
 
 CGameplayGameState::~CGameplayGameState()
 {
-	
+	CLevelManager::GetInstance().OnNextLevel.UnSubscribe("ShowLevelComplete");
 }
 
 // Initiates the gameplay state by starting the current level.

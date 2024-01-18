@@ -38,11 +38,8 @@ void CLevelManager::Update()
 		pCurrentLevel->Cleanup();
 		pCurrentLevel = nullptr;
 
-		// Check if there is a callback for transitioning to the next level.
-		if (OnNextLevel == nullptr) return;
-
-		// Invoke the callback for transitioning to the next level.
-		OnNextLevel();
+		// Invoke the event for transitioning to the next level.
+		OnNextLevel.Invoke();
 
 		return;
 	}
@@ -106,7 +103,7 @@ void CLevelManager::Cleanup()
 	// Check if there is a valid current level and invoke its shutdown method.
 	if (pCurrentLevel != nullptr)
 	{
-		pCurrentLevel->Shutdown();
+		pCurrentLevel->Cleanup();
 	}
 
 	// Delete all level instances in the list.

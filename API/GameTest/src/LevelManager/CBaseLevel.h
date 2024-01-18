@@ -20,9 +20,6 @@ public:
 	// Cleans up resources and performs necessary tasks after completing the level.
 	virtual void Cleanup() = 0;				
 
-	// Cleans up resources and performs necessary tasks when exiting the application.
-	virtual void Shutdown() = 0;	
-
 	// IsLevelComplete - Checks if the conditions for completing the level are met.
 	// Returns:
 	//   True if the level is complete, false otherwise.

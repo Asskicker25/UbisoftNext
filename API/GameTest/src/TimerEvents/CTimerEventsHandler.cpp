@@ -27,9 +27,7 @@ void CTimerEventsHandler::Update()
 
 	for (CTimerEvents* currentEvent : eventsToRemove)
 	{
-		mListOfEvents.erase(std::remove(mListOfEvents.begin(), mListOfEvents.end(), currentEvent), mListOfEvents.end());
 		currentEvent->Cleanup();
-		delete currentEvent;
 	}
 }
 
@@ -43,12 +41,18 @@ void CTimerEventsHandler::Cleanup()
 	}
 }
 
-void CTimerEventsHandler::AddDelay(std::function<void()> callback, float delayTime)
+void CTimerEventsHandler::AddDelay(std::function<void()> callback, float delayTime, CEvents* cleanUpEvent)
 {
 	CTimerEvents* newEvent = new CTimerEvents();
 
-	newEvent->mDelayTime = delayTime;
-	newEvent->mCallback = callback;
+	newEvent->AssignEventData(callback, delayTime, cleanUpEvent);
 	mListOfEvents.push_back(newEvent);
 
+}
+
+void CTimerEventsHandler::RemoveEvent(CTimerEvents* timerEvent)
+{
+	mListOfEvents.erase(std::remove(mListOfEvents.begin(), mListOfEvents.end(), timerEvent), mListOfEvents.end());
+
+	delete timerEvent;
 }

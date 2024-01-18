@@ -59,7 +59,6 @@ void CGameManager::ChangeState(EGameState state)
 // Cleans up resources and performs necessary tasks before exiting the game.
 void CGameManager::Cleanup()
 {
-	CEntityManager::GetInstance().Cleanup();
 
 	pCurrentGameState->Cleanup();
 

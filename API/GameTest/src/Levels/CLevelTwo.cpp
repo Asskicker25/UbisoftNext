@@ -39,10 +39,6 @@ void CLevelTwo::Cleanup()
 	player2->Cleanup();
 }
 
-void CLevelTwo::Shutdown()
-{
-}
-
 bool CLevelTwo::IsLevelComplete()
 {
     return mIsLevelCompleted;

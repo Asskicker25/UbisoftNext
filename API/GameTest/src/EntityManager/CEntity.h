@@ -3,6 +3,8 @@
 #include <unordered_map>
 #include <string>
 #include "../../App/app.h"
+#include "../Events/Events.h"
+
 
 // Abstract base class for game entities.
 
@@ -33,6 +35,8 @@ public:
 	// Parameters:
 	//   entity - A pointer to the entity to copy properties from.
 	virtual void InitializeEntity(CEntity* entity);
+
+	CEvents OnDestroyEvent;
 
 
 	std::string mEntityId = "";						// Unique identifier for the entity.

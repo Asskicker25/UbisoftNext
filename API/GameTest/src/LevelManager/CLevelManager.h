@@ -3,6 +3,7 @@
 #include <unordered_map>
 #include <functional>
 #include "CBaseLevel.h"
+#include "../Events/Events.h"
 
 // Singleton class responsible for managing game levels.
 class CLevelManager
@@ -51,7 +52,7 @@ public:
 	void Cleanup();
 
 	// Callback function triggered when transitioning to the next level.
-	std::function<void()> OnNextLevel = nullptr;
+	CEvents OnNextLevel;
 
 private:
 

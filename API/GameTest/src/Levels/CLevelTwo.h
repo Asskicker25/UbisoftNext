@@ -9,7 +9,6 @@ class CLevelTwo : public CBaseLevel
 	void Update() override;
 	void Render() override;
 	void Cleanup() override;
-	void Shutdown() override;
 	bool IsLevelComplete() override;
 
 private:

@@ -15,7 +15,7 @@ CPlayer::CPlayer() :
 {
 
 	pSprite = App::CreateSprite("Assets/Sprites/Batman_01_strip6.png", 12, 1);
-	float speed = 1.0f / 3.0f;
+	float speed = 1.0f / 6.0f;
 
 	pSprite->CreateAnimation(IDLE_RIGHT, speed, { 0 });
 	pSprite->CreateAnimation(IDLE_LEFT, speed, { 1 });

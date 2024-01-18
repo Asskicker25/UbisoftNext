@@ -33,6 +33,7 @@ void CGameObject::Render()
 	if (pSprite != nullptr)
 	{
 		// Draw the sprite if available.
+		pSprite->SetOpacity(mOpacity);
 		pSprite->Draw();
 
 	}

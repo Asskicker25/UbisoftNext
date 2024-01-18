@@ -59,7 +59,7 @@ void CGameObjectPool::DestroyObject(CGameObject* poolObject, float delayTime)
 		{
 			poolObject->mIsEnabled = false;
 			poolObject->mIsVisible = false;
-		}, delayTime);
+		}, delayTime, &poolObject->OnDestroyEvent);
 }
 
 
