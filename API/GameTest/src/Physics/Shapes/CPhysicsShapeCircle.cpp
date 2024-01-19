@@ -1,10 +1,11 @@
 #include "CPhysicsShapeCircle.h"
+#include "../../Entities/CGameObject.h"
 
 CPhysicsShapeCircle::CPhysicsShapeCircle() : CPhysicsBaseShape()
 {
 }
 
-CPhysicsShapeCircle::CPhysicsShapeCircle(CSimpleSprite* sprite) : CPhysicsBaseShape(sprite)
+CPhysicsShapeCircle::CPhysicsShapeCircle(CGameObject* gameObject) : CPhysicsBaseShape(gameObject)
 {
 	CalculateShape();
 }
@@ -13,13 +14,14 @@ void CPhysicsShapeCircle::CalculateShape()
 {
 
 	// Sets the sprite position as the Circle center
-	float x, y;
-	pSprite->GetPosition(x, y);
-	mCircle.mCenter = Vector2(x, y);
+
+	Vector2 pos = pGameObject->GetPosition();
+
+	mCircle.mCenter = pos;
 
 	// Calculates radius from the sprite height and widht
-	float height = pSprite->GetHeight();
-	float width = pSprite->GetWidth();
+	float height = pGameObject->pSprite->GetHeight();
+	float width = pGameObject->pSprite->GetWidth();
 
 	float radius = height;
 
@@ -33,12 +35,12 @@ SCircle CPhysicsShapeCircle::GetCircle()
 	SCircle circle = mCircle;
 
 	// Updates the center of the circle if a sprite is assosicated to the shape
-	if (pSprite != nullptr)
+	if (pGameObject->pSprite != nullptr)
 	{
-		float x, y;
-		pSprite->GetPosition(x, y);
-		circle.mCenter = Vector2(x, y);
-		circle.mRadius *= pSprite->GetScale();
+		Vector2 pos = pGameObject->GetPosition();
+
+		circle.mCenter = pos;
+		circle.mRadius *= pGameObject->pSprite->GetScale();
 	}
 
 	// Updates the center of the circle with the offset

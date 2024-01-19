@@ -12,8 +12,8 @@ public:
 
 	// Constructor: Initializes a CPhysicsShapeBox with a given sprite.
 	// Parameters:
-	//   sprite - Pointer to the associated sprite.
-	CPhysicsShapeBox(CSimpleSprite* sprite);
+	//   sprite - Pointer to the associated gameObject.
+	CPhysicsShapeBox(CGameObject* gameObject);
 
 
 	void CalculateShape() override;		// Calculates the shape of the box physics object.

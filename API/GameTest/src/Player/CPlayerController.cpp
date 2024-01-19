@@ -29,24 +29,25 @@ void CPlayerController::Render()
 
 	std::string animStateText = "Anim State : " + mAnimStateText;
 
-	float x, y;
-	pPlayer->pSprite->GetPosition(x, y);
+	Vector2 pos = pPlayer->GetPosition();
 
 	float ex, ey;
 
-	ex = x + mMoveDir.x * mRayCastDistance;
-	ey = y + mMoveDir.y * mRayCastDistance;
+	ex = pos.x + mMoveDir.x * mRayCastDistance;
+	ey = pos.y + mMoveDir.y * mRayCastDistance;
 
-	App::DrawLine(x, y, ex, ey, 1, 0, 0);
+	App::DrawLine(pos.x, pos.y, ex, ey, 1, 0, 0);
 	App::Print(10, 90, animStateText.c_str(), 1.0f, 0.0f, 1.0f, GLUT_BITMAP_HELVETICA_10);
+	App::Print(10, 70, mCollisionDetails.c_str(), 1.0f, 0.0f, 1.0f, GLUT_BITMAP_HELVETICA_10);
+
 }
 
 void CPlayerController::HandleInput()
 {
 	if (!mIsEnabled) return;
 
-	mMoveDir.x = App::GetController(mControllerID).GetRightThumbStickX();
-	mMoveDir.y = App::GetController(mControllerID).GetRightThumbStickY();
+	mMoveDir.x = App::GetController(mControllerID).GetLeftThumbStickX();
+	mMoveDir.y = App::GetController(mControllerID).GetLeftThumbStickY();
 
 	mMoveDir.Normalize();
 
@@ -61,14 +62,13 @@ void CPlayerController::HandleRayCast()
 {
 	if (!mIsEnabled) return;
 
-	float x, y;
-	pPlayer->pSprite->GetPosition(x, y);
+	Vector2 pos = pPlayer->GetPosition();
 
 	std::vector<CGameObject*> rayCastObjects;
 
 	mCanMove = true;
 
-	if (RaycastWithTag("Wall", Vector2(x, y), mMoveDir, mRayCastDistance, rayCastObjects))
+	if (RaycastWithTag("Untagged", pos, mMoveDir, mRayCastDistance, rayCastObjects))
 	{
 		mCanMove = false;
 	}
@@ -96,14 +96,15 @@ void CPlayerController::HandleMove()
 
 void CPlayerController::HandleCollision()
 {
+	mCollisionDetails = "Collision : ";
+
 	std::vector<CGameObject*> collidedObjects;
 
-	if (CheckCollisionWithTag(pPlayer->pPhysicsShape, "Pickup", collidedObjects))
+	if (CheckCollisionWithTag(pPlayer->pPhysicsShape, "Untagged", collidedObjects))
 	{
-		for (CGameObject* pickup : collidedObjects)
+		for (CGameObject* object : collidedObjects)
 		{
-			mMoveSpeed +=  0.2f;
-			pickup->Destroy();
+			mCollisionDetails += object->mName + " | ";
 		}
 	}
 }

@@ -1,4 +1,6 @@
 #include "CPhysicsShapeBox.h"
+#include "../../Camera/CCamera.h"
+#include "../../Entities/CGameObject.h"
 
 CPhysicsShapeBox::CPhysicsShapeBox() : CPhysicsBaseShape()
 {
@@ -8,7 +10,7 @@ CPhysicsShapeBox::CPhysicsShapeBox() : CPhysicsBaseShape()
 	mBox.mMaxPoint = Vector2(1, 1);
 }
 
-CPhysicsShapeBox::CPhysicsShapeBox(CSimpleSprite* sprite) : CPhysicsBaseShape(sprite)
+CPhysicsShapeBox::CPhysicsShapeBox(CGameObject* gameObject) : CPhysicsBaseShape(gameObject)
 {
 	CalculateShape();
 }
@@ -16,11 +18,11 @@ CPhysicsShapeBox::CPhysicsShapeBox(CSimpleSprite* sprite) : CPhysicsBaseShape(sp
 void CPhysicsShapeBox::CalculateShape()
 {
 
-	if (pSprite == nullptr) return;
+	if (pGameObject->pSprite == nullptr) return;
 
 	// Calculate box dimensions based on sprite size.
-	float extendX = pSprite->GetWidth() * 0.5f;
-	float extendY = pSprite->GetHeight() * 0.5f;
+	float extendX = pGameObject->pSprite->GetWidth() * 0.5f;
+	float extendY = pGameObject->pSprite->GetHeight() * 0.5f;
 
 	mBox.mMinPoint = Vector2(-extendX, -extendY);
 	mBox.mMaxPoint = Vector2(extendX, extendY);
@@ -39,20 +41,19 @@ SBox CPhysicsShapeBox::GetBox()
 	box.mMaxPoint.y *= mScale.y;
 
 	// Adjust box position based on sprite and scaling.
-	if (pSprite != nullptr)
+	if (pGameObject->pSprite != nullptr)
 	{
 
-		box.mMinPoint = box.mMinPoint * pSprite->GetScale();
-		box.mMaxPoint = box.mMaxPoint * pSprite->GetScale();
+		box.mMinPoint = box.mMinPoint * pGameObject->pSprite->GetScale();
+		box.mMaxPoint = box.mMaxPoint * pGameObject->pSprite->GetScale();
 
-		float x, y;
-		pSprite->GetPosition(x, y);
+		Vector2 pos = pGameObject->GetPosition();
 
-		box.mMinPoint.x += x;
-		box.mMinPoint.y += y;
+		box.mMinPoint.x += pos.x;
+		box.mMinPoint.y += pos.y;
 
-		box.mMaxPoint.x += x;
-		box.mMaxPoint.y += y;
+		box.mMaxPoint.x += pos.x;
+		box.mMaxPoint.y += pos.y;
 
 	}
 

@@ -32,5 +32,8 @@ public:
 	// Parameters:
 	//   other - A pointer to the game object to copy properties from.
 	virtual void CopyFromOther(CGameObject* other);
+
+	Vector2 GetPosition();
+	void SetPosition(float x, float y);
 };
 

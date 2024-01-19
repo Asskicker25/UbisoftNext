@@ -29,6 +29,8 @@ private:
 	bool mCanMove = true;
 
 	std::string mAnimStateText = "IDLE_RIGHT";
+	std::string mCollisionDetails = "";
+
 	Vector2 mLastMoveDir = Vector2(0, 0);
 
 	CPlayer* pPlayer = nullptr;

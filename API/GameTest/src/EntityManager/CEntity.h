@@ -44,5 +44,6 @@ public:
 	
 	bool mIsEnabled = true;							// Flag indicating whether the entity is enabled.
 	bool mIsStartInvoked = false;					// Flag indicating whether the Start method has been invoked for the entity.
+	bool mIsUI = false;								// Flag indicating whether the entity is UI.
 };
 

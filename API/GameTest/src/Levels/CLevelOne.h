@@ -26,5 +26,7 @@ private:
 
 	CPlayer* pPlayer1 = nullptr;
 	CPlayer* pPlayer2 = nullptr;
+
+	Vector2 mCameraMoveDir;
 };
 

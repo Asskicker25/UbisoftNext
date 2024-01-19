@@ -2,13 +2,19 @@
 #include "../Physics/Physics_Utils.h"
 #include "../Physics/Shapes/CPhysicsShapeLine.h"
 
+#include "../Camera/CCamera.h"
+
 void CLevelOne::Start()
 {
 	pPlayer1 = new CPlayer(0);
 	pPlayer1->pSprite->SetPosition(400, 400);
+	pPlayer1->mName = "Player 1";
+	pPlayer1->mTag = "Player";
 
 	pPlayer2 = new CPlayer(1);
 	pPlayer2->pSprite->SetPosition(600, 400);
+	pPlayer2->mName = "Player 2";
+	pPlayer2->mTag = "Untagged";
 
 }
 
@@ -19,7 +25,8 @@ void CLevelOne::Update()
 
 void CLevelOne::Render()
 {
-
+	std::string message = std::to_string(mCameraMoveDir.x) + " , " + std::to_string(mCameraMoveDir.y);
+	App::Print(600, 60, message.c_str(), 0, 1, 0);
 }
 
 void CLevelOne::Cleanup()
@@ -43,6 +50,13 @@ void CLevelOne::HandleInput()
 	{
 		mIsLevelCompleted = true;
 	}
+
+	mCameraMoveDir.x = App::GetController().GetRightThumbStickX();
+	mCameraMoveDir.y = App::GetController().GetRightThumbStickX();
+
+	mCameraMoveDir.Normalize();
 	
+	CCamera::GetInstance().mCameraPosition.x += mCameraMoveDir.x * 20;
+	CCamera::GetInstance().mCameraPosition.y += mCameraMoveDir.y * 20;
 }
 

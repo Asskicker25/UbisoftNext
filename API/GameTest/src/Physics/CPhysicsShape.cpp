@@ -2,18 +2,19 @@
 #include "../Physics/Shapes/CPhysicsShapeBox.h"
 #include "../Physics/Shapes/CPhysicsShapeCircle.h"
 #include "../Physics/Shapes/CPhysicsShapeLine.h"
+#include "../Entities/CGameObject.h"
 
-CPhysicsShape::CPhysicsShape(CSimpleSprite* sprite, CPhysicsShape* physicsShape)
+CPhysicsShape::CPhysicsShape(CGameObject* gameObject, CPhysicsShape* physicsShape)
 {
-	this->pSprite = sprite;
+	this->pGameObject = gameObject;
 
 	this->mShapeType = physicsShape->mShapeType;
 	InitializePhysics(mShapeType);
 }
 
-CPhysicsShape::CPhysicsShape(CSimpleSprite* sprite, EPhysicsShape shapeType)
+CPhysicsShape::CPhysicsShape(CGameObject* gameObject, EPhysicsShape shapeType)
 {
-	this->pSprite = sprite;
+	this->pGameObject = gameObject;
 	this->mShapeType = shapeType;
 	InitializePhysics(mShapeType);
 }
@@ -28,10 +29,10 @@ void CPhysicsShape::InitializePhysics(EPhysicsShape shapeType)
 	switch (shapeType)
 	{
 	case CIRCLE:
-		pShape = pSprite == nullptr ? new CPhysicsShapeCircle() : new CPhysicsShapeCircle(pSprite);
+		pShape = pGameObject->pSprite == nullptr ? new CPhysicsShapeCircle() : new CPhysicsShapeCircle(pGameObject);
 		break;
 	case BOX:
-		pShape = pSprite == nullptr ? new CPhysicsShapeBox() :  new CPhysicsShapeBox(pSprite);
+		pShape = pGameObject->pSprite == nullptr ? new CPhysicsShapeBox() :  new CPhysicsShapeBox(pGameObject);
 		break;
 	case LINE : 
 		pShape = new CPhysicsShapeLine();

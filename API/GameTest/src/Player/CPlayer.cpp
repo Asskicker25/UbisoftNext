@@ -23,9 +23,8 @@ CPlayer::CPlayer(int controllerID) :
 	pSprite->CreateAnimation(WALK_LEFT, speed, { 7, 8, 9, 10, 11 });
 		
 	pPlayerController = new CPlayerController(this, controllerID);
-	pPhysicsShape = new CPhysicsShape(this->pSprite, BOX);
+	pPhysicsShape = new CPhysicsShape(this, CIRCLE);
 	pPhysicsShape->pShape->SetScale(0.75f, 1);
-	mTag = "Player";
 
 }
 

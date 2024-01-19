@@ -3,6 +3,7 @@
 #include "../../App/app.h"
 #include "Physics_Utils.h"
 
+
 class CSimpleSprite;
 
 // Abstract base class for physics shapes associated with a sprite.
@@ -15,8 +16,8 @@ public:
 
 	// Constructor: Initializes a CPhysicsBaseShape with a given sprite.
 	// Parameters:
-	//   sprite - Pointer to the associated sprite.
-	CPhysicsBaseShape(CSimpleSprite* sprite);
+	//   sprite - Pointer to the associated gameObject.
+	CPhysicsBaseShape(CGameObject* gameObject);
 
 	virtual ~CPhysicsBaseShape() {};	// Ensures proper cleanup of derived classes.
 	virtual void CalculateShape() = 0;	// Calculates the shape of the physics object.
@@ -36,7 +37,7 @@ public:
 
 protected: 
 
-	CSimpleSprite* pSprite = nullptr;	// Pointer to the associated sprite.
+	CGameObject* pGameObject = nullptr;	// Pointer to the associated gameObject.
 	
 	Vector2 mScale = Vector2(1, 1);		// Scale of the physics shape.
 	Vector2 mOffset = Vector2(0, 0);	// Offset of the physics shape.

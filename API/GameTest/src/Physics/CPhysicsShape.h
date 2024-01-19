@@ -14,8 +14,8 @@ class CPhysicsShape
 {
 public:
 
-	CPhysicsShape(CSimpleSprite* sprite, CPhysicsShape* physicsShape);	// Initializes a CPhysicsShape with a given sprite and physics shape.
-	CPhysicsShape(CSimpleSprite* sprite, EPhysicsShape shapeType);		// Initializes a CPhysicsShape with a given sprite and physics shape type.
+	CPhysicsShape(CGameObject* gameObject, CPhysicsShape* physicsShape);	// Initializes a CPhysicsShape with a given gameObject and physics shape.
+	CPhysicsShape(CGameObject* gameObject, EPhysicsShape shapeType);		// Initializes a CPhysicsShape with a given gameObject and physics shape type.
 	
 	~CPhysicsShape();
 	
@@ -26,6 +26,6 @@ public:
 
 	CPhysicsBaseShape* pShape = nullptr;					// Pointer to the base class for the physics shape.
 private:
-	CSimpleSprite* pSprite = nullptr;						// Pointer to the sprite associated with the physics shape.
+	CGameObject* pGameObject = nullptr;						// Pointer to the gameObject associated with the physics shape.
 };
 

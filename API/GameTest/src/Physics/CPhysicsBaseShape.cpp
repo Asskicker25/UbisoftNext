@@ -4,9 +4,9 @@ CPhysicsBaseShape::CPhysicsBaseShape()
 {
 }
 
-CPhysicsBaseShape::CPhysicsBaseShape(CSimpleSprite* sprite)
+CPhysicsBaseShape::CPhysicsBaseShape(CGameObject* gameObject)
 {
-	this->pSprite = sprite;
+	this->pGameObject = gameObject;
 }
 
 void CPhysicsBaseShape::SetScale(float x, float y)

@@ -12,8 +12,8 @@ public:
 
 	// Constructor: Initializes a CPhysicsShapeCircle with a given sprite.
 	// Parameters:
-	//   sprite - Pointer to the associated sprite.
-	CPhysicsShapeCircle(CSimpleSprite* sprite);
+	//   sprite - Pointer to the associated gameObject.
+	CPhysicsShapeCircle(CGameObject* gameObject);
 
 
 	void CalculateShape() override;		// Calculates the shape of the circle physics object.

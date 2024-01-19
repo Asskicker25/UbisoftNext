@@ -1,6 +1,7 @@
 #include "CGameObject.h"
 #include "../EntityManager/CEntityManager.h"
 #include "../Timer/CTimer.h"
+#include "../Camera/CCamera.h"
 
 CGameObject::CGameObject()
 {
@@ -33,8 +34,30 @@ void CGameObject::Render()
 	if (pSprite != nullptr)
 	{
 		// Draw the sprite if available.
+		float x, y;
+
+		if (!mIsUI)
+		{
+
+			pSprite->GetPosition(x, y);
+
+			x -= CCamera::GetInstance().mCameraPosition.x;
+			y -= CCamera::GetInstance().mCameraPosition.y;
+
+			pSprite->SetPosition(x, y);
+		}
+
+
 		pSprite->SetOpacity(mOpacity);
 		pSprite->Draw();
+
+		if (!mIsUI)
+		{
+			x += CCamera::GetInstance().mCameraPosition.x;
+			y += CCamera::GetInstance().mCameraPosition.y;
+
+			pSprite->SetPosition(x, y);
+		}
 
 	}
 
@@ -64,7 +87,7 @@ void CGameObject::CopyFromOther(CGameObject* other)
 {
 	// Call the base class method to copy common entity properties.
 	CEntity::CopyFromOther(other);
-	
+
 	// Delete the existing sprite instance.
 	if (pSprite != nullptr) { delete pSprite; }
 
@@ -77,6 +100,33 @@ void CGameObject::CopyFromOther(CGameObject* other)
 	if (other->pPhysicsShape == nullptr) return;
 
 	// Create a new physicsShape instance and copy data from the other game object's physicsShape.
-	pPhysicsShape = new CPhysicsShape(pSprite, other->pPhysicsShape);
+	pPhysicsShape = new CPhysicsShape(this, other->pPhysicsShape);
 
 }
+
+Vector2 CGameObject::GetPosition()
+{
+	float x, y;
+
+	pSprite->GetPosition(x, y);
+
+	if (!mIsUI)
+	{
+		x -= CCamera::GetInstance().mCameraPosition.x;
+		y -= CCamera::GetInstance().mCameraPosition.y;
+	}
+
+	return Vector2(x, y);
+}
+
+void CGameObject::SetPosition(float x, float y)
+{
+	if (!mIsUI)
+	{
+		x += CCamera::GetInstance().mCameraPosition.x;
+		y += CCamera::GetInstance().mCameraPosition.y;
+	}
+
+	pSprite->SetPosition(x, y);
+}
+
