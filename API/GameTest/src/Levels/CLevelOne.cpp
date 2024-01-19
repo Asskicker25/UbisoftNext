@@ -46,6 +46,9 @@ void CLevelOne::Render()
 void CLevelOne::Cleanup()
 {
 	mIsLevelCompleted = false;
+
+	mWall1->Cleanup();
+
 	CPlayerManager::GetInstance().Cleanup();
 	CGameplayManager::GetInstance().Cleanup();
 
@@ -79,9 +82,9 @@ void CLevelOne::HandleInput()
 
 void CLevelOne::HandleWallCreations()
 {
-	wall1 = new CWall();
+	mWall1 = new CWall();
 
-	wall1->SetPosition(0, 400, true);
+	mWall1->SetPosition(0, 400, true);
 }
 
 void CLevelOne::HandleCameraMovement()

@@ -1,5 +1,4 @@
 #include "CPhysicsShapeBox.h"
-#include "../../Camera/CCamera.h"
 #include "../../Entities/CGameObject.h"
 
 CPhysicsShapeBox::CPhysicsShapeBox() : CPhysicsBaseShape()

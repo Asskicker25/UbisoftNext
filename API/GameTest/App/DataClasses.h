@@ -50,4 +50,13 @@ struct Vector2
 	{
 		return { x * other, y * other };
 	}
+
+	bool operator==(const Vector2& other) const
+	{
+		if (x != other.x) return false;
+		if (y != other.y) return false;
+
+		return true;
+	}
+
 };

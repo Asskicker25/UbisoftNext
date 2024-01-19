@@ -31,7 +31,7 @@ private:
 
 	Vector2 mCameraMoveDir;
 
-	CWall* wall1;
+	CWall* mWall1;
 
 };
 

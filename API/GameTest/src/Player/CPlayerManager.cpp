@@ -1,6 +1,8 @@
 #include "CPlayerManager.h"
 #include "../Entities/CGameplayManager.h"
 #include "../TimerEvents/CTimerEventsHandler.h"
+#include "Arc/CParabolicArc.h"
+#include "../Utilities/Remap.h"
 
 
 CPlayerManager::CPlayerManager()
@@ -41,11 +43,19 @@ void CPlayerManager::Update()
 
 void CPlayerManager::Render()
 {
+	RenderArc();
+
+	std::string message = "Aim Angle : " + std::to_string(mCurrentAngle);
+
+	App::Print(10, 70, message.c_str(), 1.0f, 0.0f, 1.0f, GLUT_BITMAP_HELVETICA_10);
 }
 
 void CPlayerManager::Cleanup()
 {
 	CGameplayManager::GetInstance().OnTurnStart.UnSubscribe("PManagerTurnStart");
+
+	pPlayer_One->Cleanup();
+	pPlayer_Two->Cleanup();
 }
 
 CPlayer* CPlayerManager::GetCurrentPlayer()
@@ -77,6 +87,8 @@ void CPlayerManager::HandleInput()
 		{
 			GetCurrentPlayer()->pSprite->SetAnimation(AIM);
 
+			HandleAim();
+
 			if (App::GetController().CheckButton(XINPUT_GAMEPAD_RIGHT_SHOULDER, true))
 			{
 				GetCurrentPlayer()->pSprite->SetAnimation(THROW);
@@ -85,18 +97,50 @@ void CPlayerManager::HandleInput()
 
 				//Projectile Spawn
 				//Projectile State switch
-
-				CTimerEventsHandler::GetInstance().AddDelay([]()
+				CTimerEventsHandler::GetInstance().AddDelay([this]()
 					{
-						CGameplayManager::GetInstance().SwitchTurn();
-
-					}, mThrowingDuration);
+						HandleShoot();
+					}, 
+					mThrowingDuration);
 			}
 		}
 		else
 		{
 			GetCurrentPlayer()->pSprite->SetAnimation(IDLE);
 		}
+	}
+}
+
+void CPlayerManager::HandleShoot()
+{
+	CGameplayManager::GetInstance().SwitchTurn();
+}
+
+void CPlayerManager::HandleAim()
+{
+	int direction = CGameplayManager::GetInstance().mCurrentTurn == 1 ? 1 : -1;
+
+	mCurrentAngle = std::atan2(mAimDirection.y, mAimDirection.x);
+
+	mCurrentAngle = mCurrentAngle * 180.0 / PI;
+
+
+	if (mCurrentAngle < mAimMinAngle) { mCurrentAngle = mAimMinAngle; }
+	if (mCurrentAngle > mAimMaxAngle) { mCurrentAngle = mAimMaxAngle; }
+
+	CParabolicArc arc(GetCurrentPlayer()->GetPosition(), mArcResolution, direction * mCurrentAngle, mForce, 10);
+	mCurrentArcPositions = arc.GetArc();
+
+}
+
+void CPlayerManager::RenderArc()
+{
+	int renderCount = mArcLength * mCurrentArcPositions.size();
+
+	for (int i = 1; i < renderCount; i++)
+	{
+		App::DrawLine(mCurrentArcPositions[i - 1].x, mCurrentArcPositions[i - 1].y,
+			mCurrentArcPositions[i].x, mCurrentArcPositions[i].y, 0, 1, 0);
 	}
 }
 

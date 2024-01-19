@@ -51,6 +51,7 @@
     <ClCompile Include="src\Tween\CTweenManager.cpp" />
     <ClCompile Include="src\Tween\CBaseTween.cpp" />
     <ClCompile Include="src\Tween\CFloatTween.cpp" />
+    <ClCompile Include="src\Player\Arc\CParabolicArc.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
@@ -114,6 +115,7 @@
     <ClInclude Include="src\Utilities\Lerp.h" />
     <ClInclude Include="src\Utilities\Random.h" />
     <ClInclude Include="src\Utilities\Remap.h" />
+    <ClInclude Include="src\Player\Arc\CParabolicArc.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="NextAPI">

@@ -27,11 +27,26 @@ public:
 
 	Vector2 mAimDirection;
 
+	std::vector<Vector2> mCurrentArcPositions;
+
 private:
 
 	void HandleTurnStart();
 	void HandleInput();
+	void HandleShoot();
+	void HandleAim();
 
-	float mThrowingDuration = 1.0f;
+	void RenderArc();
+
+	float mThrowingDuration = 0.5f;
+	float mArcLength = 1.0f;	
+
+	float mCurrentAngle = 0;
+	float mAimMinAngle = 15.0f;
+	float mAimMaxAngle = 50.0f;
+
+	float mForce = 117;
+
+	int mArcResolution = 10;
 };
 
