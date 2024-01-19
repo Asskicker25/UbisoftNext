@@ -9,6 +9,8 @@ NormalBullet::NormalBullet() : BaseBullet()
 	pSprite->CreateAnimation(0, 1.0f / 6.0f, { 0,1 });
 	pSprite->SetAnimation(0);
 
+	pPhysicsShape = new CPhysicsShape(pSprite, BOX);
+
 	mSpeed = 2;
 }
 
@@ -30,6 +32,20 @@ void NormalBullet::Update()
 	y += mMoveDir.y * mSpeed;
 
 	pSprite->SetPosition(x, y);
+
+	std::vector<CGameObject*> coll;
+	if (CheckCollisionWithTag(pPhysicsShape, "Wall", coll))
+	{
+		mIsEnabled = false;
+		mIsVisible = false;
+
+		for (CGameObject* a : coll)
+		{
+			a->Destroy();
+		}
+
+		return;
+	}
 
 	BaseBullet::Update();
 

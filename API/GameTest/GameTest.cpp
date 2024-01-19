@@ -50,8 +50,8 @@ void Render()
 
 void Shutdown()
 {	
+	CTimerEventsHandler::GetInstance().Cleanup();
 	pGameManager->Cleanup();
 	CLevelManager::GetInstance().Cleanup();
 	CEntityManager::GetInstance().Cleanup();
-	CTimerEventsHandler::GetInstance().Cleanup();
 }

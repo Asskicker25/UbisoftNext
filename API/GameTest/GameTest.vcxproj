@@ -236,7 +236,6 @@
     <ClCompile Include="src\Physics\Shapes\CPhysicsShapeBox.cpp" />
     <ClCompile Include="src\Physics\CPhysicsBaseShape.cpp" />
     <ClCompile Include="src\Physics\CPhysicsShape.cpp" />
-    <ClCompile Include="src\ObjectPooling\ObjectPool.cpp" />
     <ClCompile Include="src\Player\CPlayerController.cpp" />
     <ClCompile Include="src\Player\CPlayer.cpp" />
     <ClCompile Include="src\Levels\CLevelTwo.cpp" />

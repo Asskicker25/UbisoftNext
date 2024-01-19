@@ -37,7 +37,6 @@
     <ClCompile Include="src\Player\CPlayer.cpp" />
     <ClCompile Include="src\Player\CPlayerController.cpp" />
     <ClCompile Include="App\DataClasses.cpp" />
-    <ClCompile Include="src\ObjectPooling\ObjectPool.cpp" />
     <ClCompile Include="src\TimerEvents\CTimerEventsHandler.cpp" />
     <ClCompile Include="src\TimerEvents\CTimerEvents.cpp" />
     <ClCompile Include="src\Physics\CPhysicsShape.cpp" />

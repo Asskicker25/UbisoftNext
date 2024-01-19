@@ -2,20 +2,19 @@
 
 #include "BaseBullet.h"
 #include "../../ObjectPooling/ObjectPool.h"
+#include "NormalBullet.h"
 
-enum BulletType
-{
-	NORMAL = 0,
 
-};
 
 class BulletFactory
 {
 public:
 
 	BaseBullet* CreateBullet(BulletType type);
+	void DestroyBullet(BaseBullet* bullet,float time);
 
 private:
-	std::unordered_map<BulletType, CGameObjectPool* > mListOfObjectPools;
+	CGameObjectPool<NormalBullet>* bulletPool = nullptr;
+	//std::unordered_map<BulletType, CGameObjectPool* > mListOfObjectPools;
 };
 

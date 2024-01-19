@@ -190,5 +190,6 @@ void CPlayerController::ShootNormalBullet()
 
 	bullet->mMoveDir = mMoveDir;
 
+	bulletFactory->DestroyBullet(bullet, 10);
 
 }
