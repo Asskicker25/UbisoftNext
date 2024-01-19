@@ -183,7 +183,7 @@
     <ClInclude Include="App\SimpleSound.h" />
     <ClInclude Include="App\SimpleSprite.h" />
     <ClInclude Include="App\DataClasses.h" />
-    <ClInclude Include="src\Camera\CCamera.h" />
+    <ClInclude Include="src\World\CWorld.h" />
     <ClInclude Include="src\Events\Events.h" />
     <ClInclude Include="src\Physics\Shapes\CPhysicsShapeLine.h" />
     <ClInclude Include="src\Physics\Shapes\CPhysicsShapeCircle.h" />
@@ -221,7 +221,7 @@
     <ClCompile Include="App\SimpleSound.cpp" />
     <ClCompile Include="App\SimpleSprite.cpp" />
     <ClCompile Include="App\DataClasses.cpp" />
-    <ClCompile Include="src\Camera\CCamera.cpp" />
+    <ClCompile Include="src\World\CWorld.cpp" />
     <ClCompile Include="src\Events\Events.cpp" />
     <ClCompile Include="src\Physics\Shapes\CPhysicsShapeLine.cpp" />
     <ClCompile Include="src\Physics\Shapes\CPhysicsShapeCircle.cpp" />

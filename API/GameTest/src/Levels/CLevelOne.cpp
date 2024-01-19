@@ -2,7 +2,7 @@
 #include "../Physics/Physics_Utils.h"
 #include "../Physics/Shapes/CPhysicsShapeLine.h"
 
-#include "../Camera/CCamera.h"
+#include "../World/CWorld.h"
 
 void CLevelOne::Start()
 {
@@ -56,7 +56,7 @@ void CLevelOne::HandleInput()
 
 	mCameraMoveDir.Normalize();
 	
-	CCamera::GetInstance().mCameraPosition.x += mCameraMoveDir.x * 20;
-	CCamera::GetInstance().mCameraPosition.y += mCameraMoveDir.y * 20;
+	CWorld::GetInstance().mOrigin.x += mCameraMoveDir.x * 20;
+	CWorld::GetInstance().mOrigin.y += mCameraMoveDir.y * 20;
 }
 

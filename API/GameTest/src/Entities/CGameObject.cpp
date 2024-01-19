@@ -1,7 +1,7 @@
 #include "CGameObject.h"
 #include "../EntityManager/CEntityManager.h"
 #include "../Timer/CTimer.h"
-#include "../Camera/CCamera.h"
+#include "../World/CWorld.h"
 
 CGameObject::CGameObject()
 {
@@ -41,8 +41,8 @@ void CGameObject::Render()
 
 			pSprite->GetPosition(x, y);
 
-			x -= CCamera::GetInstance().mCameraPosition.x;
-			y -= CCamera::GetInstance().mCameraPosition.y;
+			x -= CWorld::GetInstance().mOrigin.x;
+			y -= CWorld::GetInstance().mOrigin.y;
 
 			pSprite->SetPosition(x, y);
 		}
@@ -53,8 +53,8 @@ void CGameObject::Render()
 
 		if (!mIsUI)
 		{
-			x += CCamera::GetInstance().mCameraPosition.x;
-			y += CCamera::GetInstance().mCameraPosition.y;
+			x += CWorld::GetInstance().mOrigin.x;
+			y += CWorld::GetInstance().mOrigin.y;
 
 			pSprite->SetPosition(x, y);
 		}
@@ -112,8 +112,8 @@ Vector2 CGameObject::GetPosition()
 
 	if (!mIsUI)
 	{
-		x -= CCamera::GetInstance().mCameraPosition.x;
-		y -= CCamera::GetInstance().mCameraPosition.y;
+		x -= CWorld::GetInstance().mOrigin.x;
+		y -= CWorld::GetInstance().mOrigin.y;
 	}
 
 	return Vector2(x, y);
@@ -123,8 +123,8 @@ void CGameObject::SetPosition(float x, float y)
 {
 	if (!mIsUI)
 	{
-		x += CCamera::GetInstance().mCameraPosition.x;
-		y += CCamera::GetInstance().mCameraPosition.y;
+		x += CWorld::GetInstance().mOrigin.x;
+		y += CWorld::GetInstance().mOrigin.y;
 	}
 
 	pSprite->SetPosition(x, y);
