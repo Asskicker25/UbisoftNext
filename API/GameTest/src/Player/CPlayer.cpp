@@ -14,46 +14,42 @@ CPlayer::CPlayer(int controllerID) :
 	pimpl{ new Pimpl(this) }
 {
 
-	pSprite = App::CreateSprite("Assets/Sprites/Batman_01_strip6.png", 12, 1);
+	pSprite = App::CreateSprite("Assets/Sprites/Cat_strip35.png", 35, 1);
 	float speed = 1.0f / 6.0f;
 
-	pSprite->CreateAnimation(IDLE_RIGHT, speed, { 0 });
-	pSprite->CreateAnimation(IDLE_LEFT, speed, { 1 });
-	pSprite->CreateAnimation(WALK_RIGHT, speed, { 2, 3, 4, 5, 6 });
-	pSprite->CreateAnimation(WALK_LEFT, speed, { 7, 8, 9, 10, 11 });
+	pSprite->CreateAnimation(IDLE, speed, { 0,1,2,3 });
+	pSprite->CreateAnimation(AIM, speed, { 5 });
+	pSprite->CreateAnimation(THROW, speed, {  6, 7, 8, 9 });
+	pSprite->CreateAnimation(TAUNT, speed, { 10, 11, 12, 13, 14, 15 });
+	pSprite->CreateAnimation(HIT_ONE, speed, { 16, 17, 18, 19, 20 });
+	pSprite->CreateAnimation(HIT_TWO, speed, { 21, 22, 23 });
+	pSprite->CreateAnimation(DEATH, speed, { 24, 25, 26, 27, 28, 29, 30, 31, 32 });
 		
-	pPlayerController = new CPlayerController(this, controllerID);
-	pPhysicsShape = new CPhysicsShape(this, CIRCLE);
-	pPhysicsShape->pShape->SetScale(0.75f, 1);
+	pPhysicsShape = new CPhysicsShape(this, BOX);
+	pPhysicsShape->pShape->SetScale(0.5f, 0.5f);
+	pPhysicsShape->pShape->SetOffset(0,- 117/4 );
+
+	pSprite->SetAnimation(IDLE);
 
 }
 
 void CPlayer::Start()
 {
-	pPlayerController->mIsEnabled = true;
 }
 
 void CPlayer::Update()
 {
-	pPlayerController->Update();
 
 	CGameObject::Update();
 }
 
 void CPlayer::Render()
 {
-	std::string moveDirText = "Move Dir : " +
-		std::to_string(pPlayerController->mMoveDir.x) + " , " + std::to_string(pPlayerController->mMoveDir.y);
-	App::Print(10, 80, moveDirText.c_str(), 1.0f, 0.0f, 1.0f, GLUT_BITMAP_HELVETICA_10);
-
-	pPlayerController->Render();
-
 	CGameObject::Render();
 }
 
 void CPlayer::Cleanup()
 {
-	pPlayerController->mIsEnabled = false;
 	CGameObject::Cleanup();
 }
 

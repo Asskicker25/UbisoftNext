@@ -1,9 +1,9 @@
 #pragma once
 
 #include "../LevelManager/CBaseLevel.h"
-#include "../Player/CPlayer.h"
 #include "../ObjectPooling/ObjectPool.h"
 
+class CWall;
 
 class CLevelOne : public CBaseLevel
 {
@@ -21,12 +21,17 @@ public:
 private:
 
 	void HandleInput();
+	void HandleWallCreations();
+	void HandleCameraMovement();
 
 	bool mIsLevelCompleted = false;
+	bool mCanCameraMove = false;
 
-	CPlayer* pPlayer1 = nullptr;
-	CPlayer* pPlayer2 = nullptr;
+	float mCameraMoveTime = 2;
 
 	Vector2 mCameraMoveDir;
+
+	CWall* wall1;
+
 };
 

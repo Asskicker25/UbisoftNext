@@ -1,6 +1,5 @@
 #include "CLevelManager.h"
 #include "../Levels/CLevelOne.h"
-#include "../Levels/CLevelTwo.h"
 #include "../GameManager/CGameManager.h"
 #include "../EntityManager/CEntityManager.h"
 
@@ -9,9 +8,8 @@ CLevelManager::CLevelManager()
 	mWindowCenterX = APP_VIRTUAL_WIDTH / 2;
 	mWindowCenterY = APP_VIRTUAL_HEIGHT / 2;
 
-	// Add initial levels to the list (e.g., CLevelOne and CLevelTwo).
+	// Add initial levels to the list (e.g., CLevelOne).
 	AddLevel(new CLevelOne());
-	//AddLevel(new CLevelTwo());
 }
 
 CLevelManager& CLevelManager::GetInstance()

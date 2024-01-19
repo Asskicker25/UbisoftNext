@@ -23,7 +23,7 @@ void CGameObject::Update()
 	if (pSprite == nullptr) return;
 
 	// Update the sprite with the current delta time.
-	pSprite->Update(CTimer::GetInstance().mDeltaTime);
+	pSprite->Update(CTimer::GetInstance().mDeltaTime * 1000);
 }
 
 void CGameObject::Render()
@@ -119,9 +119,9 @@ Vector2 CGameObject::GetPosition()
 	return Vector2(x, y);
 }
 
-void CGameObject::SetPosition(float x, float y)
+void CGameObject::SetPosition(float x, float y, bool ignoreOrigin)
 {
-	if (!mIsUI)
+	if (!mIsUI && !ignoreOrigin)
 	{
 		x += CWorld::GetInstance().mOrigin.x;
 		y += CWorld::GetInstance().mOrigin.y;

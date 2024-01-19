@@ -34,6 +34,6 @@ public:
 	virtual void CopyFromOther(CGameObject* other);
 
 	Vector2 GetPosition();
-	void SetPosition(float x, float y);
+	void SetPosition(float x, float y, bool ignoreOrigin = false);
 };
 

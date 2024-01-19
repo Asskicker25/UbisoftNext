@@ -24,7 +24,7 @@ void CTimerEvents::AssignEventData(std::function<void()> callback, float delayTi
 
 void CTimerEvents::Update()
 {
-	mCurrentTime += CTimer::GetInstance().mDeltaTime / 1000.0f;
+	mCurrentTime += CTimer::GetInstance().mDeltaTime;
 
 	if (mCurrentTime >= mDelayTime)
 	{
