@@ -118,29 +118,49 @@ void CPlayerManager::HandleShoot()
 
 void CPlayerManager::HandleAim()
 {
-	int direction = CGameplayManager::GetInstance().mCurrentTurn == 1 ? 1 : -1;
-
 	mCurrentAngle = std::atan2(mAimDirection.y, mAimDirection.x);
 
 	mCurrentAngle = mCurrentAngle * 180.0 / PI;
 
 
-	if (mCurrentAngle < mAimMinAngle) { mCurrentAngle = mAimMinAngle; }
-	if (mCurrentAngle > mAimMaxAngle) { mCurrentAngle = mAimMaxAngle; }
+	if (CGameplayManager::GetInstance().mCurrentTurn == 1)
+	{
+		if (mCurrentAngle < mAimMinAngle) { mCurrentAngle = mAimMinAngle; }
+		if (mCurrentAngle > mAimMaxAngle) { mCurrentAngle = mAimMaxAngle; }
+	}
+	else
+	{
+		if (mCurrentAngle < 0)
+		{
+			mCurrentAngle += 360.0;
+		}
 
-	CParabolicArc arc(GetCurrentPlayer()->GetPosition(), mArcResolution, direction * mCurrentAngle, mForce, 10);
+		if (mCurrentAngle > 180 - mAimMinAngle) { mCurrentAngle = 180 - mAimMinAngle; }
+		if (mCurrentAngle < 90 + mAimMaxAngle) { mCurrentAngle = 90 + mAimMaxAngle; }
+	}
+	
+
+	CParabolicArc arc(GetCurrentPlayer()->GetPosition(), mArcResolution, mCurrentAngle, mForce, 10);
 	mCurrentArcPositions = arc.GetArc();
 
 }
 
 void CPlayerManager::RenderArc()
 {
-	int renderCount = mArcLength * mCurrentArcPositions.size();
-
-	for (int i = 1; i < renderCount; i++)
+	if (CGameplayManager::GetInstance().GetState() == PLAYER_AIM)
 	{
-		App::DrawLine(mCurrentArcPositions[i - 1].x, mCurrentArcPositions[i - 1].y,
-			mCurrentArcPositions[i].x, mCurrentArcPositions[i].y, 0, 1, 0);
+		if (mAimDirection.Magnitude() > 0.1f)
+		{
+			int renderCount = mArcLength * mCurrentArcPositions.size();
+
+			for (int i = 1; i < renderCount; i++)
+			{
+				App::DrawLine(mCurrentArcPositions[i - 1].x, mCurrentArcPositions[i - 1].y,
+					mCurrentArcPositions[i].x, mCurrentArcPositions[i].y, 0, 1, 0);
+			}
+		}
+		
 	}
+	
 }
 
