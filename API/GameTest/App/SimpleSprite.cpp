@@ -72,25 +72,17 @@ void CSimpleSprite::Update(float dt)
 {
     if (m_currentAnim >= 0)
     {
-        m_animTime += dt/1000.0f;
-        sAnimation &anim = m_animations[m_currentAnim];
+        m_animTime += dt / 1000.0f;
+        sAnimation& anim = m_animations[m_currentAnim];
         float duration = anim.m_speed * anim.m_frames.size();
 
         //Looping around if reached the end of animation
         if (m_animTime > duration)
         {
-            //If we've gone farther than twice the duration, we have to remove as many full durations as possible
-            if (m_animTime >= 2 * duration)
-            {
-                m_animTime = m_animTime - duration * floorf(m_animTime / duration);
-            }
-            else //Otherwise, we can just do a simple loop around
-            {
-                m_animTime = m_animTime - duration;
-            }
+            m_animTime = fmodf(m_animTime, duration);
         }
-        int frame = (int)( m_animTime / anim.m_speed );
-        SetFrame(anim.m_frames[frame]);        
+        int frame = (int)(m_animTime / anim.m_speed);
+        SetFrame(anim.m_frames[frame]);
     }
 }
 
@@ -165,6 +157,18 @@ void CSimpleSprite::SetFrame(unsigned int f)
 
 void CSimpleSprite::SetAnimation(int id)
 {
+    SetAnimation(id, false);
+}
+
+
+void CSimpleSprite::SetAnimation(int id, bool playFromBeginning)
+{
+    //When starting a new animation, we may want to start from the beginning, ie reset time
+    if (playFromBeginning)
+    {
+        m_animTime = 0.0f;
+    }
+
     for (int i = 0; i < m_animations.size(); i++)
     {
         if (m_animations[i].m_id == id)
@@ -173,9 +177,8 @@ void CSimpleSprite::SetAnimation(int id)
             return;
         }
     }
-	m_currentAnim = -1;
+    m_currentAnim = -1;
 }
-
 
 bool CSimpleSprite::LoadTexture(const char * filename)
 {

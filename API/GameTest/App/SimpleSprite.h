@@ -25,6 +25,7 @@ public:
     void SetScale(float s) { m_scale = s; }
     void SetFrame(unsigned int f);
     void SetAnimation(int id);
+    void SetAnimation(int id, bool playFromBeginning);
 	void GetPosition(float &x, float &y) { x = m_xpos; y = m_ypos; }
     float GetWidth()  const { return m_width;  }
     float GetHeight() const { return m_height; }
