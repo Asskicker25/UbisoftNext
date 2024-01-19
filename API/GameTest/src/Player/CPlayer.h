@@ -15,7 +15,7 @@ class CPlayer : public CGameObject
 {
 public:
 
-	CPlayer();
+	CPlayer(int controllerID);
 
 	void Start() override;
 	void Update() override;

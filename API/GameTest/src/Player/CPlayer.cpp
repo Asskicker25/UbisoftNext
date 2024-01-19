@@ -10,7 +10,7 @@ public:
 
 };
 
-CPlayer::CPlayer() :
+CPlayer::CPlayer(int controllerID) :
 	pimpl{ new Pimpl(this) }
 {
 
@@ -22,8 +22,9 @@ CPlayer::CPlayer() :
 	pSprite->CreateAnimation(WALK_RIGHT, speed, { 2, 3, 4, 5, 6 });
 	pSprite->CreateAnimation(WALK_LEFT, speed, { 7, 8, 9, 10, 11 });
 		
-	pPlayerController = new CPlayerController(this->pSprite);
+	pPlayerController = new CPlayerController(this, controllerID);
 	pPhysicsShape = new CPhysicsShape(this->pSprite, BOX);
+	pPhysicsShape->pShape->SetScale(0.75f, 1);
 	mTag = "Player";
 
 }

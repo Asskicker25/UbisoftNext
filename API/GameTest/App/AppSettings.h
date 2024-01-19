@@ -59,4 +59,6 @@
 #define FRAND_RANGE(_MIN_, _MAX_ ) (FRAND * ((_MAX_)-(_MIN_)) + (_MIN_))
 #define PI		(3.14159265359f)
 
+#define RENDER_PHYSICS					true
+
 #endif

@@ -38,9 +38,9 @@ public:
 
 	CEvents OnDestroyEvent;
 
-
 	std::string mEntityId = "";						// Unique identifier for the entity.
 	std::string mTag = "Untagged";					// Tag to categorize the entity (default is "Untagged").
+	std::string mName = "Unnamed";					// Name assigned to the entity.
 	
 	bool mIsEnabled = true;							// Flag indicating whether the entity is enabled.
 	bool mIsStartInvoked = false;					// Flag indicating whether the Start method has been invoked for the entity.

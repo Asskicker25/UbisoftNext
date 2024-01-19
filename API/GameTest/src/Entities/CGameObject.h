@@ -13,7 +13,6 @@ public:
 
 	bool mIsVisible = true;					// Flag indicating whether the game object is visible.
 	float mOpacity = 1.0f;
-	std::string mName = "Unnamed";			// Name assigned to the game object.
 
 	// Pointers to sprite and physics shape instances.
 	CSimpleSprite* pSprite = nullptr;

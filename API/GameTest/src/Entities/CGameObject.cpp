@@ -38,6 +38,8 @@ void CGameObject::Render()
 
 	}
 
+	if (!RENDER_PHYSICS) return;
+
 	// Render the physics shape if available.
 	if (pPhysicsShape != nullptr)
 	{
@@ -71,6 +73,8 @@ void CGameObject::CopyFromOther(CGameObject* other)
 
 	// Delete the existing physicsShape instance.
 	if (pPhysicsShape != nullptr) { delete pPhysicsShape; }
+
+	if (other->pPhysicsShape == nullptr) return;
 
 	// Create a new physicsShape instance and copy data from the other game object's physicsShape.
 	pPhysicsShape = new CPhysicsShape(pSprite, other->pPhysicsShape);
