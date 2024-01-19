@@ -5,7 +5,6 @@
 CPlayerController::CPlayerController(CPlayer* player, int& controllerID) 
 	: pPlayer{ player }, mControllerID { controllerID }
 {
-	bulletFactory = new BulletFactory();
 }
 
 CPlayerController::~CPlayerController()
@@ -46,15 +45,14 @@ void CPlayerController::HandleInput()
 {
 	if (!mIsEnabled) return;
 
-	mMoveDir.x = App::GetController(mControllerID).GetLeftThumbStickX();
-	mMoveDir.y = App::GetController(mControllerID).GetLeftThumbStickY();
+	mMoveDir.x = App::GetController(mControllerID).GetRightThumbStickX();
+	mMoveDir.y = App::GetController(mControllerID).GetRightThumbStickY();
 
 	mMoveDir.Normalize();
 
 
 	if (App::GetController(mControllerID).CheckButton(XINPUT_GAMEPAD_A, true))
 	{
-		ShootNormalBullet();
 	}
 
 }
@@ -177,19 +175,4 @@ void CPlayerController::HandleAnimation()
 	}
 }
 
-void CPlayerController::ShootNormalBullet()
-{
-	BaseBullet* bullet =  bulletFactory->CreateBullet(NORMAL);
 
-	float x, y;
-	pPlayer->pSprite->GetPosition(x, y);
-
-	x += mMoveDir.x * mRayCastDistance;
-	y += mMoveDir.y * mRayCastDistance;
-	bullet->pSprite->SetPosition(x, y);
-
-	bullet->mMoveDir = mMoveDir;
-
-	bulletFactory->DestroyBullet(bullet, 2);
-
-}

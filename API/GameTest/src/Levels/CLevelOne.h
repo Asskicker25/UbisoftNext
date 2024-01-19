@@ -3,8 +3,7 @@
 #include "../LevelManager/CBaseLevel.h"
 #include "../Player/CPlayer.h"
 #include "../ObjectPooling/ObjectPool.h"
-#include "../Game/Walls/Wall.h"
-#include "../Game/PickUp/PickUp.h"
+
 
 class CLevelOne : public CBaseLevel
 {
@@ -27,12 +26,5 @@ private:
 
 	CPlayer* pPlayer1 = nullptr;
 	CPlayer* pPlayer2 = nullptr;
-
-	CWall* wall1 = nullptr;
-	CWall* wall2 = nullptr;
-
-	CPickUp* pickup1 = nullptr;
-	CPickUp* pickup2 = nullptr;
-
 };
 

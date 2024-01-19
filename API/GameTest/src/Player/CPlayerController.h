@@ -2,7 +2,6 @@
 
 #include "../App/app.h"
 #include <string>
-#include "../Game/Bullet/BulletFactory.h"
 
 class CPlayer;
 
@@ -32,8 +31,6 @@ private:
 	std::string mAnimStateText = "IDLE_RIGHT";
 	Vector2 mLastMoveDir = Vector2(0, 0);
 
-	BulletFactory* bulletFactory = nullptr;
-
 	CPlayer* pPlayer = nullptr;
 
 	void HandleInput();
@@ -42,8 +39,6 @@ private:
 	void HandleCollision();
 	void HandleRotation();
 	void HandleAnimation();
-
-	void ShootNormalBullet();
 
 };
 

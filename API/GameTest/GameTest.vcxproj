@@ -183,11 +183,7 @@
     <ClInclude Include="App\SimpleSound.h" />
     <ClInclude Include="App\SimpleSprite.h" />
     <ClInclude Include="App\DataClasses.h" />
-    <ClInclude Include="src\Game\Bullet\NormalBullet.h" />
-    <ClInclude Include="src\Game\Bullet\BaseBullet.h" />
-    <ClInclude Include="src\Game\Bullet\BulletFactory.h" />
     <ClInclude Include="src\Events\Events.h" />
-    <ClInclude Include="src\Game\PickUp\PickUp.h" />
     <ClInclude Include="src\Physics\Shapes\CPhysicsShapeLine.h" />
     <ClInclude Include="src\Physics\Shapes\CPhysicsShapeCircle.h" />
     <ClInclude Include="src\Physics\Physics_Utils.h" />
@@ -216,7 +212,6 @@
     <ClInclude Include="targetver.h" />
     <ClInclude Include="src\TimerEvents\CTimerEventsHandler.h" />
     <ClInclude Include="src\TimerEvents\CTimerEvents.h" />
-    <ClInclude Include="src\Game\Walls\Wall.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="App\app.cpp" />
@@ -225,11 +220,7 @@
     <ClCompile Include="App\SimpleSound.cpp" />
     <ClCompile Include="App\SimpleSprite.cpp" />
     <ClCompile Include="App\DataClasses.cpp" />
-    <ClCompile Include="src\Game\Bullet\NormalBullet.cpp" />
-    <ClCompile Include="src\Game\Bullet\BaseBullet.cpp" />
-    <ClCompile Include="src\Game\Bullet\BulletFactory.cpp" />
     <ClCompile Include="src\Events\Events.cpp" />
-    <ClCompile Include="src\Game\PickUp\PickUp.cpp" />
     <ClCompile Include="src\Physics\Shapes\CPhysicsShapeLine.cpp" />
     <ClCompile Include="src\Physics\Shapes\CPhysicsShapeCircle.cpp" />
     <ClCompile Include="src\Physics\Physics_Utils.cpp" />
@@ -261,7 +252,6 @@
     </ClCompile>
     <ClCompile Include="src\TimerEvents\CTimerEventsHandler.cpp" />
     <ClCompile Include="src\TimerEvents\CTimerEvents.cpp" />
-    <ClCompile Include="src\Game\Walls\Wall.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

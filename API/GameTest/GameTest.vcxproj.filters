@@ -46,11 +46,6 @@
     <ClCompile Include="src\Physics\Shapes\CPhysicsShapeCircle.cpp" />
     <ClCompile Include="src\Physics\Shapes\CPhysicsShapeLine.cpp" />
     <ClCompile Include="src\Events\Events.cpp" />
-    <ClCompile Include="src\Game\Walls\Wall.cpp" />
-    <ClCompile Include="src\Game\PickUp\PickUp.cpp" />
-    <ClCompile Include="src\Game\Bullet\BulletFactory.cpp" />
-    <ClCompile Include="src\Game\Bullet\BaseBullet.cpp" />
-    <ClCompile Include="src\Game\Bullet\NormalBullet.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
@@ -105,11 +100,6 @@
     <ClInclude Include="src\Physics\Shapes\CPhysicsShapeCircle.h" />
     <ClInclude Include="src\Physics\Shapes\CPhysicsShapeLine.h" />
     <ClInclude Include="src\Events\Events.h" />
-    <ClInclude Include="src\Game\Walls\Wall.h" />
-    <ClInclude Include="src\Game\PickUp\PickUp.h" />
-    <ClInclude Include="src\Game\Bullet\BulletFactory.h" />
-    <ClInclude Include="src\Game\Bullet\BaseBullet.h" />
-    <ClInclude Include="src\Game\Bullet\NormalBullet.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="NextAPI">
