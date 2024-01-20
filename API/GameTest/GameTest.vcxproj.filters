@@ -65,6 +65,8 @@
     <ClCompile Include="src\Player\PowerUps\Types\CMegaMagnify.cpp" />
     <ClCompile Include="src\Player\PowerUps\Types\CExplosiveImpact.cpp" />
     <ClCompile Include="src\Player\PowerUps\Types\CDamageAmplifier.cpp" />
+    <ClCompile Include="src\Projectile\Projectiles\CDamageAmplifierProjectile.cpp" />
+    <ClCompile Include="src\Projectile\Projectiles\CExplosiveImpactProjectile.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
@@ -143,6 +145,8 @@
     <ClInclude Include="src\Player\PowerUps\Types\CExplosiveImpact.h" />
     <ClInclude Include="src\Player\PowerUps\Types\CDamageAmplifier.h" />
     <ClInclude Include="src\Player\PowerUps\EPowerUp.h" />
+    <ClInclude Include="src\Projectile\Projectiles\CDamageAmplifierProjectile.h" />
+    <ClInclude Include="src\Projectile\Projectiles\CExplosiveImpactProjectile.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="NextAPI">

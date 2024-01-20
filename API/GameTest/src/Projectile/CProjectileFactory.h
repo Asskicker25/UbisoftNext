@@ -22,5 +22,7 @@ private:
 
 	CBaseProjectile* mCurrentProjectile = nullptr;
 	CBaseProjectile* mNormalProjectile = nullptr;
+	CBaseProjectile* mDamageAmplifierProjectile = nullptr;
+	CBaseProjectile* mExplosiveImpactProjectile = nullptr;
 };
 

@@ -183,6 +183,8 @@
     <ClInclude Include="App\SimpleSound.h" />
     <ClInclude Include="App\SimpleSprite.h" />
     <ClInclude Include="App\DataClasses.h" />
+    <ClInclude Include="src\Projectile\Projectiles\CExplosiveImpactProjectile.h" />
+    <ClInclude Include="src\Projectile\Projectiles\CDamageAmplifierProjectile.h" />
     <ClInclude Include="src\Player\PowerUps\Types\CDamageAmplifier.h" />
     <ClInclude Include="src\Player\PowerUps\Types\CExplosiveImpact.h" />
     <ClInclude Include="src\Player\PowerUps\Types\CMegaMagnify.h" />
@@ -244,6 +246,8 @@
     <ClCompile Include="App\SimpleSound.cpp" />
     <ClCompile Include="App\SimpleSprite.cpp" />
     <ClCompile Include="App\DataClasses.cpp" />
+    <ClCompile Include="src\Projectile\Projectiles\CExplosiveImpactProjectile.cpp" />
+    <ClCompile Include="src\Projectile\Projectiles\CDamageAmplifierProjectile.cpp" />
     <ClCompile Include="src\Player\PowerUps\Types\CDamageAmplifier.cpp" />
     <ClCompile Include="src\Player\PowerUps\Types\CExplosiveImpact.cpp" />
     <ClCompile Include="src\Player\PowerUps\Types\CMegaMagnify.cpp" />

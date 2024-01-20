@@ -145,6 +145,8 @@ void CPlayerManager::HandleTurnStart()
 	{
 		pCurrentPowerUp->Deactivate();
 		pCurrentPowerUp = nullptr;
+
+		mProjectileType = NORMAL;
 	}
 }
 
@@ -252,7 +254,7 @@ void CPlayerManager::HandleShoot()
 	CParabolicArc arc(GetCurrentPlayer()->GetPosition(), mArcResolution, mCurrentAngle, mForce + windForce, 10);
 	mCurrentArcPositions = arc.GetArc();
 
-	pProjectileFactory->Shoot(NORMAL, mCurrentArcPositions);
+	pProjectileFactory->Shoot(mProjectileType, mCurrentArcPositions);
 
 	OnShoot.Invoke();
 
@@ -376,6 +378,7 @@ bool CPlayerManager::SwitchPowerUp(EPowerUp type)
 		
 		prevPowerUp = pCurrentPowerUp;
 
+		mProjectileType = NORMAL;
 		pCurrentPowerUp = nullptr;
 		break;
 
@@ -388,6 +391,8 @@ bool CPlayerManager::SwitchPowerUp(EPowerUp type)
 
 		pCurrentPowerUp = GetCurrentPlayer()->mMegaMagnify.first;
 
+		mProjectileType = NORMAL;
+
 		break;
 
 	case DAMAGE_AMPLIFIER:
@@ -395,6 +400,8 @@ bool CPlayerManager::SwitchPowerUp(EPowerUp type)
 		if (GetCurrentPlayer()->mDamageAmplifier.second == 0) return false;
 
 		prevPowerUp = pCurrentPowerUp;
+
+		mProjectileType = DAMAGE_AMPLIFIER_PROJECTILE;
 
 		pCurrentPowerUp = GetCurrentPlayer()->mDamageAmplifier.first;
 		//GetCurrentPlayer()->mDamageAmplifier.first->Activate();
@@ -406,6 +413,9 @@ bool CPlayerManager::SwitchPowerUp(EPowerUp type)
 		if (GetCurrentPlayer()->mExplosiveImpact.second == 0) return false;
 
 		prevPowerUp = pCurrentPowerUp;
+
+		mProjectileType = EXPLOSIVE_IMPACT_PROJECTILE;
+
 		pCurrentPowerUp = GetCurrentPlayer()->mExplosiveImpact.first;
 		//GetCurrentPlayer()->mExplosiveImpact.first->Activate();
 

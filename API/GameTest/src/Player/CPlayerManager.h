@@ -35,6 +35,8 @@ public:
 	CArcRenderer* mPrevArc = nullptr;
 
 	EPowerUp mCurrentPowerUp = NONE;
+	EProjectileType mProjectileType = NORMAL;
+
 	CBasePowerUp* pCurrentPowerUp = nullptr;
 
 	Vector2 mAimDirection;
