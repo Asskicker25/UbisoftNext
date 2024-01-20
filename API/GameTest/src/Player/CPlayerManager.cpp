@@ -412,12 +412,6 @@ bool CPlayerManager::SwitchPowerUp(EPowerUp type)
 		break;
 	}
 
-
-	if (prevPowerUp != nullptr)
-	{
-		prevPowerUp->Deactivate();
-	}
-
 	mCurrentPowerUp = type;
 
 	return true;
