@@ -171,9 +171,30 @@ void CLevelOne::HandleEnvironmentCreations()
 				ground1->pPhysicsShape = new CPhysicsShape(ground1, BOX);
 
 			}
+			else
+			{
+				ground1->pSprite->SetAnimation(4);
+			}
+
 			ground1->SetPosition(-600 - i * ground1->pSprite->GetWidth(), 160 - j * ground1->pSprite->GetHeight(), true);
 
 			mEnvironmentObjects.push_back(ground1);
+
+
+			if (i == -2 && j == 0)
+			{
+				ground1->pSprite->SetAnimation(2);
+			}
+
+			if (j == 0 && i != -2)
+			{
+				ground1->pSprite->SetAnimation(1);
+			}
+
+			if (j != 0 && i == -2)
+			{
+				ground1->pSprite->SetAnimation(5);
+			}
 
 		}
 	}
@@ -190,9 +211,29 @@ void CLevelOne::HandleEnvironmentCreations()
 				ground1->pPhysicsShape = new CPhysicsShape(ground1, BOX);
 
 			}
+			else
+			{
+				ground1->pSprite->SetAnimation(4);
+			}
 			ground1->SetPosition(600 + i * ground1->pSprite->GetWidth(), 160 - j * ground1->pSprite->GetHeight(), true);
 
 			mEnvironmentObjects.push_back(ground1);
+
+
+			if (i == -2 && j == 0)
+			{
+				ground1->pSprite->SetAnimation(0);
+			}
+
+			if (j == 0 && i != -2)
+			{
+				ground1->pSprite->SetAnimation(1);
+			}
+
+			if (j != 0 && i == -2)
+			{
+				ground1->pSprite->SetAnimation(3);
+			}
 
 		}
 	}

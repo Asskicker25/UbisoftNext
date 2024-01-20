@@ -6,7 +6,7 @@ CPlayerHealthIcon::CPlayerHealthIcon() : CGameObject()
 	pSprite = App::CreateSprite("Assets/Sprites/Cat_strip35.png", 35, 1);
 
 	pSprite->CreateAnimation(0, 1.0f / 6, { 0,1,2,3 });
-	pSprite->SetAnimation(1);
+	pSprite->SetAnimation(0);
 
 	pSprite->SetScale(0.75f);
 

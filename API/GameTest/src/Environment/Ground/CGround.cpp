@@ -2,7 +2,14 @@
 
 CGround::CGround() : CGameObject()
 {
-	pSprite = App::CreateSprite("Assets/Sprites/Wall.png", 1, 1);
+	pSprite = App::CreateSprite("Assets/Sprites/Ground_strip9.png", 9, 1);
+
+	for (int i = 0; i < 9; i++)
+	{
+		pSprite->CreateAnimation(i, 1, { i });
+	}
+
+
 	mTag = "Environment";
 }
 
