@@ -13,5 +13,9 @@ public:
 	virtual void Render();
 	virtual void Cleanup();
 	virtual void OnDestroy();
+
+private:
+
+	void Explode(bool doDamage);
 };
 

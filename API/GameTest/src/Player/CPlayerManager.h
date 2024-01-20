@@ -24,6 +24,8 @@ public:
 	CPlayer* GetCurrentPlayer();
 	CPlayer* GetOtherPlayer();
 
+	void DamagePlayer(int amount);
+
 	bool GetPreviousArc(std::vector<Vector2>& prevArc);
 
 	CPlayer* pPlayer_One = nullptr;
@@ -59,7 +61,6 @@ private:
 	void HandlePowerUpInput();
 	bool SwitchPowerUp(EPowerUp type);
 	void PowerUpUsed();
-
 
 	void HandleProjectileHit(bool success);
 

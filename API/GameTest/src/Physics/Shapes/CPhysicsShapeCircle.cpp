@@ -35,13 +35,17 @@ SCircle CPhysicsShapeCircle::GetCircle()
 	SCircle circle = mCircle;
 
 	// Updates the center of the circle if a sprite is assosicated to the shape
-	if (pGameObject->pSprite != nullptr)
+	if (pGameObject != nullptr)
 	{
-		Vector2 pos = pGameObject->GetPosition();
+		if (pGameObject->pSprite != nullptr)
+		{
+			Vector2 pos = pGameObject->GetPosition();
 
-		circle.mCenter = pos;
-		circle.mRadius *= pGameObject->pSprite->GetScale();
+			circle.mCenter = pos;
+			circle.mRadius *= pGameObject->pSprite->GetScale();
+		}
 	}
+	
 
 	// Updates the center of the circle with the offset
 	circle.mCenter = circle.mCenter + mOffset;

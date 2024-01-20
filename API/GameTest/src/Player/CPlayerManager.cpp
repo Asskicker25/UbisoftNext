@@ -115,6 +115,8 @@ CPlayer* CPlayerManager::GetOtherPlayer()
 	return CGameplayManager::GetInstance().mCurrentTurn == 1 ? pPlayer_Two : pPlayer_One;
 }
 
+
+
 bool CPlayerManager::GetPreviousArc(std::vector<Vector2>& prevArc)
 {
 	if (CGameplayManager::GetInstance().mCurrentTurn == 1)
@@ -268,8 +270,7 @@ void CPlayerManager::HandleProjectileHit(bool success)
 	if (success)
 	{
 		GetOtherPlayer()->pSprite->SetAnimation(HIT_ONE);
-		GetOtherPlayer()->ReduceHealth(pProjectileFactory->GetCurrentProjectile()->mDamageAmount);
-		OnPlayerHit.Invoke();
+		DamagePlayer(pProjectileFactory->GetCurrentProjectile()->mDamageAmount);
 
 		if (GetOtherPlayer()->IsPlayerDead())
 		{
@@ -286,6 +287,12 @@ void CPlayerManager::HandleProjectileHit(bool success)
 		{
 			CGameplayManager::GetInstance().SwitchTurn();
 		}, mProjectHitAnimDuration);
+}
+
+void CPlayerManager::DamagePlayer(int amount)
+{
+	GetOtherPlayer()->ReduceHealth(amount);
+	OnPlayerHit.Invoke();
 }
 
 
