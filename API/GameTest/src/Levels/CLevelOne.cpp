@@ -8,6 +8,7 @@
 #include "../Tween/CTweenManager.h"
 
 #include "../Environment/Wall/CWall.h"
+#include "../Environment/Ground/CGround.h"
 
 void CLevelOne::Start()
 {
@@ -29,7 +30,7 @@ void CLevelOne::Start()
 
 
 
-	HandleWallCreations();
+	HandleEnvironmentCreations();
 }
 
 void CLevelOne::Update()
@@ -43,7 +44,7 @@ void CLevelOne::Update()
 void CLevelOne::Render()
 {
 	std::string message = std::to_string(CWorld::GetInstance().mOrigin.x) + " , " + std::to_string(CWorld::GetInstance().mOrigin.y);
-	
+
 	App::Print(10, 110, message.c_str(), 1.0f, 0.0f, 1.0f, GLUT_BITMAP_HELVETICA_10);
 
 	CGameplayManager::GetInstance().Render();
@@ -54,7 +55,13 @@ void CLevelOne::Cleanup()
 {
 	mIsLevelCompleted = false;
 
-	mWall1->Cleanup();
+	while (mEnvironmentObjects.size() != 0)
+	{
+		CGameObject* obj = mEnvironmentObjects[0];
+		mEnvironmentObjects.erase(mEnvironmentObjects.begin());
+
+		obj->Cleanup();
+	}
 
 	CPlayerManager::GetInstance().Cleanup();
 	CGameplayManager::GetInstance().Cleanup();
@@ -89,10 +96,51 @@ void CLevelOne::HandleInput()
 }
 
 
-void CLevelOne::HandleWallCreations()
+void CLevelOne::HandleEnvironmentCreations()
 {
-	mWall1 = new CWall();
-	mWall1->SetPosition(0, 400, true);
+	CWall* wall1 = new CWall();
+	wall1->SetPosition(0, 400, true);
+
+
+	//Player 1 Side
+	for (int i = -2; i < 8; i++)
+	{
+		for (int j = 0; j < 4; j++)
+		{
+			CGround* ground1 = new CGround();
+
+			if (j == 0 || i == -2)
+			{
+				ground1->pPhysicsShape = new CPhysicsShape(ground1, BOX);
+
+			}
+			ground1->SetPosition(-600 - i * ground1->pSprite->GetWidth(), 160 - j * ground1->pSprite->GetHeight(), true);
+
+			mEnvironmentObjects.push_back(ground1);
+
+		}
+	}
+
+	//Player 2 Side
+	for (int i = -2; i < 8; i++)
+	{
+		for (int j = 0; j < 4; j++)
+		{
+			CGround* ground1 = new CGround();
+
+			if (j == 0 || i == -2)
+			{
+				ground1->pPhysicsShape = new CPhysicsShape(ground1, BOX);
+
+			}
+			ground1->SetPosition(600 + i * ground1->pSprite->GetWidth(), 160 - j * ground1->pSprite->GetHeight(), true);
+
+			mEnvironmentObjects.push_back(ground1);
+
+		}
+	}
+
+	mEnvironmentObjects.push_back(wall1);
 
 }
 
@@ -113,7 +161,7 @@ void CLevelOne::HandleCameraMovement()
 
 void CLevelOne::HandleOnShoot()
 {
-	mCurrentProjectile =  CPlayerManager::GetInstance().pProjectileFactory->GetCurrentProjectile();
+	mCurrentProjectile = CPlayerManager::GetInstance().pProjectileFactory->GetCurrentProjectile();
 
 	mOriginInitPos = CWorld::GetInstance().mOrigin;
 

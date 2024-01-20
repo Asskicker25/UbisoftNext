@@ -22,7 +22,7 @@ private:
 
 	void HandleInput();
 	void HandleOnShoot();
-	void HandleWallCreations();
+	void HandleEnvironmentCreations();
 	void HandleCameraMovement();
 	void HandleCameraFollow();
 
@@ -39,8 +39,9 @@ private:
 	Vector2 mCameraMoveDir;
 	Vector2 mOriginInitPos;
 
-	CWall* mWall1 = nullptr;
 	CGameObject* mCurrentProjectile = nullptr;
+
+	std::vector<CGameObject* > mEnvironmentObjects;
 
 
 };

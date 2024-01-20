@@ -183,6 +183,7 @@
     <ClInclude Include="App\SimpleSound.h" />
     <ClInclude Include="App\SimpleSprite.h" />
     <ClInclude Include="App\DataClasses.h" />
+    <ClInclude Include="src\Environment\Ground\CGround.h" />
     <ClInclude Include="src\Projectile\Projectiles\CNormalProjectile.h" />
     <ClInclude Include="src\Projectile\CProjectileFactory.h" />
     <ClInclude Include="src\Projectile\CBaseProjectile.h" />
@@ -233,6 +234,7 @@
     <ClCompile Include="App\SimpleSound.cpp" />
     <ClCompile Include="App\SimpleSprite.cpp" />
     <ClCompile Include="App\DataClasses.cpp" />
+    <ClCompile Include="src\Environment\Ground\CGround.cpp" />
     <ClCompile Include="src\Projectile\Projectiles\CNormalProjectile.cpp" />
     <ClCompile Include="src\Projectile\CProjectileFactory.cpp" />
     <ClCompile Include="src\Projectile\CBaseProjectile.cpp" />
