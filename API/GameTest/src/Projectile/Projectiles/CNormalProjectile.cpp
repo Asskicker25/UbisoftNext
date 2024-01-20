@@ -6,6 +6,8 @@ CNormalProjectile::CNormalProjectile() : CBaseProjectile()
 
 	pSprite->CreateAnimation(0, 1 / 6, { 0,1 });
 
+	pPhysicsShape = new CPhysicsShape(this, BOX);
+
 	mIsEnabled = false;
 	mIsVisible = false;
 }

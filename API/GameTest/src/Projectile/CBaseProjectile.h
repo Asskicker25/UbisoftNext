@@ -26,11 +26,12 @@ public:
 private:
 
 	Vector2 GetPositionFromArc(float t);
+	void SetPositionFromArc();
 
 	bool mCanMove = false;
 
 	float mTimeStep = 0;
-	float mSpeed = 1;
+	float mSpeed = 0.4f;
 
 	Vector2 mOriginInitPos;
 

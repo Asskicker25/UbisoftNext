@@ -21,17 +21,27 @@ public:
 private:
 
 	void HandleInput();
+	void HandleOnShoot();
 	void HandleWallCreations();
 	void HandleCameraMovement();
+	void HandleCameraFollow();
 
 	bool mIsLevelCompleted = false;
 	bool mCanCameraMove = false;
+	bool mCameraFollowProjectile = false;
 
 	float mCameraMoveTime = 2;
+	float mProjectileLastPos = 0;
+
+	float mWindowCenterX = APP_VIRTUAL_WIDTH * 0.5f;
+	float mWindowCenterY = APP_VIRTUAL_HEIGHT * 0.5f;
 
 	Vector2 mCameraMoveDir;
+	Vector2 mOriginInitPos;
 
-	CWall* mWall1;
+	CWall* mWall1 = nullptr;
+	CGameObject* mCurrentProjectile = nullptr;
+
 
 };
 

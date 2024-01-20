@@ -2,6 +2,7 @@
 
 #include "CPlayer.h"
 #include "../Projectile/CProjectileFactory.h"
+#include "../Events/Events.h"
 
 
 class CPlayerManager 
@@ -32,6 +33,8 @@ public:
 
 	std::vector<Vector2> mCurrentArcPositions;
 
+	CEvents OnShoot;
+
 private:
 
 	void HandleTurnStart();
@@ -42,7 +45,7 @@ private:
 	void RenderArc();
 
 	float mThrowingDuration = 0.1f;
-	float mArcLength = 1.0f;	
+	float mArcLength = 0.3f;	
 
 	float mCurrentAngle = 0;
 	float mAimMinAngle = 15.0f;

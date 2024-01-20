@@ -12,9 +12,18 @@ void CProjectileFactory::Shoot(EProjectileType type, std::vector<Vector2>& arcPa
 	switch (type)
 	{
 	case NORMAL:
+		
 		mNormalProjectile->Shoot(arcPath);
+
+		mCurrentProjectile = mNormalProjectile;
+
 		break;
 	default:
 		break;
 	}
+}
+
+CBaseProjectile* CProjectileFactory::GetCurrentProjectile()
+{
+	return mCurrentProjectile;
 }

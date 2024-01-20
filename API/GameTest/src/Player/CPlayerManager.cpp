@@ -116,7 +116,8 @@ void CPlayerManager::HandleInput()
 void CPlayerManager::HandleShoot()
 {
 	pProjectileFactory->Shoot(NORMAL, mCurrentArcPositions);
-	CGameplayManager::GetInstance().SwitchTurn();
+	OnShoot.Invoke();
+	//CGameplayManager::GetInstance().SwitchTurn();
 }
 
 void CPlayerManager::HandleAim()

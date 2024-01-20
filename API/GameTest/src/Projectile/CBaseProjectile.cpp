@@ -21,12 +21,7 @@ void CBaseProjectile::Update()
 
 	mTimeStep = CalculateTForSpeed(mTimeStep, CTimer::GetInstance().mDeltaTime, mSpeed);
 
-	Vector2 pos = GetPositionFromArc(mTimeStep);
-
-	pos.x += mOriginInitPos.x;
-	pos.y += mOriginInitPos.y;
-
-	SetPosition(pos.x, pos.y, true);
+	SetPositionFromArc();
 
 	if (mTimeStep == 1)
 	{
@@ -49,6 +44,16 @@ Vector2 CBaseProjectile::GetPositionFromArc(float t)
     interpolatedPosition.y = Lerp(mArcPath[index1].y, mArcPath[index2].y, lerpT);
 
     return interpolatedPosition;
+}
+
+void CBaseProjectile::SetPositionFromArc()
+{
+	Vector2 pos = GetPositionFromArc(mTimeStep);
+
+	pos.x += mOriginInitPos.x;
+	pos.y += mOriginInitPos.y;
+
+	SetPosition(pos.x, pos.y, true);
 }
 
 void CBaseProjectile::Render()
@@ -83,5 +88,7 @@ void CBaseProjectile::Shoot(std::vector<Vector2>& arcPath)
 
 	mIsVisible = true;
 	mIsEnabled = true;
+
+	SetPositionFromArc();
 }
 

@@ -19,6 +19,11 @@ void CLevelOne::Start()
 			HandleCameraMovement();
 		});
 
+	CPlayerManager::GetInstance().OnShoot.Subscribe("Level_Shoot", [this]()
+		{
+			HandleOnShoot();
+		});
+
 	CPlayerManager::GetInstance().Start();
 	CGameplayManager::GetInstance().Start();
 
@@ -30,6 +35,7 @@ void CLevelOne::Start()
 void CLevelOne::Update()
 {
 	HandleInput();
+	HandleCameraFollow();
 	CGameplayManager::GetInstance().Update();
 	CPlayerManager::GetInstance().Update();
 }
@@ -37,6 +43,7 @@ void CLevelOne::Update()
 void CLevelOne::Render()
 {
 	std::string message = std::to_string(CWorld::GetInstance().mOrigin.x) + " , " + std::to_string(CWorld::GetInstance().mOrigin.y);
+	
 	App::Print(10, 110, message.c_str(), 1.0f, 0.0f, 1.0f, GLUT_BITMAP_HELVETICA_10);
 
 	CGameplayManager::GetInstance().Render();
@@ -53,6 +60,7 @@ void CLevelOne::Cleanup()
 	CGameplayManager::GetInstance().Cleanup();
 
 	CGameplayManager::GetInstance().OnTurnStart.UnSubscribe("Level_TurnStart");
+	CPlayerManager::GetInstance().OnShoot.UnSubscribe("Level_Shoot");
 }
 
 bool CLevelOne::IsLevelComplete()
@@ -80,10 +88,12 @@ void CLevelOne::HandleInput()
 	CWorld::GetInstance().mOrigin.y += mCameraMoveDir.y * 20;
 }
 
+
 void CLevelOne::HandleWallCreations()
 {
 	mWall1 = new CWall();
 	mWall1->SetPosition(0, 400, true);
+
 }
 
 void CLevelOne::HandleCameraMovement()
@@ -99,3 +109,55 @@ void CLevelOne::HandleCameraMovement()
 	);
 }
 
+
+
+void CLevelOne::HandleOnShoot()
+{
+	mCurrentProjectile =  CPlayerManager::GetInstance().pProjectileFactory->GetCurrentProjectile();
+
+	mOriginInitPos = CWorld::GetInstance().mOrigin;
+
+	float x, y;
+
+	mCurrentProjectile->pSprite->GetPosition(x, y);
+
+	x -= mOriginInitPos.x;
+
+	mProjectileLastPos = x;
+
+	mCameraFollowProjectile = true;
+
+}
+
+void CLevelOne::HandleCameraFollow()
+{
+
+	if (!mCameraFollowProjectile) return;
+
+	float x, y;
+
+	mCurrentProjectile->pSprite->GetPosition(x, y);
+
+	x -= mOriginInitPos.x;
+
+	float mPosOffset = x - mProjectileLastPos;
+
+	mProjectileLastPos = x;
+
+
+	if (CGameplayManager::GetInstance().mCurrentTurn == 1)
+	{
+		if (x >= mWindowCenterX)
+		{
+			CWorld::GetInstance().mOrigin.x += mPosOffset;
+		}
+	}
+	else
+	{
+		if (x <= mWindowCenterX)
+		{
+			CWorld::GetInstance().mOrigin.x += mPosOffset;
+		}
+	}
+
+}

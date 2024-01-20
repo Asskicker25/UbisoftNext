@@ -1,4 +1,6 @@
 #include "CWorld.h"
+#include "../../App/app.h"
+
 
 CWorld& CWorld::GetInstance()
 {
