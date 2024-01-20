@@ -11,6 +11,7 @@ static const float GetRandomFloatNumber(float minValue, float maxValue)
 	return distribution(gen);
 }
 
+//Inclusive
 static const int GetRandomIntNumber(int minValue, int maxValue)
 {
 	std::random_device rd;

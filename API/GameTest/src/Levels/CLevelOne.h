@@ -23,7 +23,7 @@ private:
 	void HandleInput();
 	void HandleOnShoot();
 	void HandleEnvironmentCreations();
-	void HandleCameraMovement();
+	void HandleCameraMovement(bool currentPlayer);
 	void HandleCameraFollow();
 
 	bool mIsLevelCompleted = false;

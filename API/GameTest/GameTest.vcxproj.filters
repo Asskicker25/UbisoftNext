@@ -56,6 +56,7 @@
     <ClCompile Include="src\Projectile\CProjectileFactory.cpp" />
     <ClCompile Include="src\Projectile\Projectiles\CNormalProjectile.cpp" />
     <ClCompile Include="src\Environment\Ground\CGround.cpp" />
+    <ClCompile Include="src\Environment\WindUI\CWindHUD.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
@@ -124,6 +125,7 @@
     <ClInclude Include="src\Projectile\CProjectileFactory.h" />
     <ClInclude Include="src\Projectile\Projectiles\CNormalProjectile.h" />
     <ClInclude Include="src\Environment\Ground\CGround.h" />
+    <ClInclude Include="src\Environment\WindUI\CWindHUD.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="NextAPI">

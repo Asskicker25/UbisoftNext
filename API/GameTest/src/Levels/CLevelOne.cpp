@@ -17,7 +17,7 @@ void CLevelOne::Start()
 
 	CGameplayManager::GetInstance().OnTurnStart.Subscribe("Level_TurnStart", [this]()
 		{
-			HandleCameraMovement();
+			HandleCameraMovement(true);
 		});
 
 	CPlayerManager::GetInstance().OnShoot.Subscribe("Level_Shoot", [this]()
@@ -25,10 +25,19 @@ void CLevelOne::Start()
 			HandleOnShoot();
 		});
 
+
 	CPlayerManager::GetInstance().Start();
 	CGameplayManager::GetInstance().Start();
 
+	CPlayerManager::GetInstance().pProjectileFactory->OnProjectileFail.Subscribe("Player_Fail", [this]()
+		{
+			HandleCameraMovement(false);
+		});
 
+	CPlayerManager::GetInstance().pProjectileFactory->OnProjectileSuccess.Subscribe("Player_Fail", [this]()
+		{
+			HandleCameraMovement(false);
+		});
 
 	HandleEnvironmentCreations();
 }
@@ -68,6 +77,8 @@ void CLevelOne::Cleanup()
 
 	CGameplayManager::GetInstance().OnTurnStart.UnSubscribe("Level_TurnStart");
 	CPlayerManager::GetInstance().OnShoot.UnSubscribe("Level_Shoot");
+	CPlayerManager::GetInstance().pProjectileFactory->OnProjectileFail.UnSubscribe("Player_Fail");
+	CPlayerManager::GetInstance().pProjectileFactory->OnProjectileSuccess.UnSubscribe("Player_Fail");
 }
 
 bool CLevelOne::IsLevelComplete()
@@ -99,7 +110,7 @@ void CLevelOne::HandleInput()
 void CLevelOne::HandleEnvironmentCreations()
 {
 	CWall* wall1 = new CWall();
-	wall1->SetPosition(0, 500, true);
+	wall1->SetPosition(0, 600, true);
 	CWall* wall2 = new CWall();
 	wall2->SetPosition(0, 300, true);
 
@@ -148,9 +159,18 @@ void CLevelOne::HandleEnvironmentCreations()
 
 }
 
-void CLevelOne::HandleCameraMovement()
+void CLevelOne::HandleCameraMovement(bool currentPlayer)
 {
-	float cameraValue = CGameplayManager::GetInstance().mCurrentTurn == 1 ? -850 : -150;
+
+	float cameraValue;
+	if (currentPlayer)
+	{
+		cameraValue = CGameplayManager::GetInstance().mCurrentTurn == 1 ? -850 : -150;
+	}
+	else
+	{
+		cameraValue = CGameplayManager::GetInstance().mCurrentTurn == 1 ? -150 : -850;
+	}
 
 	CTweenManager::GetInstance().AddFloatTween(CWorld::GetInstance().mOrigin.x, cameraValue, mCameraMoveTime,
 		[](float value)

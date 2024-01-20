@@ -39,8 +39,13 @@ public:
 
 	int mWindStrength = 10;
 
+	int mWindNoChangeCount = 0;
+	int mWindForceChangeCount = 2;
+
 private:
 
-	int mWindDirection = -1;
+	void HandleWind();
+
+	float mWindDirection = 0;
 };
 
