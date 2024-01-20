@@ -27,10 +27,10 @@ void CGameplayGameState::Start()
 // Updates the current level in the gameplay state.
 void CGameplayGameState::Update()
 {
-	if (App::GetController().CheckButton(XINPUT_GAMEPAD_B, true))
+	/*if (App::GetController().CheckButton(XINPUT_GAMEPAD_B, true))
 	{
 		CLevelManager::GetInstance().RestartLevel();
-	}
+	}*/
 
 	CLevelManager::GetInstance().Update();
 }

@@ -1,5 +1,8 @@
 #include "CPlayer.h"
 #include "../Physics/Physics_Utils.h"
+#include "PowerUps/Types/CDamageAmplifier.h"
+#include "PowerUps/Types/CExplosiveImpact.h"
+#include "PowerUps/Types/CMegaMagnify.h"
 
 class CPlayer::Pimpl
 {
@@ -33,6 +36,14 @@ CPlayer::CPlayer(int controllerID) :
 	pPhysicsShape->pShape->SetOffset(0,- 117/3 );
 
 	pSprite->SetAnimation(IDLE);
+
+	mMegaMagnify.first = new CMegaMagnify();
+	mDamageAmplifier.first = new CDamageAmplifier();
+	mExplosiveImpact.first = new CExplosiveImpact();
+
+	mMegaMagnify.second = 5;
+	mDamageAmplifier.second = 5;
+	mExplosiveImpact.second = 5;
 
 }
 

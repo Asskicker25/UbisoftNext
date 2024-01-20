@@ -99,7 +99,7 @@ void CLevelOne::HandleInput()
 		mIsLevelCompleted = true;
 	}
 
-	mCanCameraMove = App::GetController().CheckButton(XINPUT_GAMEPAD_A, false);
+	//mCanCameraMove = App::GetController().CheckButton(XINPUT_GAMEPAD_A, false);
 
 	if (!mCanCameraMove) return;
 

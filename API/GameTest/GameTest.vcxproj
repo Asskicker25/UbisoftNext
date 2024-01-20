@@ -183,8 +183,13 @@
     <ClInclude Include="App\SimpleSound.h" />
     <ClInclude Include="App\SimpleSprite.h" />
     <ClInclude Include="App\DataClasses.h" />
+    <ClInclude Include="src\Player\PowerUps\Types\CDamageAmplifier.h" />
+    <ClInclude Include="src\Player\PowerUps\Types\CExplosiveImpact.h" />
+    <ClInclude Include="src\Player\PowerUps\Types\CMegaMagnify.h" />
+    <ClInclude Include="src\Player\PowerUps\CBasePowerUp.h" />
     <ClInclude Include="src\Player\Arc\CArcDot.h" />
     <ClInclude Include="src\Player\Arc\CArcRenderer.h" />
+    <ClInclude Include="src\Player\PowerUps\EPowerUp.h" />
     <ClInclude Include="src\Player\UI\CPlayerHealthIcon.h" />
     <ClInclude Include="src\Player\UI\CPlayerHUD.h" />
     <ClInclude Include="src\Environment\WindUI\CWindHUD.h" />
@@ -239,6 +244,10 @@
     <ClCompile Include="App\SimpleSound.cpp" />
     <ClCompile Include="App\SimpleSprite.cpp" />
     <ClCompile Include="App\DataClasses.cpp" />
+    <ClCompile Include="src\Player\PowerUps\Types\CDamageAmplifier.cpp" />
+    <ClCompile Include="src\Player\PowerUps\Types\CExplosiveImpact.cpp" />
+    <ClCompile Include="src\Player\PowerUps\Types\CMegaMagnify.cpp" />
+    <ClCompile Include="src\Player\PowerUps\CBasePowerUp.cpp" />
     <ClCompile Include="src\Player\Arc\CArcDot.cpp" />
     <ClCompile Include="src\Player\Arc\CArcRenderer.cpp" />
     <ClCompile Include="src\Player\UI\CPlayerHealthIcon.cpp" />

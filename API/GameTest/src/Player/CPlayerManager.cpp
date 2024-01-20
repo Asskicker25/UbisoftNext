@@ -67,6 +67,29 @@ void CPlayerManager::Render()
 	std::string message = "Aim Angle : " + std::to_string(mCurrentAngle);
 
 	App::Print(10, 70, message.c_str(), 0.3f, 0.0f, 1.0f, GLUT_BITMAP_HELVETICA_10);
+
+
+	std::string powerUpMessage = "Power Up : ";
+
+	switch (mCurrentPowerUp)
+	{
+	case NONE:
+		powerUpMessage += "NONE";
+		break;
+	case MAGNIFY:
+		powerUpMessage += "MAGNIFY";
+		break;
+	case DAMAGE_AMPLIFIER:
+		powerUpMessage += "DAMAGE_AMPLIFIER";
+		break;
+	case EXPLOSIVE_IMPACT:
+		powerUpMessage += "EXPLOSIVE_IMPACT";
+		break;
+	default:
+		break;
+	}
+	App::Print(10, 300, powerUpMessage.c_str(), 1.0f, 0.0f, 1.0f, GLUT_BITMAP_HELVETICA_10);
+
 }
 
 void CPlayerManager::Cleanup()
@@ -122,6 +145,7 @@ void CPlayerManager::HandleInput()
 {
 	if (CGameplayManager::GetInstance().GetState() == PLAYER_AIM)
 	{
+		HandlePowerUpInput();
 		/*float x = App::GetController().GetLeftThumbStickX();
 
 		mAimDirection.x = Lerp(mAimDirection.x, x,
@@ -304,4 +328,39 @@ void CPlayerManager::HandlePlayerDead()
 		{
 			OnPlayerDead.Invoke();
 		}, mLevelEndDuration);
+}
+
+void CPlayerManager::HandlePowerUpInput()
+{
+	if (App::GetController().CheckButton(XINPUT_GAMEPAD_A, true))
+	{
+		mCurrentPowerUp = MAGNIFY;
+
+	}
+
+	if (App::GetController().CheckButton(XINPUT_GAMEPAD_B, true))
+	{
+		if (GetCurrentPlayer()->mDamageAmplifier.second == 0) return;
+
+		mCurrentPowerUp = DAMAGE_AMPLIFIER;
+		GetCurrentPlayer()->mDamageAmplifier.first->Activate();
+
+	}
+
+	if (App::GetController().CheckButton(XINPUT_GAMEPAD_X, true))
+	{
+
+		if (GetCurrentPlayer()->mExplosiveImpact.second == 0) return;
+
+		mCurrentPowerUp = EXPLOSIVE_IMPACT;
+		GetCurrentPlayer()->mExplosiveImpact.first->Activate();
+	}
+
+	if (App::GetController().CheckButton(XINPUT_GAMEPAD_Y, true))
+	{
+		if (GetCurrentPlayer()->mMegaMagnify.second == 0) return;
+
+		mCurrentPowerUp = MAGNIFY;
+		GetCurrentPlayer()->mMegaMagnify.first->Activate();
+	}
 }

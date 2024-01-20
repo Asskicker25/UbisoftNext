@@ -2,6 +2,8 @@
 
 #include "../Entities/CGameObject.h"
 
+#include "PowerUps/CBasePowerUp.h"
+
 enum EPlayerAnimState
 {
 	IDLE = 0,
@@ -32,6 +34,9 @@ public:
 
 	bool IsPlayerDead();
 	
+	std::pair<CBasePowerUp*, int> mMegaMagnify;
+	std::pair<CBasePowerUp*, int> mDamageAmplifier;
+	std::pair<CBasePowerUp*, int> mExplosiveImpact;
 
 private:
 

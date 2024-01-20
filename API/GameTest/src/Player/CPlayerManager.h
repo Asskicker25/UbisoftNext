@@ -5,6 +5,8 @@
 #include "../Events/Events.h"
 #include "Arc/CArcRenderer.h"
 
+#include "PowerUps/EPowerUp.h"
+
 class CPlayerManager 
 {
 public:
@@ -32,11 +34,14 @@ public:
 	CArcRenderer* mCurrentArc = nullptr;
 	CArcRenderer* mPrevArc = nullptr;
 
-	float mPlayerOffset = 600;
+	EPowerUp mCurrentPowerUp = NONE;
+	CBasePowerUp* pCurrentPowerUp = nullptr;
 
 	Vector2 mAimDirection;
 
 	std::vector<Vector2> mCurrentArcPositions;
+
+	float mPlayerOffset = 600;
 
 	CEvents OnShoot;
 	CEvents OnPlayerHit;
@@ -49,6 +54,7 @@ private:
 	void HandleShoot();
 	void HandleAim();
 	void HandlePlayerDead();
+	void HandlePowerUpInput();
 
 	void HandleProjectileHit(bool success);
 

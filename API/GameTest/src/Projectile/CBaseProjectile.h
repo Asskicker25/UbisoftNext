@@ -6,7 +6,8 @@
 enum EProjectileType
 {
 	NORMAL = 0,
-
+	DAMAGE_AMPLIFIER_PROJECTILE = 1,
+	EXPLOSIVE_IMPACT_PROJECTILE = 2
 };
 
 class CBaseProjectile : public CGameObject
