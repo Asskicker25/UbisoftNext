@@ -98,6 +98,6 @@ void CPlayerHUD::UpdatePlayerHealth(std::vector<CPlayerHealthIcon*>& playerHealt
 	CPlayer* player = CPlayerManager::GetInstance().GetOtherPlayer();
 	for (int i = player->mMaxHealth - 1; i >= player->mTotalHealth; --i)
 	{
-		playerHealth[i]->mIsVisible = false;
+		playerHealth[i]->mOpacity = 0.2f;
 	}
 }

@@ -3,6 +3,7 @@
 #include "../TimerEvents/CTimerEventsHandler.h"
 #include "Arc/CParabolicArc.h"
 #include "../Utilities/Remap.h"
+#include "../Utilities/Random.h"
 
 
 CPlayerManager::CPlayerManager()
@@ -80,6 +81,23 @@ CPlayer* CPlayerManager::GetCurrentPlayer()
 CPlayer* CPlayerManager::GetOtherPlayer()
 {
 	return CGameplayManager::GetInstance().mCurrentTurn == 1 ? pPlayer_Two : pPlayer_One;
+}
+
+bool CPlayerManager::GetPreviousArc(std::vector<Vector2>& prevArc)
+{
+	if (CGameplayManager::GetInstance().mCurrentTurn == 1)
+	{
+		if (mPlayerOnePrevArc.size() == 0) return false;
+
+		prevArc = mPlayerOnePrevArc;
+	}
+	else
+	{
+		if (mPlayerTwoPrevArc.size() == 0) return false;
+		prevArc = mPlayerTwoPrevArc;
+
+	}
+	return true;
 }
 
 void CPlayerManager::HandleTurnStart()
@@ -162,9 +180,20 @@ void CPlayerManager::HandleAim()
 
 }
 
+
 void CPlayerManager::HandleShoot()
 {
 	mAimDirection = Vector2(0, 0);
+
+	if (CGameplayManager::GetInstance().mCurrentTurn == 1)
+	{
+		mPlayerOnePrevArc = mCurrentArcPositions;
+	}
+	else
+	{
+		mPlayerTwoPrevArc = mCurrentArcPositions;
+	}
+
 	CGameplayManager::GetInstance().SetState(PROJECTILE);
 
 	float windForce = CGameplayManager::GetInstance().GetWindForce();
@@ -182,9 +211,15 @@ void CPlayerManager::HandleProjectileHit(bool success)
 {
 	if (success)
 	{
-		GetOtherPlayer()->pSprite->SetAnimation(HIT_ONE);
+		GetOtherPlayer()->pSprite->SetAnimation(GetRandomIntNumber(0,1) == 0 ? HIT_ONE : HIT_TWO);
 		GetOtherPlayer()->ReduceHealth(1);
 		OnPlayerHit.Invoke();
+
+		if (GetOtherPlayer()->IsPlayerDead())
+		{
+			HandlePlayerDead();
+			return;
+		}
 	}
 	else
 	{
@@ -205,12 +240,22 @@ void CPlayerManager::RenderArc()
 	{
 		if (mAimDirection.Magnitude() > 0.1f)
 		{
+			std::vector<Vector2> prevArc;
 			int renderCount = mArcLength * mCurrentArcPositions.size();
 
 			for (int i = 1; i < renderCount; i++)
 			{
 				App::DrawLine(mCurrentArcPositions[i - 1].x, mCurrentArcPositions[i - 1].y,
-					mCurrentArcPositions[i].x, mCurrentArcPositions[i].y, 0, 1, 0);
+					mCurrentArcPositions[i].x, mCurrentArcPositions[i].y, 1, 0, 0);
+			}
+
+			if (GetPreviousArc(prevArc))
+			{
+				for (int i = 1; i < renderCount; i++)
+				{
+					App::DrawLine(prevArc[i - 1].x, prevArc[i - 1].y,
+						prevArc[i].x, prevArc[i].y, 0, 1, 0);
+				}
 			}
 		}
 
@@ -218,3 +263,13 @@ void CPlayerManager::RenderArc()
 
 }
 
+void CPlayerManager::HandlePlayerDead()
+{
+	GetCurrentPlayer()->pSprite->SetAnimation(TAUNT);
+	GetOtherPlayer()->pSprite->SetAnimation(HIT_TWO);
+
+	CTimerEventsHandler::GetInstance().AddDelay([this]()
+		{
+			OnPlayerDead.Invoke();
+		}, mLevelEndDuration);
+}

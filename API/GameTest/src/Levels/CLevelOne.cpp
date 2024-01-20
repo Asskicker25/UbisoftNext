@@ -39,6 +39,11 @@ void CLevelOne::Start()
 			HandleCameraMovement(false);
 		});
 
+	CPlayerManager::GetInstance().OnPlayerDead.Subscribe("Level_Complete", [this]()
+		{
+			mIsLevelCompleted = true;
+		});
+
 	HandleEnvironmentCreations();
 }
 

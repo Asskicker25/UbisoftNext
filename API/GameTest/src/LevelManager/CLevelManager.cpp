@@ -96,6 +96,11 @@ bool CLevelManager::NextLevel()
 	return true;
 }
 
+CBaseLevel* CLevelManager::GetCurrentLevel()
+{
+	return mListOfLevels[mCurrentLevelIndex];
+}
+
 void CLevelManager::Cleanup()
 {
 	// Check if there is a valid current level and invoke its shutdown method.

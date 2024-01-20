@@ -13,6 +13,8 @@ public:
 CPlayer::CPlayer(int controllerID) :
 	pimpl{ new Pimpl(this) }
 {
+
+	mTotalHealth = mMaxHealth;
 	mTag = "Player";
 
 	pSprite = App::CreateSprite("Assets/Sprites/Cat_strip35.png", 35, 1);
@@ -63,6 +65,11 @@ void CPlayer::ReduceHealth(int reduceAmount)
 {
 	mTotalHealth -= reduceAmount;
 
-	if (mTotalHealth < 0) { mTotalHealth == 0; }
+	if (mTotalHealth < 0) { mTotalHealth = 0; }
+}
+
+bool CPlayer::IsPlayerDead()
+{
+	return mTotalHealth <= 0;
 }
 

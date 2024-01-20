@@ -25,10 +25,12 @@ public:
 	void Cleanup() override;
 	void OnDestroy() override;
 
-	int mTotalHealth = 8;
-	int mMaxHealth = 8;
+	int mTotalHealth = 0;
+	int mMaxHealth = 3;
 
 	void ReduceHealth(int reduceAmount);
+
+	bool IsPlayerDead();
 	
 
 private:
