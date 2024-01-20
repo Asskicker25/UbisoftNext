@@ -167,8 +167,7 @@ void CPlayerManager::HandleShoot()
 	mAimDirection = Vector2(0, 0);
 	CGameplayManager::GetInstance().SetState(PROJECTILE);
 
-	float windForce = (CGameplayManager::GetInstance().mCurrentTurn == 1 ? 1 : -1) *
-		CGameplayManager::GetInstance().mWindForce * 10;
+	float windForce = CGameplayManager::GetInstance().GetWindForce();
 
 	CParabolicArc arc(GetCurrentPlayer()->GetPosition(), mArcResolution, mCurrentAngle, mForce + windForce, 10);
 	mCurrentArcPositions = arc.GetArc();

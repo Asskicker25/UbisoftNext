@@ -30,11 +30,17 @@ public:
 	EGameplayState GetState();
 	void SetState(EGameplayState state);
 
+	float GetWindForce();
+
 	CEvents OnTurnStart;
 	EGameplayState mCurrentState = PLAYER_AIM;
 
 	int mCurrentTurn = 1;
 
-	int mWindForce = -1;
+	int mWindStrength = 10;
+
+private:
+
+	int mWindDirection = -1;
 };
 

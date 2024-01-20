@@ -27,8 +27,8 @@ CPlayer::CPlayer(int controllerID) :
 	pSprite->CreateAnimation(DEATH, speed, { 24, 25, 26, 27, 28, 29, 30, 31, 32 });
 		
 	pPhysicsShape = new CPhysicsShape(this, BOX);
-	pPhysicsShape->pShape->SetScale(0.5f, 0.5f);
-	pPhysicsShape->pShape->SetOffset(0,- 117/4 );
+	pPhysicsShape->pShape->SetScale(0.2f, 0.4f);
+	pPhysicsShape->pShape->SetOffset(0,- 117/3 );
 
 	pSprite->SetAnimation(IDLE);
 

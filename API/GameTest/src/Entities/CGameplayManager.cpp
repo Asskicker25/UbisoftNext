@@ -49,3 +49,8 @@ void CGameplayManager::SetState(EGameplayState state)
 	this->mCurrentState = state;
 }
 
+float CGameplayManager::GetWindForce()
+{
+	return (mCurrentTurn == 1 ? 1 : -1) * mWindDirection * mWindStrength;
+}
+
