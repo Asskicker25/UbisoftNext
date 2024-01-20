@@ -12,3 +12,10 @@ static double CalculateTForSpeed(double currentT, double deltaTime, double lerpS
 
     return (currentT + step);
 }
+
+static double GetTimeForDistance(double distance, double speed)
+{
+    double time = distance / speed;
+
+    return time;
+}

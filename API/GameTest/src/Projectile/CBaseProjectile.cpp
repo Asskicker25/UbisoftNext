@@ -25,28 +25,19 @@ void CBaseProjectile::Update()
 
 Vector2 CBaseProjectile::GetPositionFromArc(float t)
 {
-    t = max(0.0f, min(1.0f, t));
+	t = max(0.0f, min(1.0f, t));
 
-    size_t index1 = static_cast<size_t>(t * (mArcPath.size() - 1));
-    size_t index2 = min(index1 + 1, mArcPath.size() - 1);
+	size_t index1 = static_cast<size_t>(t * (mArcPath.size() - 1));
+	size_t index2 = min(index1 + 1, mArcPath.size() - 1);
 
-    float lerpT = t * (mArcPath.size() - 1) - index1;
-    Vector2 interpolatedPosition;
-    interpolatedPosition.x = Lerp(mArcPath[index1].x, mArcPath[index2].x, lerpT);
-    interpolatedPosition.y = Lerp(mArcPath[index1].y, mArcPath[index2].y, lerpT);
+	float lerpT = t * (mArcPath.size() - 1) - index1;
+	Vector2 interpolatedPosition;
+	interpolatedPosition.x = Lerp(mArcPath[index1].x, mArcPath[index2].x, lerpT);
+	interpolatedPosition.y = Lerp(mArcPath[index1].y, mArcPath[index2].y, lerpT);
 
-    return interpolatedPosition;
+	return interpolatedPosition;
 }
 
-void CBaseProjectile::SetPositionFromArc()
-{
-	Vector2 pos = GetPositionFromArc(mTimeStep);
-
-	pos.x += mOriginInitPos.x;
-	pos.y += mOriginInitPos.y;
-
-	SetPosition(pos.x, pos.y, true);
-}
 
 void CBaseProjectile::HandleFreeFall()
 {
@@ -71,7 +62,9 @@ void CBaseProjectile::HandleFollowArc()
 {
 	if (!mFollowArc) return;
 
-	mTimeStep = CalculateTForSpeed(mTimeStep, CTimer::GetInstance().mDeltaTime, mSpeed);
+	//mTimeStep = CalculateTForSpeed(mTimeStep, CTimer::GetInstance().mDeltaTime, mSpeed);
+
+	mTimeStep += CTimer::GetInstance().mDeltaTime / mTotalTime;
 
 	SetPositionFromArc();
 
@@ -80,6 +73,16 @@ void CBaseProjectile::HandleFollowArc()
 		mFollowArc = false;
 		mFreeFall = true;
 	}
+}
+
+void CBaseProjectile::SetPositionFromArc()
+{
+	Vector2 pos = GetPositionFromArc(mTimeStep);
+
+	pos.x += mOriginInitPos.x;
+	pos.y += mOriginInitPos.y;
+
+	SetPosition(pos.x, pos.y, true);
 }
 
 void CBaseProjectile::HandleCollision()
@@ -105,6 +108,7 @@ void CBaseProjectile::HandleProjectileExplode()
 	mIsEnabled = false;
 	mIsVisible = false;
 }
+
 
 void CBaseProjectile::Render()
 {
@@ -142,6 +146,23 @@ void CBaseProjectile::Shoot(std::vector<Vector2>& arcPath)
 	mIsVisible = true;
 	mIsEnabled = true;
 
+	CalculateArcDistance();
+
+	mTotalTime = GetTimeForDistance(mArcDistance, mSpeed);
+
 	SetPositionFromArc();
 }
+
+void CBaseProjectile::CalculateArcDistance()
+{
+	mArcDistance = 0;
+
+	for (int i = 1; i < mArcPath.size(); i++)
+	{
+		Vector2 diff = mArcPath[i] - mArcPath[i - 1];
+
+		mArcDistance += std::abs(diff.Magnitude());
+	}
+}
+
 

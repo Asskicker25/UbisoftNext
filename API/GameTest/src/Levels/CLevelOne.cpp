@@ -9,6 +9,7 @@
 
 #include "../Environment/Wall/CWall.h"
 #include "../Environment/Ground/CGround.h"
+#include "../Player/Arc/CArcDot.h"
 
 void CLevelOne::Start()
 {
@@ -118,6 +119,10 @@ void CLevelOne::HandleEnvironmentCreations()
 	wall1->SetPosition(0, 600, true);
 	CWall* wall2 = new CWall();
 	wall2->SetPosition(0, 300, true);
+
+
+	CArcDot* dot = new CArcDot();
+	dot->SetPosition(0, 200, true);
 
 	mEnvironmentObjects.push_back(wall1);
 	mEnvironmentObjects.push_back(wall2);

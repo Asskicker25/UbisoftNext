@@ -183,6 +183,8 @@
     <ClInclude Include="App\SimpleSound.h" />
     <ClInclude Include="App\SimpleSprite.h" />
     <ClInclude Include="App\DataClasses.h" />
+    <ClInclude Include="src\Player\Arc\CArcDot.h" />
+    <ClInclude Include="src\Player\Arc\CArcRenderer.h" />
     <ClInclude Include="src\Player\UI\CPlayerHealthIcon.h" />
     <ClInclude Include="src\Player\UI\CPlayerHUD.h" />
     <ClInclude Include="src\Environment\WindUI\CWindHUD.h" />
@@ -237,6 +239,8 @@
     <ClCompile Include="App\SimpleSound.cpp" />
     <ClCompile Include="App\SimpleSprite.cpp" />
     <ClCompile Include="App\DataClasses.cpp" />
+    <ClCompile Include="src\Player\Arc\CArcDot.cpp" />
+    <ClCompile Include="src\Player\Arc\CArcRenderer.cpp" />
     <ClCompile Include="src\Player\UI\CPlayerHealthIcon.cpp" />
     <ClCompile Include="src\Player\UI\CPlayerHUD.cpp" />
     <ClCompile Include="src\Environment\WindUI\CWindHUD.cpp" />

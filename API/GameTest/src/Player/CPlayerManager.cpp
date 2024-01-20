@@ -32,6 +32,10 @@ void CPlayerManager::Start()
 
 	pProjectileFactory = new CProjectileFactory();
 
+	mCurrentArc = new CArcRenderer(mArcResolution * mArcLength);
+	mPrevArc = new CArcRenderer(mArcResolution * mArcLength);
+	mPrevArc->UpdateColor(1, 1, 1, 0.4f);
+
 	pProjectileFactory->OnProjectileSuccess.Subscribe("PManagerTurnSwitch", [this]()
 		{
 			HandleProjectileHit(true);
@@ -60,7 +64,7 @@ void CPlayerManager::Render()
 
 	std::string message = "Aim Angle : " + std::to_string(mCurrentAngle);
 
-	App::Print(10, 70, message.c_str(), 1.0f, 0.0f, 1.0f, GLUT_BITMAP_HELVETICA_10);
+	App::Print(10, 70, message.c_str(), 0.3f, 0.0f, 1.0f, GLUT_BITMAP_HELVETICA_10);
 }
 
 void CPlayerManager::Cleanup()
@@ -68,6 +72,9 @@ void CPlayerManager::Cleanup()
 	CGameplayManager::GetInstance().OnTurnStart.UnSubscribe("PManagerTurnStart");
 	pProjectileFactory->OnProjectileSuccess.UnSubscribe("PManagerTurnSwitch");
 	pProjectileFactory->OnProjectileFail.UnSubscribe("PManagerTurnSwitch");
+
+	mPrevArc->Cleanup();
+	mCurrentArc->Cleanup();
 
 	pPlayer_One->Cleanup();
 	pPlayer_Two->Cleanup();
@@ -185,6 +192,9 @@ void CPlayerManager::HandleShoot()
 {
 	mAimDirection = Vector2(0, 0);
 
+	mCurrentArc->Disable();
+	mPrevArc->Disable();
+
 	if (CGameplayManager::GetInstance().mCurrentTurn == 1)
 	{
 		mPlayerOnePrevArc = mCurrentArcPositions;
@@ -212,7 +222,7 @@ void CPlayerManager::HandleProjectileHit(bool success)
 	if (success)
 	{
 		GetOtherPlayer()->pSprite->SetAnimation(GetRandomIntNumber(0,1) == 0 ? HIT_ONE : HIT_TWO);
-		GetOtherPlayer()->ReduceHealth(1);
+		GetOtherPlayer()->ReduceHealth(pProjectileFactory->GetCurrentProjectile()->mDamageAmount);
 		OnPlayerHit.Invoke();
 
 		if (GetOtherPlayer()->IsPlayerDead())
@@ -240,23 +250,35 @@ void CPlayerManager::RenderArc()
 	{
 		if (mAimDirection.Magnitude() > 0.1f)
 		{
+
+			mCurrentArc->UpdatePositions(mCurrentArcPositions);
+
 			std::vector<Vector2> prevArc;
-			int renderCount = mArcLength * mCurrentArcPositions.size();
+			/*int renderCount = mArcLength * mCurrentArcPositions.size();
 
 			for (int i = 1; i < renderCount; i++)
 			{
 				App::DrawLine(mCurrentArcPositions[i - 1].x, mCurrentArcPositions[i - 1].y,
 					mCurrentArcPositions[i].x, mCurrentArcPositions[i].y, 1, 0, 0);
-			}
+			}*/
 
 			if (GetPreviousArc(prevArc))
 			{
-				for (int i = 1; i < renderCount; i++)
+				mPrevArc->UpdatePositions(prevArc);
+				/*for (int i = 1; i < renderCount; i++)
 				{
 					App::DrawLine(prevArc[i - 1].x, prevArc[i - 1].y,
 						prevArc[i].x, prevArc[i].y, 0, 1, 0);
-				}
+				}*/
 			}
+			else
+			{
+				mPrevArc->Disable();
+			}
+		}
+		else
+		{
+			mCurrentArc->Disable();
 		}
 
 	}

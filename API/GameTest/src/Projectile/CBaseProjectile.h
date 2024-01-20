@@ -27,6 +27,8 @@ public:
 	CEvents OnProjectileFail;
 	CEvents OnProjectileSuccess;
 
+	int mDamageAmount = 1;
+
 private:
 
 	Vector2 GetPositionFromArc(float t);
@@ -36,13 +38,17 @@ private:
 	void HandleFollowArc();
 	void HandleCollision();
 	void HandleProjectileExplode();
+	void CalculateArcDistance();
 
 	bool mFollowArc = false;
 	bool mFreeFall = false;
 
 	float mTimeStep = 0;
-	float mSpeed = 0.4f;
+	float mSpeed = 500.0f;
 	float mFreeFallSpeed = 10.0f;
+	float mTotalTime = 0;
+
+	float mArcDistance = 0;
 
 	Vector2 mOriginInitPos;
 	Vector2 mFreeFallDir;

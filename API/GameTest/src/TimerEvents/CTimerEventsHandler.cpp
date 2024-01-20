@@ -36,8 +36,6 @@ void CTimerEventsHandler::Cleanup()
 	while (mListOfEvents.size() != 0)
 	{
 		mListOfEvents[0]->Cleanup();
-		delete mListOfEvents[0];
-		mListOfEvents.erase(mListOfEvents.begin());
 	}
 }
 

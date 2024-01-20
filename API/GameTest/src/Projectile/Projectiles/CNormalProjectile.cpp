@@ -10,6 +10,7 @@ CNormalProjectile::CNormalProjectile() : CBaseProjectile()
 
 	mIsEnabled = false;
 	mIsVisible = false;
+
 }
 
 void CNormalProjectile::Start()

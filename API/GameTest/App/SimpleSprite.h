@@ -32,7 +32,7 @@ public:
     float GetAngle()  const { return m_angle;  }
     float GetScale()  const { return m_scale;  }
     unsigned int GetFrame()  const { return m_frame; }
-    void SetColor(float r, float g, float b, float a) { m_red = r; m_green = g; m_blue = b; m_alpha = a; }
+    void SetColor(float r, float g, float b) { m_red = r; m_green = g; m_blue = b; }
     void SetOpacity(float a) { m_alpha = a; }
 
     // Note: speed must be > 0, frames must have size >= 1, id must be unique among animations

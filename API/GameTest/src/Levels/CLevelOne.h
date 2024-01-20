@@ -30,7 +30,7 @@ private:
 	bool mCanCameraMove = false;
 	bool mCameraFollowProjectile = false;
 
-	float mCameraMoveTime = 2;
+	float mCameraMoveTime = 1;
 	float mProjectileLastPos = 0;
 
 	float mWindowCenterX = APP_VIRTUAL_WIDTH * 0.5f;

@@ -3,7 +3,7 @@
 #include "CPlayer.h"
 #include "../Projectile/CProjectileFactory.h"
 #include "../Events/Events.h"
-
+#include "Arc/CArcRenderer.h"
 
 class CPlayerManager 
 {
@@ -28,6 +28,9 @@ public:
 	CPlayer* pPlayer_Two = nullptr;
 
 	CProjectileFactory* pProjectileFactory = nullptr;
+
+	CArcRenderer* mCurrentArc = nullptr;
+	CArcRenderer* mPrevArc = nullptr;
 
 	float mPlayerOffset = 600;
 
@@ -60,11 +63,11 @@ private:
 	float mArcLength = 0.3f;	
 
 	float mCurrentAngle = 0;
-	float mAimMinAngle = 15.0f;
+	float mAimMinAngle = 10.0f;
 	float mAimMaxAngle = 50.0f;
 
 	float mForce = 117;
 
-	int mArcResolution = 10;
+	int mArcResolution = 50;
 };
 

@@ -59,6 +59,8 @@
     <ClCompile Include="src\Environment\WindUI\CWindHUD.cpp" />
     <ClCompile Include="src\Player\UI\CPlayerHUD.cpp" />
     <ClCompile Include="src\Player\UI\CPlayerHealthIcon.cpp" />
+    <ClCompile Include="src\Player\Arc\CArcRenderer.cpp" />
+    <ClCompile Include="src\Player\Arc\CArcDot.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
@@ -130,6 +132,8 @@
     <ClInclude Include="src\Environment\WindUI\CWindHUD.h" />
     <ClInclude Include="src\Player\UI\CPlayerHUD.h" />
     <ClInclude Include="src\Player\UI\CPlayerHealthIcon.h" />
+    <ClInclude Include="src\Player\Arc\CArcRenderer.h" />
+    <ClInclude Include="src\Player\Arc\CArcDot.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="NextAPI">

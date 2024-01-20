@@ -40,7 +40,7 @@ public:
 
 	int mCurrentTurn = 1;
 
-	int mWindStrength = 10;
+	int mWindStrength = 5;
 
 	int mWindNoChangeCount = 0;
 	int mWindForceChangeCount = 2;
