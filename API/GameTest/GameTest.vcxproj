@@ -183,6 +183,9 @@
     <ClInclude Include="App\SimpleSound.h" />
     <ClInclude Include="App\SimpleSprite.h" />
     <ClInclude Include="App\DataClasses.h" />
+    <ClInclude Include="src\Projectile\Projectiles\CNormalProjectile.h" />
+    <ClInclude Include="src\Projectile\CProjectileFactory.h" />
+    <ClInclude Include="src\Projectile\CBaseProjectile.h" />
     <ClInclude Include="src\Player\Arc\CParabolicArc.h" />
     <ClInclude Include="src\Tween\CFloatTween.h" />
     <ClInclude Include="src\Tween\CBaseTween.h" />
@@ -230,6 +233,9 @@
     <ClCompile Include="App\SimpleSound.cpp" />
     <ClCompile Include="App\SimpleSprite.cpp" />
     <ClCompile Include="App\DataClasses.cpp" />
+    <ClCompile Include="src\Projectile\Projectiles\CNormalProjectile.cpp" />
+    <ClCompile Include="src\Projectile\CProjectileFactory.cpp" />
+    <ClCompile Include="src\Projectile\CBaseProjectile.cpp" />
     <ClCompile Include="src\Player\Arc\CParabolicArc.cpp" />
     <ClCompile Include="src\Tween\CFloatTween.cpp" />
     <ClCompile Include="src\Tween\CBaseTween.cpp" />

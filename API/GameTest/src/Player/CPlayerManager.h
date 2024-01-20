@@ -1,6 +1,7 @@
 #pragma once
 
 #include "CPlayer.h"
+#include "../Projectile/CProjectileFactory.h"
 
 
 class CPlayerManager 
@@ -23,6 +24,8 @@ public:
 	CPlayer* pPlayer_One = nullptr;
 	CPlayer* pPlayer_Two = nullptr;
 
+	CProjectileFactory* pProjectileFactory = nullptr;
+
 	float mPlayerOffset = 600;
 
 	Vector2 mAimDirection;
@@ -38,7 +41,7 @@ private:
 
 	void RenderArc();
 
-	float mThrowingDuration = 0.5f;
+	float mThrowingDuration = 0.1f;
 	float mArcLength = 1.0f;	
 
 	float mCurrentAngle = 0;

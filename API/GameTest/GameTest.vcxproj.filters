@@ -52,6 +52,9 @@
     <ClCompile Include="src\Tween\CBaseTween.cpp" />
     <ClCompile Include="src\Tween\CFloatTween.cpp" />
     <ClCompile Include="src\Player\Arc\CParabolicArc.cpp" />
+    <ClCompile Include="src\Projectile\CBaseProjectile.cpp" />
+    <ClCompile Include="src\Projectile\CProjectileFactory.cpp" />
+    <ClCompile Include="src\Projectile\Projectiles\CNormalProjectile.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
@@ -116,6 +119,9 @@
     <ClInclude Include="src\Utilities\Random.h" />
     <ClInclude Include="src\Utilities\Remap.h" />
     <ClInclude Include="src\Player\Arc\CParabolicArc.h" />
+    <ClInclude Include="src\Projectile\CBaseProjectile.h" />
+    <ClInclude Include="src\Projectile\CProjectileFactory.h" />
+    <ClInclude Include="src\Projectile\Projectiles\CNormalProjectile.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="NextAPI">

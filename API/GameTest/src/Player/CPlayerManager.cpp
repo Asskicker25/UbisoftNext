@@ -29,6 +29,8 @@ void CPlayerManager::Start()
 	pPlayer_Two->SetPosition(mPlayerOffset, 250, true);
 	pPlayer_Two->mName = "Player 2";
 
+	pProjectileFactory = new CProjectileFactory();
+
 
 	CGameplayManager::GetInstance().OnTurnStart.Subscribe("PManagerTurnStart", [this]()
 		{
@@ -113,6 +115,7 @@ void CPlayerManager::HandleInput()
 
 void CPlayerManager::HandleShoot()
 {
+	pProjectileFactory->Shoot(NORMAL, mCurrentArcPositions);
 	CGameplayManager::GetInstance().SwitchTurn();
 }
 

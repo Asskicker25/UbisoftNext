@@ -1,7 +1,7 @@
 #pragma once
 
 
-float Lerp(float start, float end, float t)
+static float Lerp(float start, float end, float t)
 {
     return start + t * (end - start);
 }

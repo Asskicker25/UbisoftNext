@@ -9,7 +9,6 @@
 
 #include "../Environment/Wall/CWall.h"
 
-
 void CLevelOne::Start()
 {
 
@@ -22,6 +21,7 @@ void CLevelOne::Start()
 
 	CPlayerManager::GetInstance().Start();
 	CGameplayManager::GetInstance().Start();
+
 
 
 	HandleWallCreations();
@@ -83,7 +83,6 @@ void CLevelOne::HandleInput()
 void CLevelOne::HandleWallCreations()
 {
 	mWall1 = new CWall();
-
 	mWall1->SetPosition(0, 400, true);
 }
 
