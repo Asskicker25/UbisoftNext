@@ -13,14 +13,15 @@ public:
 
 };
 
-CPlayer::CPlayer(int controllerID) :
+CPlayer::CPlayer(const std::string& spritePath, int controllerID) :
 	pimpl{ new Pimpl(this) }
 {
 
 	mTotalHealth = mMaxHealth;
 	mTag = "Player";
 
-	pSprite = App::CreateSprite("Assets/Sprites/Cat_strip35.png", 35, 1);
+	pSprite = App::CreateSprite(spritePath.c_str(), 35, 1);
+	//pSprite = App::CreateSprite("Assets/Sprites/Cat_strip35.png", 35, 1);
 	float speed = 1.0f / 6.0f;
 
 	pSprite->CreateAnimation(IDLE, speed, { 0,1,2,3 });
@@ -44,6 +45,8 @@ CPlayer::CPlayer(int controllerID) :
 	mMegaMagnify.second = 2;
 	mDamageAmplifier.second = 1;
 	mExplosiveImpact.second = 1;
+
+	pSprite->SetScale(0.5f);
 
 }
 

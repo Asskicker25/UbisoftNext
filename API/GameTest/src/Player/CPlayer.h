@@ -19,7 +19,7 @@ class CPlayer : public CGameObject
 {
 public:
 
-	CPlayer(int controllerID = 0);
+	CPlayer(const std::string& spritePath, int controllerID = 0);
 
 	void Start() override;
 	void Update() override;

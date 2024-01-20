@@ -13,13 +13,13 @@ void CMegaMagnify::Activate()
 	Vector2 pos = player->GetPosition();
 
 	//pos.x += player->pSprite->GetWidth() * 0.5f;
-	pos.y += player->pSprite->GetHeight();
+	pos.y += player->pSprite->GetHeight() * 0.5f;
 
 	player->SetPosition(pos.x, pos.y);
 
 	Vector2 offset = player->pPhysicsShape->pShape->GetOffset();
 
-	offset.y -= player->pSprite->GetHeight() * 0.5f;
+	offset.y -= player->pSprite->GetHeight() * 0.25f;
 
 	player->pPhysicsShape->pShape->SetOffset(offset.x, offset.y);
 
@@ -28,18 +28,18 @@ void CMegaMagnify::Activate()
 void CMegaMagnify::Deactivate()
 {
 	CPlayer* player = CPlayerManager::GetInstance().GetCurrentPlayer();
-	player->pSprite->SetScale(1);
+	player->pSprite->SetScale(0.5f);
 
 	Vector2 pos = player->GetPosition();
 
 	//pos.x += player->pSprite->GetWidth() * 0.5f;
-	pos.y -= player->pSprite->GetHeight();
+	pos.y -= player->pSprite->GetHeight() * 0.5f;
 
 	player->SetPosition(pos.x, pos.y);
 
 	Vector2 offset = player->pPhysicsShape->pShape->GetOffset();
 
-	offset.y += player->pSprite->GetHeight() * 0.5f;
+	offset.y += player->pSprite->GetHeight() * 0.25f;
 
 	player->pPhysicsShape->pShape->SetOffset(offset.x, offset.y);
 }

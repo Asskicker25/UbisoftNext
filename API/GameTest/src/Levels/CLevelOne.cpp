@@ -139,21 +139,19 @@ void CLevelOne::HandleEnvironmentCreations()
 	bg1->mOrder = -5;
 	bg1->mIsUI = true;
 	bg1->SetPosition(windowCenterX, windowCenterY, true);
-	bg1->pSprite->SetScale(4);
 
 	CGameObject* bg2 = new CGameObject();
 	bg2->pSprite = App::CreateSprite("Assets/Sprites/BG2.png", 1, 1);
+	bg2->pSprite->SetColor(0.9f, 0.9f, 0.9f);
 	bg2->mOrder = -4;
 	bg2->mIsUI = true;
 	bg2->SetPosition(windowCenterX, windowCenterY, true);
-	bg2->pSprite->SetScale(4);
 
 	CGameObject* bg3 = new CGameObject();
 	bg3->pSprite = App::CreateSprite("Assets/Sprites/BG3.png", 1, 1);
 	bg3->mOrder = -3;
 	bg3->mIsUI = true;
 	bg3->SetPosition(windowCenterX, windowCenterY, true);
-	bg3->pSprite->SetScale(4);
 
 	mEnvironmentObjects.push_back(bg1);
 	mEnvironmentObjects.push_back(bg2);

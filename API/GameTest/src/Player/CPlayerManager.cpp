@@ -24,11 +24,11 @@ CPlayerManager& CPlayerManager::GetInstance()
 
 void CPlayerManager::Start()
 {
-	pPlayer_One = new CPlayer();
+	pPlayer_One = new CPlayer("Assets/Sprites/Cat_strip35.png");
 	pPlayer_One->SetPosition(-mPlayerOffset, 250, true);
 	pPlayer_One->mName = "Player 1";
 
-	pPlayer_Two = new CPlayer();
+	pPlayer_Two = new CPlayer("Assets/Sprites/CatScaled_strip35.png");
 	pPlayer_Two->SetPosition(mPlayerOffset, 250, true);
 	pPlayer_Two->mName = "Player 2";
 
@@ -267,7 +267,7 @@ void CPlayerManager::HandleProjectileHit(bool success)
 {
 	if (success)
 	{
-		GetOtherPlayer()->pSprite->SetAnimation(GetRandomIntNumber(0,1) == 0 ? HIT_ONE : HIT_TWO);
+		GetOtherPlayer()->pSprite->SetAnimation(HIT_ONE);
 		GetOtherPlayer()->ReduceHealth(pProjectileFactory->GetCurrentProjectile()->mDamageAmount);
 		OnPlayerHit.Invoke();
 

@@ -11,6 +11,6 @@ public:
 	void Deactivate() override;
 
 private:
-	float mMagnifyScale = 3;
+	float mMagnifyScale = 1.5f;
 };
 
