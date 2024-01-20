@@ -31,9 +31,14 @@ void CPlayerManager::Start()
 
 	pProjectileFactory = new CProjectileFactory();
 
-	pProjectileFactory->OnProjectileDestroy.Subscribe("PManagerTurnSwitch", [this]()
+	pProjectileFactory->OnProjectileSuccess.Subscribe("PManagerTurnSwitch", [this]()
 		{
-			CGameplayManager::GetInstance().SwitchTurn();
+			HandleProjectileHit(true);
+		});
+
+	pProjectileFactory->OnProjectileFail.Subscribe("PManagerTurnSwitch", [this]()
+		{
+			HandleProjectileHit(false);
 		});
 
 	CGameplayManager::GetInstance().OnTurnStart.Subscribe("PManagerTurnStart", [this]()
@@ -60,7 +65,8 @@ void CPlayerManager::Render()
 void CPlayerManager::Cleanup()
 {
 	CGameplayManager::GetInstance().OnTurnStart.UnSubscribe("PManagerTurnStart");
-	pProjectileFactory->OnProjectileDestroy.UnSubscribe("PManagerTurnSwitch");
+	pProjectileFactory->OnProjectileSuccess.UnSubscribe("PManagerTurnSwitch");
+	pProjectileFactory->OnProjectileFail.UnSubscribe("PManagerTurnSwitch");
 
 	pPlayer_One->Cleanup();
 	pPlayer_Two->Cleanup();
@@ -78,8 +84,8 @@ CPlayer* CPlayerManager::GetOtherPlayer()
 
 void CPlayerManager::HandleTurnStart()
 {
-	GetCurrentPlayer()->pSprite->SetAnimation(IDLE);
-	GetOtherPlayer()->pSprite->SetAnimation(TAUNT);
+	GetCurrentPlayer()->pSprite->SetAnimation(TAUNT);
+	GetOtherPlayer()->pSprite->SetAnimation(IDLE);
 
 	GetCurrentPlayer()->mTag = "Untagged";
 	GetOtherPlayer()->mTag = "Player";
@@ -106,24 +112,32 @@ void CPlayerManager::HandleInput()
 
 				CGameplayManager::GetInstance().SetState(PLAYER_THROWING);
 
-				//Projectile Spawn
-				//Projectile State switch
 				CTimerEventsHandler::GetInstance().AddDelay([this]()
 					{
 						HandleShoot();
 					}, 
 					mThrowingDuration);
+
+				CTimerEventsHandler::GetInstance().AddDelay([this]()
+					{
+						GetCurrentPlayer()->pSprite->SetAnimation(IDLE);
+					},
+					mThrowingDuration * 5);
 			}
 		}
 		else
 		{
-			GetCurrentPlayer()->pSprite->SetAnimation(IDLE);
+			GetCurrentPlayer()->pSprite->SetAnimation(TAUNT);
 		}
 	}
 }
 
 void CPlayerManager::HandleShoot()
 {
+	mAimDirection = Vector2(0, 0);
+	CGameplayManager::GetInstance().SetState(PROJECTILE);
+
+
 	pProjectileFactory->Shoot(NORMAL, mCurrentArcPositions);
 	OnShoot.Invoke();
 	//CGameplayManager::GetInstance().SwitchTurn();
@@ -157,6 +171,17 @@ void CPlayerManager::HandleAim()
 	mCurrentArcPositions = arc.GetArc();
 
 }
+
+void CPlayerManager::HandleProjectileHit(bool success)
+{
+	GetOtherPlayer()->pSprite->SetAnimation( success ? HIT_ONE : TAUNT);
+
+	CTimerEventsHandler::GetInstance().AddDelay([]()
+		{
+			CGameplayManager::GetInstance().SwitchTurn();
+		}, mProjectHitAnimDuration);
+}
+
 
 void CPlayerManager::RenderArc()
 {

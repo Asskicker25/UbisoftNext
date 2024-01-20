@@ -24,7 +24,8 @@ public:
 
 	void Shoot(std::vector<Vector2>& arcPath);
 
-	CEvents OnProjectileDestroy;
+	CEvents OnProjectileFail;
+	CEvents OnProjectileSuccess;
 
 private:
 

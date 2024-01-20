@@ -3,6 +3,7 @@
 CWall::CWall()
 {
 	pSprite = App::CreateSprite("Assets/Sprites/Wall.png",1,1);
+	pPhysicsShape = new CPhysicsShape(this, BOX);
 
 	mTag = "Environment";
 }

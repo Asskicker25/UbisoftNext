@@ -42,9 +42,12 @@ private:
 	void HandleShoot();
 	void HandleAim();
 
+	void HandleProjectileHit(bool success);
+
 	void RenderArc();
 
 	float mThrowingDuration = 0.1f;
+	float mProjectHitAnimDuration = 1.5f;
 	float mArcLength = 0.3f;	
 
 	float mCurrentAngle = 0;

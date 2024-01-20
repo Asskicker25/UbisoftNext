@@ -99,7 +99,12 @@ void CLevelOne::HandleInput()
 void CLevelOne::HandleEnvironmentCreations()
 {
 	CWall* wall1 = new CWall();
-	wall1->SetPosition(0, 400, true);
+	wall1->SetPosition(0, 500, true);
+	CWall* wall2 = new CWall();
+	wall2->SetPosition(0, 300, true);
+
+	mEnvironmentObjects.push_back(wall1);
+	mEnvironmentObjects.push_back(wall2);
 
 
 	//Player 1 Side
@@ -140,7 +145,6 @@ void CLevelOne::HandleEnvironmentCreations()
 		}
 	}
 
-	mEnvironmentObjects.push_back(wall1);
 
 }
 

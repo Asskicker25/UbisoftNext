@@ -6,9 +6,14 @@ CProjectileFactory::CProjectileFactory()
 	mNormalProjectile = new CNormalProjectile();
 	mNormalProjectile->mName = "Normal Projectile";
 
-	mNormalProjectile->OnProjectileDestroy.Subscribe("Factory_Destroy", [this]()
+	mNormalProjectile->OnProjectileFail.Subscribe("Factory_Destroy", [this]()
 		{
-			InvokeProjectileDestroy();
+			InvokeProjectileFail();
+		});
+
+	mNormalProjectile->OnProjectileSuccess.Subscribe("Factory_Destroy", [this]()
+		{
+			InvokeProjectileSuccess();
 		});
 }
 
@@ -33,9 +38,15 @@ CBaseProjectile* CProjectileFactory::GetCurrentProjectile()
 	return mCurrentProjectile;
 }
 
-void CProjectileFactory::InvokeProjectileDestroy()
+void CProjectileFactory::InvokeProjectileSuccess()
 {
-	OnProjectileDestroy.Invoke();
+	OnProjectileSuccess.Invoke();
+	mCurrentProjectile = nullptr;
+}
+
+void CProjectileFactory::InvokeProjectileFail()
+{
+	OnProjectileFail.Invoke();
 
 	mCurrentProjectile = nullptr;
 }

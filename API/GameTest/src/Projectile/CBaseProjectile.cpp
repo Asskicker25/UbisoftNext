@@ -89,13 +89,14 @@ void CBaseProjectile::HandleCollision()
 	if (CheckCollisionWithTag(pPhysicsShape, "Player", colliderObjects))
 	{
 		HandleProjectileExplode();
+		OnProjectileSuccess.Invoke();
 		return;
 	}
 
 	if (CheckCollisionWithTag(pPhysicsShape, "Environment", colliderObjects))
 	{
 		HandleProjectileExplode();
-		
+		OnProjectileFail.Invoke();
 	}
 }
 
@@ -103,8 +104,6 @@ void CBaseProjectile::HandleProjectileExplode()
 {
 	mIsEnabled = false;
 	mIsVisible = false;
-
-	OnProjectileDestroy.Invoke();
 }
 
 void CBaseProjectile::Render()

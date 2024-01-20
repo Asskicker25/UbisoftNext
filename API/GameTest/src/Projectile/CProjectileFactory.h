@@ -12,11 +12,13 @@ public:
 
 	CBaseProjectile* GetCurrentProjectile();
 	
-	CEvents OnProjectileDestroy;
+	CEvents OnProjectileSuccess;
+	CEvents OnProjectileFail;
 
 private:
 
-	void InvokeProjectileDestroy();
+	void InvokeProjectileFail();
+	void InvokeProjectileSuccess();
 
 	CBaseProjectile* mCurrentProjectile = nullptr;
 	CBaseProjectile* mNormalProjectile = nullptr;
