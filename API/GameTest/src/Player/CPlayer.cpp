@@ -41,9 +41,9 @@ CPlayer::CPlayer(int controllerID) :
 	mDamageAmplifier.first = new CDamageAmplifier();
 	mExplosiveImpact.first = new CExplosiveImpact();
 
-	mMegaMagnify.second = 5;
-	mDamageAmplifier.second = 5;
-	mExplosiveImpact.second = 5;
+	mMegaMagnify.second = 2;
+	mDamageAmplifier.second = 1;
+	mExplosiveImpact.second = 1;
 
 }
 

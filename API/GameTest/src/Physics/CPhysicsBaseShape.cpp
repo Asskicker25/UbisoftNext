@@ -19,3 +19,8 @@ void CPhysicsBaseShape::SetOffset(float x, float y)
 	mOffset = Vector2(x, y);
 }
 
+Vector2 CPhysicsBaseShape::GetOffset()
+{
+	return mOffset;
+}
+

@@ -55,6 +55,9 @@ private:
 	void HandleAim();
 	void HandlePlayerDead();
 	void HandlePowerUpInput();
+	bool SwitchPowerUp(EPowerUp type);
+	void PowerUpUsed();
+
 
 	void HandleProjectileHit(bool success);
 

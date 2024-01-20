@@ -35,6 +35,8 @@ public:
 	//   y - Offset along the y-axis.
 	void SetOffset(float x, float y);
 
+	Vector2 GetOffset();
+
 protected: 
 
 	CGameObject* pGameObject = nullptr;	// Pointer to the associated gameObject.

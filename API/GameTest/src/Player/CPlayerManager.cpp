@@ -137,8 +137,15 @@ void CPlayerManager::HandleTurnStart()
 	GetCurrentPlayer()->pSprite->SetAnimation(TAUNT);
 	GetOtherPlayer()->pSprite->SetAnimation(IDLE);
 
+
 	GetCurrentPlayer()->mTag = "Untagged";
 	GetOtherPlayer()->mTag = "Player";
+
+	if (pCurrentPowerUp != nullptr)
+	{
+		pCurrentPowerUp->Deactivate();
+		pCurrentPowerUp = nullptr;
+	}
 }
 
 void CPlayerManager::HandleInput()
@@ -212,7 +219,7 @@ void CPlayerManager::HandleAim()
 		}
 
 		if (mCurrentAngle > 180 - mAimMinAngle) { mCurrentAngle = 180 - mAimMinAngle; }
-		if (mCurrentAngle < 90 + mAimMaxAngle) { mCurrentAngle = 90 + mAimMaxAngle; }
+		if (mCurrentAngle < 90 + ( 90 - mAimMaxAngle)) { mCurrentAngle = 90 + mAimMaxAngle; }
 	}
 
 
@@ -246,7 +253,10 @@ void CPlayerManager::HandleShoot()
 	mCurrentArcPositions = arc.GetArc();
 
 	pProjectileFactory->Shoot(NORMAL, mCurrentArcPositions);
+
 	OnShoot.Invoke();
+
+	PowerUpUsed();
 	//CGameplayManager::GetInstance().SwitchTurn();
 }
 
@@ -269,7 +279,6 @@ void CPlayerManager::HandleProjectileHit(bool success)
 	{
 		GetOtherPlayer()->pSprite->SetAnimation(TAUNT);
 	}
-
 
 	CTimerEventsHandler::GetInstance().AddDelay([]()
 		{
@@ -334,33 +343,117 @@ void CPlayerManager::HandlePowerUpInput()
 {
 	if (App::GetController().CheckButton(XINPUT_GAMEPAD_A, true))
 	{
-		mCurrentPowerUp = MAGNIFY;
-
+		SwitchPowerUp(NONE);
 	}
 
 	if (App::GetController().CheckButton(XINPUT_GAMEPAD_B, true))
 	{
-		if (GetCurrentPlayer()->mDamageAmplifier.second == 0) return;
-
-		mCurrentPowerUp = DAMAGE_AMPLIFIER;
-		GetCurrentPlayer()->mDamageAmplifier.first->Activate();
-
+		SwitchPowerUp(DAMAGE_AMPLIFIER);
 	}
 
 	if (App::GetController().CheckButton(XINPUT_GAMEPAD_X, true))
 	{
 
-		if (GetCurrentPlayer()->mExplosiveImpact.second == 0) return;
-
-		mCurrentPowerUp = EXPLOSIVE_IMPACT;
-		GetCurrentPlayer()->mExplosiveImpact.first->Activate();
+		SwitchPowerUp(EXPLOSIVE_IMPACT);
 	}
 
 	if (App::GetController().CheckButton(XINPUT_GAMEPAD_Y, true))
 	{
-		if (GetCurrentPlayer()->mMegaMagnify.second == 0) return;
+		SwitchPowerUp(MAGNIFY);
+		//PowerUpUsed();
 
-		mCurrentPowerUp = MAGNIFY;
-		GetCurrentPlayer()->mMegaMagnify.first->Activate();
 	}
+}
+
+bool CPlayerManager::SwitchPowerUp(EPowerUp type)
+{
+
+	CBasePowerUp* prevPowerUp = nullptr;
+
+	switch (type)
+	{
+	case NONE:
+		
+		prevPowerUp = pCurrentPowerUp;
+
+		pCurrentPowerUp = nullptr;
+		break;
+
+
+	case MAGNIFY:
+
+		if (GetCurrentPlayer()->mMegaMagnify.second == 0) return false;
+
+		prevPowerUp = pCurrentPowerUp;
+
+		pCurrentPowerUp = GetCurrentPlayer()->mMegaMagnify.first;
+
+		break;
+
+	case DAMAGE_AMPLIFIER:
+
+		if (GetCurrentPlayer()->mDamageAmplifier.second == 0) return false;
+
+		prevPowerUp = pCurrentPowerUp;
+
+		pCurrentPowerUp = GetCurrentPlayer()->mDamageAmplifier.first;
+		//GetCurrentPlayer()->mDamageAmplifier.first->Activate();
+
+		break;
+
+	case EXPLOSIVE_IMPACT:
+
+		if (GetCurrentPlayer()->mExplosiveImpact.second == 0) return false;
+
+		prevPowerUp = pCurrentPowerUp;
+		pCurrentPowerUp = GetCurrentPlayer()->mExplosiveImpact.first;
+		//GetCurrentPlayer()->mExplosiveImpact.first->Activate();
+
+		break;
+	}
+
+
+	if (prevPowerUp != nullptr)
+	{
+		prevPowerUp->Deactivate();
+	}
+
+	mCurrentPowerUp = type;
+
+	return true;
+
+}
+
+void CPlayerManager::PowerUpUsed()
+{
+	if (pCurrentPowerUp != nullptr)
+	{
+		pCurrentPowerUp->Activate();
+	}
+
+	switch (mCurrentPowerUp)
+	{
+	case NONE:
+
+
+		break;
+	case MAGNIFY:
+		GetCurrentPlayer()->mMegaMagnify.second--;
+
+		break;
+	case DAMAGE_AMPLIFIER:
+
+		GetCurrentPlayer()->mDamageAmplifier.second--;
+
+		break;
+	case EXPLOSIVE_IMPACT:
+
+		GetCurrentPlayer()->mExplosiveImpact.second--;
+
+		break;
+	default:
+		break;
+	}
+
+	mCurrentPowerUp = NONE;
 }
