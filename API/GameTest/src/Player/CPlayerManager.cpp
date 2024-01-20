@@ -333,7 +333,7 @@ void CPlayerManager::RenderArc()
 void CPlayerManager::HandlePlayerDead()
 {
 	GetCurrentPlayer()->pSprite->SetAnimation(TAUNT);
-	GetOtherPlayer()->pSprite->SetAnimation(HIT_TWO);
+	GetOtherPlayer()->pSprite->SetAnimation(HIT_ONE);
 
 	CTimerEventsHandler::GetInstance().AddDelay([this]()
 		{

@@ -28,7 +28,7 @@ public:
 	void OnDestroy() override;
 
 	int mTotalHealth = 0;
-	int mMaxHealth = 3;
+	int mMaxHealth = 5;
 
 	void ReduceHealth(int reduceAmount);
 

@@ -10,7 +10,7 @@ void CPlayerHUD::Start()
 	CPlayer* playerTwo = CPlayerManager::GetInstance().GetOtherPlayer();
 
 	float hudY = APP_VIRTUAL_HEIGHT - 50; 
-	float spacing = -75;
+	float spacing = 10;
 
 	for (int i = 0; i < playerOne->mMaxHealth; i++)
 	{
@@ -98,6 +98,7 @@ void CPlayerHUD::UpdatePlayerHealth(std::vector<CPlayerHealthIcon*>& playerHealt
 	CPlayer* player = CPlayerManager::GetInstance().GetOtherPlayer();
 	for (int i = player->mMaxHealth - 1; i >= player->mTotalHealth; --i)
 	{
-		playerHealth[i]->mOpacity = 0.2f;
+		playerHealth[i]->pSprite->SetAnimation(1);
+		playerHealth[i]->mOpacity = 0.4f;
 	}
 }
