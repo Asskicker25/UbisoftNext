@@ -132,16 +132,6 @@ void CPlayerManager::HandleInput()
 	}
 }
 
-void CPlayerManager::HandleShoot()
-{
-	mAimDirection = Vector2(0, 0);
-	CGameplayManager::GetInstance().SetState(PROJECTILE);
-
-
-	pProjectileFactory->Shoot(NORMAL, mCurrentArcPositions);
-	OnShoot.Invoke();
-	//CGameplayManager::GetInstance().SwitchTurn();
-}
 
 void CPlayerManager::HandleAim()
 {
@@ -171,6 +161,23 @@ void CPlayerManager::HandleAim()
 	mCurrentArcPositions = arc.GetArc();
 
 }
+
+void CPlayerManager::HandleShoot()
+{
+	mAimDirection = Vector2(0, 0);
+	CGameplayManager::GetInstance().SetState(PROJECTILE);
+
+	float windForce = (CGameplayManager::GetInstance().mCurrentTurn == 1 ? 1 : -1) *
+		CGameplayManager::GetInstance().mWindForce * 10;
+
+	CParabolicArc arc(GetCurrentPlayer()->GetPosition(), mArcResolution, mCurrentAngle, mForce + windForce, 10);
+	mCurrentArcPositions = arc.GetArc();
+
+	pProjectileFactory->Shoot(NORMAL, mCurrentArcPositions);
+	OnShoot.Invoke();
+	//CGameplayManager::GetInstance().SwitchTurn();
+}
+
 
 void CPlayerManager::HandleProjectileHit(bool success)
 {

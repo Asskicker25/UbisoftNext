@@ -34,5 +34,7 @@ public:
 	EGameplayState mCurrentState = PLAYER_AIM;
 
 	int mCurrentTurn = 1;
+
+	int mWindForce = -1;
 };
 
