@@ -1,4 +1,6 @@
 #include "CEntityManager.h"
+#include <algorithm>
+#include<vector>
 
 CEntityManager& CEntityManager::GetInstance()
 {
@@ -75,6 +77,7 @@ void CEntityManager::AddEntity(std::string entityId, CEntity* entity)
 	entity->mEntityId = entityId;
 
 	mEntityCount++;
+
 }
 
 // Removes an entity from the entity manager.
@@ -82,6 +85,23 @@ void CEntityManager::RemoveEntity(CEntity* entity)
 {
 	//mListOfEntities[entity->mEntityId]->Cleanup();
 	mListOfEntities.erase(entity->mEntityId);
+}
+
+bool CompareByOrder(const std::pair<std::string, CEntity*>& entity1, const std::pair<std::string, CEntity*>& entity2) {
+	return entity1.second->mOrder < entity2.second->mOrder;
+}
+void CEntityManager::SortEntities()
+{
+	std::vector<std::pair<std::string, CEntity*>> entityVector(mListOfEntities.begin(), mListOfEntities.end());
+
+	std::sort(entityVector.begin(), entityVector.end(), CompareByOrder);
+
+	mListOfEntities.clear();
+
+	for (std::pair<std::string, CEntity*>& entityPair : entityVector) 
+	{
+		mListOfEntities[entityPair.first] = entityPair.second;
+	}
 }
 
 // Retrieves all entities with a specific tag.

@@ -36,6 +36,7 @@ public:
 	//   entity - A pointer to the entity to copy properties from.
 	virtual void InitializeEntity(CEntity* entity);
 
+
 	CEvents OnDestroyEvent;
 
 	std::string mEntityId = "";						// Unique identifier for the entity.
@@ -45,5 +46,7 @@ public:
 	bool mIsEnabled = true;							// Flag indicating whether the entity is enabled.
 	bool mIsStartInvoked = false;					// Flag indicating whether the Start method has been invoked for the entity.
 	bool mIsUI = false;								// Flag indicating whether the entity is UI.
+
+	int mOrder = 0;
 };
 

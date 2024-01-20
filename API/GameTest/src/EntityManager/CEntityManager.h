@@ -39,6 +39,8 @@ public:
 	//   entity - A pointer to the entity to be removed.
 	void RemoveEntity(CEntity* entity);
 
+	void SortEntities();
+
 	// GetEntitiesWithTag method: Retrieves all entities with a specific tag.
 	// Parameters:
 	//   tag - The tag to filter entities.
@@ -47,6 +49,7 @@ public:
 	std::vector<CEntity*> GetEntitiesWithTag(const std::string& tag);
 
 private:
+
 
 	// Map to store entities with their unique IDs.
 	std::unordered_map<std::string, CEntity*> mListOfEntities;

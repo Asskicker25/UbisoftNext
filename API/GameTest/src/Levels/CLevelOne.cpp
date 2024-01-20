@@ -2,6 +2,8 @@
 #include "../Physics/Physics_Utils.h"
 #include "../Physics/Shapes/CPhysicsShapeLine.h"
 
+#include "../EntityManager/CEntityManager.h"
+
 #include "../World/CWorld.h"
 #include "../Player/CPlayerManager.h"
 #include "../Entities/CGameplayManager.h"
@@ -46,6 +48,8 @@ void CLevelOne::Start()
 		});
 
 	HandleEnvironmentCreations();
+
+	CEntityManager::GetInstance().SortEntities();
 }
 
 void CLevelOne::Update()
@@ -127,6 +131,34 @@ void CLevelOne::HandleEnvironmentCreations()
 	mEnvironmentObjects.push_back(wall1);
 	mEnvironmentObjects.push_back(wall2);
 
+	float windowCenterX = APP_VIRTUAL_WIDTH * 0.5f;
+	float windowCenterY = APP_VIRTUAL_HEIGHT * 0.5f;
+
+	CGameObject* bg1 = new CGameObject();
+	bg1->pSprite = App::CreateSprite("Assets/Sprites/BG1.png", 1, 1);
+	bg1->mOrder = -5;
+	bg1->mIsUI = true;
+	bg1->SetPosition(windowCenterX, windowCenterY, true);
+	bg1->pSprite->SetScale(4);
+
+	CGameObject* bg2 = new CGameObject();
+	bg2->pSprite = App::CreateSprite("Assets/Sprites/BG2.png", 1, 1);
+	bg2->mOrder = -4;
+	bg2->mIsUI = true;
+	bg2->SetPosition(windowCenterX, windowCenterY, true);
+	bg2->pSprite->SetScale(4);
+
+	CGameObject* bg3 = new CGameObject();
+	bg3->pSprite = App::CreateSprite("Assets/Sprites/BG3.png", 1, 1);
+	bg3->mOrder = -3;
+	bg3->mIsUI = true;
+	bg3->SetPosition(windowCenterX, windowCenterY, true);
+	bg3->pSprite->SetScale(4);
+
+	mEnvironmentObjects.push_back(bg1);
+	mEnvironmentObjects.push_back(bg2);
+	mEnvironmentObjects.push_back(bg3);
+
 	//Player 1 Side
 	for (int i = -2; i < 8; i++)
 	{
@@ -164,7 +196,6 @@ void CLevelOne::HandleEnvironmentCreations()
 
 		}
 	}
-
 
 }
 
