@@ -31,11 +31,16 @@ void CPlayerManager::Start()
 
 	pProjectileFactory = new CProjectileFactory();
 
+	pProjectileFactory->OnProjectileDestroy.Subscribe("PManagerTurnSwitch", [this]()
+		{
+			CGameplayManager::GetInstance().SwitchTurn();
+		});
 
 	CGameplayManager::GetInstance().OnTurnStart.Subscribe("PManagerTurnStart", [this]()
 		{
 			HandleTurnStart();
 		});
+
 }
 
 void CPlayerManager::Update()
@@ -55,6 +60,7 @@ void CPlayerManager::Render()
 void CPlayerManager::Cleanup()
 {
 	CGameplayManager::GetInstance().OnTurnStart.UnSubscribe("PManagerTurnStart");
+	pProjectileFactory->OnProjectileDestroy.UnSubscribe("PManagerTurnSwitch");
 
 	pPlayer_One->Cleanup();
 	pPlayer_Two->Cleanup();
@@ -74,6 +80,9 @@ void CPlayerManager::HandleTurnStart()
 {
 	GetCurrentPlayer()->pSprite->SetAnimation(IDLE);
 	GetOtherPlayer()->pSprite->SetAnimation(TAUNT);
+
+	GetCurrentPlayer()->mTag = "Untagged";
+	GetOtherPlayer()->mTag = "Player";
 }
 
 void CPlayerManager::HandleInput()

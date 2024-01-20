@@ -13,11 +13,9 @@ CGameplayManager& CGameplayManager::GetInstance()
 
 void CGameplayManager::Start()
 {
-	mCurrentTurn = 1;
+	mCurrentTurn = 2;
 
-	SetState(PLAYER_AIM);
-
-	OnTurnStart.Invoke();
+	SwitchTurn();
 }
 
 void CGameplayManager::Update()
@@ -35,6 +33,8 @@ void CGameplayManager::Cleanup()
 void CGameplayManager::SwitchTurn()
 {
 	mCurrentTurn = mCurrentTurn == 1 ? 2 : 1;
+
+
 	SetState(PLAYER_AIM);
 	OnTurnStart.Invoke();
 }

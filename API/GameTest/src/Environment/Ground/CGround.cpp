@@ -3,7 +3,7 @@
 CGround::CGround() : CGameObject()
 {
 	pSprite = App::CreateSprite("Assets/Sprites/Wall.png", 1, 1);
-
+	mTag = "Environment";
 }
 
 void CGround::Start()

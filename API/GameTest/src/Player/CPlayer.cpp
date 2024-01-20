@@ -13,6 +13,7 @@ public:
 CPlayer::CPlayer(int controllerID) :
 	pimpl{ new Pimpl(this) }
 {
+	mTag = "Player";
 
 	pSprite = App::CreateSprite("Assets/Sprites/Cat_strip35.png", 35, 1);
 	float speed = 1.0f / 6.0f;

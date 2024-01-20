@@ -16,17 +16,9 @@ void CBaseProjectile::Update()
 {
 	CGameObject::Update();
 
-	if (!mCanMove) return;
-
-
-	mTimeStep = CalculateTForSpeed(mTimeStep, CTimer::GetInstance().mDeltaTime, mSpeed);
-
-	SetPositionFromArc();
-
-	if (mTimeStep == 1)
-	{
-		mCanMove = false;
-	}
+	HandleFollowArc();
+	HandleFreeFall();
+	HandleCollision();
 
 }
 
@@ -56,6 +48,65 @@ void CBaseProjectile::SetPositionFromArc()
 	SetPosition(pos.x, pos.y, true);
 }
 
+void CBaseProjectile::HandleFreeFall()
+{
+	if (!mFreeFall) return;
+
+	/*float x, y;
+	pSprite->GetPosition(x,y);
+
+	x += mFreeFallSpeed * mFreeFallDir.x;
+	y += mFreeFallSpeed * mFreeFallDir.y;
+
+	pSprite->SetPosition(x, y);*/
+
+	Vector2 pos = GetPosition();
+	pos.x += mFreeFallSpeed * mFreeFallDir.x;
+	pos.y += mFreeFallSpeed * mFreeFallDir.y;
+
+	SetPosition(pos.x, pos.y);
+}
+
+void CBaseProjectile::HandleFollowArc()
+{
+	if (!mFollowArc) return;
+
+	mTimeStep = CalculateTForSpeed(mTimeStep, CTimer::GetInstance().mDeltaTime, mSpeed);
+
+	SetPositionFromArc();
+
+	if (mTimeStep >= 1)
+	{
+		mFollowArc = false;
+		mFreeFall = true;
+	}
+}
+
+void CBaseProjectile::HandleCollision()
+{
+	std::vector<CGameObject*> colliderObjects;
+
+	if (CheckCollisionWithTag(pPhysicsShape, "Player", colliderObjects))
+	{
+		HandleProjectileExplode();
+		return;
+	}
+
+	if (CheckCollisionWithTag(pPhysicsShape, "Environment", colliderObjects))
+	{
+		HandleProjectileExplode();
+		
+	}
+}
+
+void CBaseProjectile::HandleProjectileExplode()
+{
+	mIsEnabled = false;
+	mIsVisible = false;
+
+	OnProjectileDestroy.Invoke();
+}
+
 void CBaseProjectile::Render()
 {
 	CGameObject::Render();
@@ -82,9 +133,12 @@ void CBaseProjectile::Shoot(std::vector<Vector2>& arcPath)
 
 	mOriginInitPos = CWorld::GetInstance().mOrigin;
 
+	mFreeFallDir = mArcPath[mArcPath.size() - 1] - mArcPath[mArcPath.size() - 2];
+	mFreeFallDir.Normalize();
+
 	mTimeStep = 0;
 
-	mCanMove = true;
+	mFollowArc = true;
 
 	mIsVisible = true;
 	mIsEnabled = true;
