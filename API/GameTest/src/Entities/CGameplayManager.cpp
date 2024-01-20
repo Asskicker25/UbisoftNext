@@ -28,7 +28,7 @@ void CGameplayManager::Update()
 void CGameplayManager::Render()
 {
 	std::string message = "Wind : " + std::to_string(mWindDirection);
-	App::Print(10, 400, message.c_str(), 1.0f, 0.0f, 1.0f, GLUT_BITMAP_HELVETICA_10);
+	App::Print(500, 600, message.c_str(), 1.0f, 0.0f, 1.0f, GLUT_BITMAP_HELVETICA_10);
 }
 
 void CGameplayManager::Cleanup()

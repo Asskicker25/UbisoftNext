@@ -88,7 +88,7 @@ void CPlayerManager::Render()
 	default:
 		break;
 	}
-	App::Print(10, 300, powerUpMessage.c_str(), 1.0f, 0.0f, 1.0f, GLUT_BITMAP_HELVETICA_10);
+	App::Print(10, 500, powerUpMessage.c_str(), 1.0f, 0.0f, 1.0f, GLUT_BITMAP_HELVETICA_10);
 
 }
 
