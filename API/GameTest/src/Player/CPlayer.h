@@ -25,6 +25,12 @@ public:
 	void Cleanup() override;
 	void OnDestroy() override;
 
+	int mTotalHealth = 8;
+	int mMaxHealth = 8;
+
+	void ReduceHealth(int reduceAmount);
+	
+
 private:
 
 	class Pimpl;

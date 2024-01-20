@@ -16,6 +16,8 @@ void CGameplayManager::Start()
 {
 	mCurrentTurn = 2;
 
+	pPlayerHud = new CPlayerHUD();
+
 	SwitchTurn();
 }
 
@@ -31,6 +33,7 @@ void CGameplayManager::Render()
 
 void CGameplayManager::Cleanup()
 {
+	pPlayerHud->Cleanup();
 }
 
 void CGameplayManager::SwitchTurn()

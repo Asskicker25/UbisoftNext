@@ -34,6 +34,7 @@ public:
 	std::vector<Vector2> mCurrentArcPositions;
 
 	CEvents OnShoot;
+	CEvents OnPlayerHit;
 
 private:
 

@@ -54,7 +54,7 @@ void CLevelManager::Render()
 	pCurrentLevel->Render();
 
 	// Display the level number on the screen.
-	App::Print(mWindowCenterX, 2 * mWindowCenterY - mWindowCenterY / 4,
+	App::Print(mWindowCenterX, 2 * mWindowCenterY - mWindowCenterY / 8,
 		("Level " + std::to_string( mCurrentLevelIndex + 1)).c_str(), 0, 1, 0, GLUT_BITMAP_TIMES_ROMAN_24);
 
 }

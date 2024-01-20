@@ -115,7 +115,7 @@ void CPlayerManager::HandleInput()
 				CTimerEventsHandler::GetInstance().AddDelay([this]()
 					{
 						HandleShoot();
-					}, 
+					},
 					mThrowingDuration);
 
 				CTimerEventsHandler::GetInstance().AddDelay([this]()
@@ -155,7 +155,7 @@ void CPlayerManager::HandleAim()
 		if (mCurrentAngle > 180 - mAimMinAngle) { mCurrentAngle = 180 - mAimMinAngle; }
 		if (mCurrentAngle < 90 + mAimMaxAngle) { mCurrentAngle = 90 + mAimMaxAngle; }
 	}
-	
+
 
 	CParabolicArc arc(GetCurrentPlayer()->GetPosition(), mArcResolution, mCurrentAngle, mForce, 10);
 	mCurrentArcPositions = arc.GetArc();
@@ -180,7 +180,17 @@ void CPlayerManager::HandleShoot()
 
 void CPlayerManager::HandleProjectileHit(bool success)
 {
-	GetOtherPlayer()->pSprite->SetAnimation( success ? HIT_ONE : TAUNT);
+	if (success)
+	{
+		GetOtherPlayer()->pSprite->SetAnimation(HIT_ONE);
+		GetOtherPlayer()->ReduceHealth(1);
+		OnPlayerHit.Invoke();
+	}
+	else
+	{
+		GetOtherPlayer()->pSprite->SetAnimation(TAUNT);
+	}
+
 
 	CTimerEventsHandler::GetInstance().AddDelay([]()
 		{
@@ -203,8 +213,8 @@ void CPlayerManager::RenderArc()
 					mCurrentArcPositions[i].x, mCurrentArcPositions[i].y, 0, 1, 0);
 			}
 		}
-		
+
 	}
-	
+
 }
 

@@ -117,7 +117,6 @@ void CLevelOne::HandleEnvironmentCreations()
 	mEnvironmentObjects.push_back(wall1);
 	mEnvironmentObjects.push_back(wall2);
 
-
 	//Player 1 Side
 	for (int i = -2; i < 8; i++)
 	{

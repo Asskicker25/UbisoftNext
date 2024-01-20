@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../Events/Events.h"
+#include "../Player/UI/CPlayerHUD.h"
 
 enum EGameplayState
 {
@@ -34,6 +35,8 @@ public:
 
 	CEvents OnTurnStart;
 	EGameplayState mCurrentState = PLAYER_AIM;
+
+	CPlayerHUD* pPlayerHud;
 
 	int mCurrentTurn = 1;
 

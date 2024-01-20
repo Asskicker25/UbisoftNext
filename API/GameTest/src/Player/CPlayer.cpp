@@ -59,3 +59,10 @@ void CPlayer::OnDestroy()
 	CGameObject::OnDestroy();
 }
 
+void CPlayer::ReduceHealth(int reduceAmount)
+{
+	mTotalHealth -= reduceAmount;
+
+	if (mTotalHealth < 0) { mTotalHealth == 0; }
+}
+
