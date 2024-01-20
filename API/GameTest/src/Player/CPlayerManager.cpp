@@ -4,6 +4,8 @@
 #include "Arc/CParabolicArc.h"
 #include "../Utilities/Remap.h"
 #include "../Utilities/Random.h"
+#include "../Utilities/Lerp.h"
+#include "../Timer/CTimer.h"
 
 
 CPlayerManager::CPlayerManager()
@@ -120,6 +122,14 @@ void CPlayerManager::HandleInput()
 {
 	if (CGameplayManager::GetInstance().GetState() == PLAYER_AIM)
 	{
+		/*float x = App::GetController().GetLeftThumbStickX();
+
+		mAimDirection.x = Lerp(mAimDirection.x, x,
+			CTimer::GetInstance().mDeltaTime * mAimLerpSpeed);
+
+		mAimDirection.y = Lerp(mAimDirection.y, App::GetController().GetLeftThumbStickY(),
+			CTimer::GetInstance().mDeltaTime * mAimLerpSpeed);*/
+
 		mAimDirection.x = App::GetController().GetLeftThumbStickX();
 		mAimDirection.y = App::GetController().GetLeftThumbStickY();
 
@@ -248,7 +258,7 @@ void CPlayerManager::RenderArc()
 {
 	if (CGameplayManager::GetInstance().GetState() == PLAYER_AIM)
 	{
-		if (mAimDirection.Magnitude() > 0.1f)
+		if (mAimDirection.Magnitude() > 0.2f)
 		{
 
 			mCurrentArc->UpdatePositions(mCurrentArcPositions);

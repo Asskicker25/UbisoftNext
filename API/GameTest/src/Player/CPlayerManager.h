@@ -62,6 +62,8 @@ private:
 	float mProjectHitAnimDuration = 1.5f;
 	float mArcLength = 0.3f;	
 
+	float mAimLerpSpeed = 1;
+
 	float mCurrentAngle = 0;
 	float mAimMinAngle = 10.0f;
 	float mAimMaxAngle = 50.0f;
