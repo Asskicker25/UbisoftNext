@@ -301,6 +301,8 @@ void CPlayerManager::HandleProjectileHit(bool success)
 	}
 	else
 	{
+		HandleSoundOnHit(false);
+
 		GetOtherPlayer()->pSprite->SetAnimation(TAUNT);
 	}
 
