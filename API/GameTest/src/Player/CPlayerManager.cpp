@@ -283,10 +283,37 @@ void CPlayerManager::HandleProjectileHit(bool success)
 		GetOtherPlayer()->pSprite->SetAnimation(TAUNT);
 	}
 
+	//HandleSoundOnHit(success);
+
+
 	CTimerEventsHandler::GetInstance().AddDelay([]()
 		{
 			CGameplayManager::GetInstance().SwitchTurn();
 		}, mProjectHitAnimDuration);
+}
+
+void CPlayerManager::HandleSoundOnHit(bool hitPlayer)
+{
+	switch (mProjectileType)
+	{
+	case NORMAL:
+		App::PlaySound("Assets/Audio/Shoe_hit.wav");
+		break;
+	case DAMAGE_AMPLIFIER_PROJECTILE:
+		App::PlaySound("Assets/Audio/Shoe_hit.wav");
+		break;
+	case EXPLOSIVE_IMPACT_PROJECTILE:
+		App::PlaySound("Assets/Audio/Shoe_hit.wav");
+		break;
+	default:
+		break;
+	}
+
+	if (hitPlayer)
+	{
+		App::PlaySound("Assets/Audio/Shoe_hit.wav");
+	}
+
 }
 
 void CPlayerManager::DamagePlayer(int amount)

@@ -64,6 +64,8 @@ private:
 
 	void HandleProjectileHit(bool success);
 
+	void HandleSoundOnHit(bool hitPlayer);
+
 	void RenderArc();
 
 	std::vector<Vector2> mPlayerOnePrevArc;
