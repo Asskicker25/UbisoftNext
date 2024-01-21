@@ -1,5 +1,6 @@
 #include "CGameplayGameState.h"
 #include "../../LevelManager/CLevelManager.h"
+#include "../../Tween/CTweenManager.h"
 
 // Sets up a callback function for the OnNextLevel event in the level manager.
 CGameplayGameState::CGameplayGameState()
@@ -43,6 +44,7 @@ void CGameplayGameState::Render()
 
 void CGameplayGameState::Cleanup()
 {
+	CTweenManager::GetInstance().Cleanup();
 }
 
 void CGameplayGameState::Pause()

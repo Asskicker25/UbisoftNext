@@ -60,5 +60,4 @@ void Shutdown()
 	pGameManager->Cleanup();
 	CLevelManager::GetInstance().Cleanup();
 	CEntityManager::GetInstance().Cleanup();
-	CTweenManager::GetInstance().Cleanup();
 }

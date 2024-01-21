@@ -29,7 +29,7 @@ public:
 	void OnDestroy() override;
 
 	int mTotalHealth = 0;
-	int mMaxHealth = 5;
+	int mMaxHealth = 1;
 
 	void ReduceHealth(int reduceAmount);
 	void AddPowerUp(EPowerUp type);
