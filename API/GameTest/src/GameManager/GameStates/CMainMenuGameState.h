@@ -21,6 +21,7 @@ private:
 	float mWindowCenterX = 0;
 	float mWindowCenterY = 0;
 
+	CGameObject* mTitle = nullptr;
 	CGameObject* mBg = nullptr;
 	CGameObject* mStartUI = nullptr;
 	CGameObject* mControlsUI = nullptr;

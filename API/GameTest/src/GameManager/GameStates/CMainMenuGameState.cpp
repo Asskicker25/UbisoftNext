@@ -13,6 +13,11 @@ void CMainMenuGameState::Start()
 	mBg->mIsUI = true;
 	mBg->SetPosition(mWindowCenterX, mWindowCenterY, true);
 
+	mTitle = new CGameObject();
+	mTitle->pSprite = App::CreateSprite("Assets/Sprites/GameTitle.png", 1, 1);
+	mTitle->mIsUI = true;
+	mTitle->SetPosition(mWindowCenterX, mWindowCenterY + 100, true);
+	mTitle->pSprite->SetScale(1.5f);
 
 	mStartUI = new CGameObject();
 	mStartUI->pSprite = App::CreateSprite("Assets/Sprites/Press_Start.png", 1, 1);
@@ -65,6 +70,7 @@ void CMainMenuGameState::Cleanup()
 	mStartUI->Cleanup();
 	mControlsUI->Cleanup();
 	mCreditsUI->Cleanup();
+	mTitle->Cleanup();
 }
 
 void CMainMenuGameState::Pause()
