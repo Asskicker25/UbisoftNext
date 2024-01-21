@@ -13,6 +13,14 @@ CWindHUD::CWindHUD() : CGameObject()
 	float y = APP_VIRTUAL_HEIGHT - 100;
 
 	SetPosition(x, y, true);
+
+
+	mWindText = new CGameObject();
+	mWindText->pSprite = App::CreateSprite("Assets/Sprites/Wind.png", 1, 1);
+	mWindText->mIsUI = true;
+	mWindText->mOrder = 2;
+	mWindText->SetPosition(x, y + 50, true);
+	mWindText->pSprite->SetScale(0.4);
 }
 
 void CWindHUD::Start()
@@ -52,6 +60,7 @@ void CWindHUD::SetDirection(float direction)
 
 void CWindHUD::Cleanup()
 {
+	mWindText->Cleanup();
 	CGameObject::Cleanup();
 }
 

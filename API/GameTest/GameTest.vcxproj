@@ -183,6 +183,7 @@
     <ClInclude Include="App\SimpleSound.h" />
     <ClInclude Include="App\SimpleSprite.h" />
     <ClInclude Include="App\DataClasses.h" />
+    <ClInclude Include="src\Entities\CNumberUI.h" />
     <ClInclude Include="src\ParticleSystem\CParticleSystem.h" />
     <ClInclude Include="src\Entities\CNightManager.h" />
     <ClInclude Include="src\Entities\CTextPopUp.h" />
@@ -252,6 +253,7 @@
     <ClCompile Include="App\SimpleSound.cpp" />
     <ClCompile Include="App\SimpleSprite.cpp" />
     <ClCompile Include="App\DataClasses.cpp" />
+    <ClCompile Include="src\Entities\CNumberUI.cpp" />
     <ClCompile Include="src\ParticleSystem\CParticleSystem.cpp" />
     <ClCompile Include="src\Entities\CNightManager.cpp" />
     <ClCompile Include="src\Entities\CTextPopUp.cpp" />

@@ -73,6 +73,7 @@
     <ClCompile Include="src\Entities\CTextPopUp.cpp" />
     <ClCompile Include="src\Entities\CNightManager.cpp" />
     <ClCompile Include="src\ParticleSystem\CParticleSystem.cpp" />
+    <ClCompile Include="src\Entities\CNumberUI.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
@@ -159,6 +160,7 @@
     <ClInclude Include="src\Entities\CTextPopUp.h" />
     <ClInclude Include="src\Entities\CNightManager.h" />
     <ClInclude Include="src\ParticleSystem\CParticleSystem.h" />
+    <ClInclude Include="src\Entities\CNumberUI.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="NextAPI">

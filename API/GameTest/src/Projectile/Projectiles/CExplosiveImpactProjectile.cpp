@@ -77,14 +77,16 @@ void CExplosiveImpactProjectile::Explode(bool doDamage)
 
 
 	CGameObject* collider = new CGameObject();
-	collider->pSprite = App::CreateSprite("Assets/Sprites/Circle.png", 1, 1);
+	collider->pSprite = App::CreateSprite("Assets/Sprites/Explosion_strip7.png", 7, 1);
+	collider->pSprite->CreateAnimation(0, 1.0f / 6.0f, { 0,1,2,3,4,5,6 });
+	collider->pSprite->SetAnimation(0);
 	collider->pPhysicsShape = new CPhysicsShape(collider, CIRCLE);
-	collider->pPhysicsShape->pShape->SetScale(0.7f, 0.7f);
-	collider->mOpacity = 0.3f;
-	collider->pSprite->SetColor(1, 0.3, 0);
+	collider->pPhysicsShape->pShape->SetScale(0.85, 0.85f);
+	collider->mOpacity = 1.0f;
+	//collider->pSprite->SetColor(1, 0.3, 0);
 
 
-	collider->pSprite->SetScale(3.0f);
+	collider->pSprite->SetScale(1.8f);
 
 	float x, y;
 	pSprite->GetPosition(x, y);

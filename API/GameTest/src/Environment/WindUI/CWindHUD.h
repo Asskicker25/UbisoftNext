@@ -17,5 +17,7 @@ public:
 
 	float mDirection = 0;
 
+	CGameObject* mWindText;
+
 };
 

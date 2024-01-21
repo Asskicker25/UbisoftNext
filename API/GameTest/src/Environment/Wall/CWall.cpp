@@ -4,7 +4,15 @@
 
 CWall::CWall()
 {
-	pSprite = App::CreateSprite("Assets/Sprites/Wall.png",1,1);
+	pSprite = App::CreateSprite("Assets/Sprites/Obstacle_strip12.png",12,1);
+
+	pSprite->CreateAnimation(0, 1.0f / 6.0f, { 0,1,2,3,4,5 });
+	pSprite->CreateAnimation(1, 1.0f / 6.0f, { 6,7,8,9,10,11 });
+
+	pSprite->SetAnimation(0);
+
+	pSprite->SetScale(1.3);
+
 	pPhysicsShape = new CPhysicsShape(this, BOX);
 
 	mTag = "Environment";

@@ -5,6 +5,7 @@
 #include "../Environment/WindUI/CWindHUD.h"
 #include "CPowerUpSpawner.h"
 #include "CNightManager.h"
+#include "CNumberUI.h"
 
 enum EGameplayState
 {
@@ -46,10 +47,18 @@ public:
 	CPowerUpSpawner* mPowerUpSpawner = nullptr;
 	CNightManager* mNightManager = nullptr;
 
+	CGameObject* mRoundUI = nullptr;
+	CNumberUI* mRoundCountUI = nullptr;
+	
+	CGameObject* mNightTextUI = nullptr;
+	CNumberUI* mNightCountUI = nullptr;
+
 
 	Vector2 mWallSwitchRoundRange = Vector2(2, 5);
 	Vector2 mNightSwitchRoundRange = Vector2(3, 6);
 
+
+	float mRoundCountUIX = 550;
 
 	int mCurrentTurn = 1;
 	int mCurrentRound = 0;

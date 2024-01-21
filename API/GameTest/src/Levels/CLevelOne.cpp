@@ -20,6 +20,18 @@ void CLevelOne::Start()
 
 	CWorld::GetInstance().mOrigin = Vector2(-522, 0);
 
+	wall1 = new CWall();
+	wall1->SetPosition(0, 600, true);
+	wall1->mYRange = Vector2(400, 700);
+
+	wall2 = new CWall();
+	wall2->SetPosition(0, 300, true);
+	wall2->mYRange = Vector2(100, 350);
+
+
+	mEnvironmentObjects.push_back(wall1);
+	mEnvironmentObjects.push_back(wall2);
+
 	CGameplayManager::GetInstance().OnTurnStart.Subscribe("Level_TurnStart", [this]()
 		{
 			HandleCameraMovement(true);
@@ -123,21 +135,8 @@ void CLevelOne::HandleInput()
 
 void CLevelOne::HandleEnvironmentCreations()
 {
-	/*CParticleSystem* particle = new CParticleSystem("Assets/Sprites/Explosion.png", 100, 6);
-	particle->SetPosition(-400, 400, true);
-	particle->mStartVelocityX = { -300, 300 };
-	particle->mStartVelocityY = { -300, 300 };
-	particle->mSpawnRadius = 10;
-	particle->mStartLifeTime = {3,5};
-	particle->mGravity = -5;*/
 
-	wall1 = new CWall();
-	wall1->SetPosition(0, 600, true);
-	wall1->mYRange = Vector2(400, 700);
-
-	wall2 = new CWall();
-	wall2->SetPosition(0, 300, true);
-	wall2->mYRange = Vector2(100, 350);
+	
 
 	CGameplayManager::GetInstance().OnWallSwitch.Subscribe("Wall_Switch", [this]()
 		{
@@ -146,8 +145,6 @@ void CLevelOne::HandleEnvironmentCreations()
 		});
 
 
-	mEnvironmentObjects.push_back(wall1);
-	mEnvironmentObjects.push_back(wall2);
 
 	float windowCenterX = APP_VIRTUAL_WIDTH * 0.5f;
 	float windowCenterY = APP_VIRTUAL_HEIGHT * 0.5f;
@@ -258,6 +255,9 @@ void CLevelOne::HandleEnvironmentCreations()
 
 void CLevelOne::HandleCameraMovement(bool currentPlayer)
 {
+
+	wall1->pSprite->SetAnimation(CGameplayManager::GetInstance().mCurrentTurn == 1 ? 0 : 1);
+	wall2->pSprite->SetAnimation(CGameplayManager::GetInstance().mCurrentTurn == 1 ? 0 : 1);
 
 	float cameraValue;
 	if (currentPlayer)

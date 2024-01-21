@@ -167,6 +167,10 @@ void CPlayerManager::HandleInput()
 		if (mAimDirection.Magnitude() > 0.1f)
 		{
 			mAimPressed = true;
+		}
+
+		if (mAimPressed)
+		{
 			GetCurrentPlayer()->pSprite->SetAnimation(AIM);
 		}
 		else
@@ -297,7 +301,7 @@ void CPlayerManager::HandleProjectileHit(bool success)
 		GetOtherPlayer()->pSprite->SetAnimation(TAUNT);
 	}
 
-	//HandleSoundOnHit(success);
+	HandleSoundOnHit(success);
 
 
 	CTimerEventsHandler::GetInstance().AddDelay([]()
@@ -314,10 +318,10 @@ void CPlayerManager::HandleSoundOnHit(bool hitPlayer)
 		App::PlaySound("Assets/Audio/Shoe_hit.wav");
 		break;
 	case DAMAGE_AMPLIFIER_PROJECTILE:
-		App::PlaySound("Assets/Audio/Shoe_hit.wav");
+		App::PlaySound("Assets/Audio/Fish_Hit.wav");
 		break;
 	case EXPLOSIVE_IMPACT_PROJECTILE:
-		App::PlaySound("Assets/Audio/Shoe_hit.wav");
+		App::PlaySound("Assets/Audio/Explosion_sound.wav");
 		break;
 	default:
 		break;
@@ -325,7 +329,7 @@ void CPlayerManager::HandleSoundOnHit(bool hitPlayer)
 
 	if (hitPlayer)
 	{
-		App::PlaySound("Assets/Audio/Shoe_hit.wav");
+		App::PlaySound("Assets/Audio/Cat_Sound_One.wav");
 	}
 
 }

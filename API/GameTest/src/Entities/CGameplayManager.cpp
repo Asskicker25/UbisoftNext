@@ -1,6 +1,7 @@
 #include "CGameplayManager.h"
 #include "../Player/CPlayerManager.h"
 #include "../Utilities/Random.h"
+#include "CNumberUI.h"
 
 CGameplayManager::CGameplayManager()
 {
@@ -22,6 +23,18 @@ void CGameplayManager::Start()
 	mPowerUpSpawner = new CPowerUpSpawner();
 	mNightManager = new CNightManager();
 
+	mRoundUI = new CGameObject();
+	mRoundUI->pSprite = App::CreateSprite("Assets/Sprites/Round.png", 1, 1);
+	mRoundUI->mIsUI = true;
+	mRoundUI->SetPosition(APP_VIRTUAL_WIDTH / 2, APP_VIRTUAL_HEIGHT - 150, true);
+	mRoundUI->pSprite->SetScale(0.2f);
+
+	mRoundCountUI = new CNumberUI();
+	mRoundCountUI->SetPosition(mRoundCountUIX, APP_VIRTUAL_HEIGHT - 149, true);
+	mRoundCountUI->pSprite->SetScale(0.72);
+
+
+
 	SwitchTurn();
 	HandleRoundSwitch();
 }
@@ -32,9 +45,6 @@ void CGameplayManager::Update()
 
 void CGameplayManager::Render()
 {
-	std::string message = "Round : " + std::to_string(mCurrentRound);
-	App::Print(500, 550, message.c_str(), 1.0f, 0.0f, 1.0f, GLUT_BITMAP_HELVETICA_10);
-
 	std::string wallSwitchMessage = "Wall Switch in : " + std::to_string(mCurrentWallSwitchRound - mCurrentRound);
 
 	App::Print(500, 500, wallSwitchMessage.c_str(), 1.0f, 0.0f, 1.0f, GLUT_BITMAP_HELVETICA_10);
@@ -50,6 +60,10 @@ void CGameplayManager::Cleanup()
 	mWindHud->Cleanup();
 	mPowerUpSpawner->Cleanup();
 	mNightManager->Cleanup();
+
+	mRoundCountUI->Cleanup();
+	mRoundUI->Cleanup();
+
 	mCleanedUp = true;
 }
 
@@ -136,6 +150,8 @@ void CGameplayManager::HandleRoundIncrement()
 	if (mCurrentTurn == 1)
 	{
 		++mCurrentRound;
+
+		mRoundCountUI->SetNumber(mCurrentRound);
 
 		HandleRoundSwitch();
 	}
