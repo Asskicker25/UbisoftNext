@@ -18,6 +18,13 @@ void CLevelCompleteGameState::Start()
 	mExitUI->pSprite = App::CreateSprite("Assets/Sprites/LevelCompleteMainMenu.png", 1, 1);
 	mExitUI->mIsUI = true;
 	mExitUI->SetPosition(mWindowCenterX, mWindowCenterY - 200, true);
+
+	mHeader = new CGameObject();
+	mHeader->pSprite = App::CreateSprite("Assets/Sprites/GameOver.png", 1, 1);
+	mHeader->mIsUI = true;
+	mHeader->SetPosition(mWindowCenterX, mWindowCenterY, true);
+	mHeader->pSprite->SetScale(3.0f);
+
 	
 }
 
@@ -40,14 +47,15 @@ void CLevelCompleteGameState::Update()
 // Displays the level completion message and prompt for the next level.
 void CLevelCompleteGameState::Render()
 {
-	App::Print(mWindowCenterX, mWindowCenterY + mWindowCenterY / 2, "Level Complete ", 0, 1, 0, GLUT_BITMAP_TIMES_ROMAN_24);
-	App::Print(mWindowCenterX, mWindowCenterY, "Press Enter/Start to Next Level ", 0, 1, 0, GLUT_BITMAP_TIMES_ROMAN_24);
+	/*App::Print(mWindowCenterX, mWindowCenterY + mWindowCenterY / 2, "Level Complete ", 0, 1, 0, GLUT_BITMAP_TIMES_ROMAN_24);
+	App::Print(mWindowCenterX, mWindowCenterY, "Press Enter/Start to Next Level ", 0, 1, 0, GLUT_BITMAP_TIMES_ROMAN_24);*/
 }
 
 void CLevelCompleteGameState::Cleanup()
 {
 	mBg->Cleanup();
 	mExitUI->Cleanup();
+	mHeader->Cleanup();
 }
 
 void CLevelCompleteGameState::Pause()

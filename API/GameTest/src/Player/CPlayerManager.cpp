@@ -104,8 +104,8 @@ void CPlayerManager::Cleanup()
 	pPlayer_One->Cleanup();
 	pPlayer_Two->Cleanup();
 
-	delete pProjectileFactory;
-	pProjectileFactory = nullptr;
+	//delete pProjectileFactory;
+	//pProjectileFactory = nullptr;
 }
 
 CPlayer* CPlayerManager::GetCurrentPlayer()
@@ -304,7 +304,7 @@ void CPlayerManager::HandleProjectileHit(bool success)
 		GetOtherPlayer()->pSprite->SetAnimation(TAUNT);
 	}
 
-	HandleSoundOnHit(success);
+	//HandleSoundOnHit(success);
 
 
 	CTimerEventsHandler::GetInstance().AddDelay([]()
@@ -345,10 +345,11 @@ void CPlayerManager::DamagePlayer(int amount)
 
 bool CPlayerManager::CheckForDeath()
 {
+	HandleSoundOnHit(true);
+
 	if (GetOtherPlayer()->IsPlayerDead())
 	{
 		HandlePlayerDead();
-		HandleSoundOnHit(true);
 		return true;
 	}
 	return false;

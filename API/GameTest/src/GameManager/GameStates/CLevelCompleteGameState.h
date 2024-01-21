@@ -22,6 +22,7 @@ private:
 
 	CGameObject* mBg = nullptr;
 	CGameObject* mExitUI = nullptr;
+	CGameObject* mHeader = nullptr;
 
 };
 
