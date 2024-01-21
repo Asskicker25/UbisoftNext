@@ -42,9 +42,9 @@ CPlayer::CPlayer(const std::string& spritePath, int controllerID) :
 	mDamageAmplifier.first = new CDamageAmplifier();
 	mExplosiveImpact.first = new CExplosiveImpact();
 
-	mMegaMagnify.second = 2;
+	mMegaMagnify.second = 1;
 	mDamageAmplifier.second = 1;
-	mExplosiveImpact.second = 5;
+	mExplosiveImpact.second = 1;
 
 	pSprite->SetScale(0.5f);
 
