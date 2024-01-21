@@ -18,6 +18,10 @@ CPlayerHUD::CPlayerHUD()
 
 	mNormalUI = new CPowerUpUI();
 	mNormalUI->pSprite = App::CreateSprite("Assets/Sprites/Boot.png", 1, 1);
+	mNormalUI->mCount->pSprite->SetScale(0.85f);
+	mNormalUI->mCount->pSprite->SetAnimation(8);
+	mNormalUI->mCount->pSprite->SetAngle(90 * PI / 180);
+
 
 	CEntityManager::GetInstance().SortEntities();
 }

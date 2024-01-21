@@ -18,11 +18,11 @@ public:
 	void SetCount(int count);
 	void SetVisibility(bool state, bool isSelected);
 
+	CGameObject* mCount;
 private:
 
 	float mOffset = 20;
 
-	CGameObject* mCount;
 	CGameObject* mSelected;
 };
 

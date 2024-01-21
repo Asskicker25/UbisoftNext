@@ -68,6 +68,8 @@ void CNightManager::Cleanup()
 	CPlayerManager::GetInstance().pProjectileFactory->OnProjectileSuccess.UnSubscribe("ProjectileHit");
 	CPlayerManager::GetInstance().pProjectileFactory->OnProjectileFail.UnSubscribe("ProjectileHit");
 
+	mNightSprite->Cleanup();
+
 	CGameObject::Cleanup();
 }
 
