@@ -9,7 +9,7 @@ class CPowerUpPickup : public CGameObject
 {
 public:
 
-	CPowerUpPickup(EPowerUp type);
+	CPowerUpPickup();
 
 	virtual void Start();
 	virtual void Update();
@@ -17,13 +17,18 @@ public:
 	virtual void Cleanup();
 	virtual void OnDestroy();
 
+	virtual void CopyFromOther(CPowerUpPickup* other);
+
+
+	void SetPowerUpType(EPowerUp type);
+
 	EPowerUp mPowerUpType = NONE;
 
 	Vector2 mSpeedRange = Vector2(50, 150);
 
 	float mCurrentSpeed = 0;
 
-	CPowerUpSpawner* mPowerUpSpawner;
+	CPowerUpSpawner* mPowerUpSpawner = nullptr;
 
 private:
 

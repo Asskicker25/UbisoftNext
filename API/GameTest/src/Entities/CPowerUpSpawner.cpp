@@ -5,7 +5,6 @@
 
 CPowerUpSpawner::CPowerUpSpawner() : CGameObject()
 {
-
 }
 
 void CPowerUpSpawner::Start()
@@ -17,6 +16,13 @@ void CPowerUpSpawner::Start()
 
 	powerUp->SetPosition(mSpawnXRange.x, mSpawnYValue, true);
 	powerUp1->SetPosition(mSpawnXRange.y, mSpawnYValue, true);*/
+
+	CPowerUpPickup* base = new CPowerUpPickup();
+	base->mIsEnabled = false;
+	base->mIsVisible = false;
+	base->mPowerUpSpawner = this;
+	mObjectPool.SetPoolObject(base);
+
 
 	SetRandomSpawnInterval();
 }
@@ -35,11 +41,7 @@ void CPowerUpSpawner::Render()
 
 void CPowerUpSpawner::Cleanup()
 {
-
-	while (mListOfPowerUps.size() != 0)
-	{
-		RemovePowerUp(mListOfPowerUps[0]);
-	}
+	mObjectPool.Cleanup();
 
 	CGameObject::Cleanup();
 }
@@ -50,9 +52,7 @@ void CPowerUpSpawner::OnDestroy()
 
 void CPowerUpSpawner::RemovePowerUp(CGameObject* powerUp)
 {
-	mListOfPowerUps.erase(std::remove(mListOfPowerUps.begin(), mListOfPowerUps.end(), powerUp), mListOfPowerUps.end());
-	powerUp->mIsVisible = false;
-	powerUp->mIsEnabled = false;
+	mObjectPool.DestroyObject((CPowerUpPickup*)powerUp);
 	//powerUp->Cleanup();
 }
 
@@ -74,13 +74,10 @@ void CPowerUpSpawner::HandleSpawnCalculate()
 
 void CPowerUpSpawner::SpawnPickUp()
 {
-	CPowerUpPickup* powerUp = new CPowerUpPickup((EPowerUp) GetRandomIntNumber(1,3));
-
-	powerUp->mPowerUpSpawner = this;
+	CPowerUpPickup* powerUp = mObjectPool.SpawnObject();
+	powerUp->SetPowerUpType((EPowerUp) GetRandomIntNumber(1,3));
 
 	powerUp->SetPosition(GetRandomFloatNumber(mSpawnXRange.x, mSpawnXRange.y), mSpawnYValue, true);
 
-	mListOfPowerUps.push_back(powerUp);
-		
 	SetRandomSpawnInterval();
 }

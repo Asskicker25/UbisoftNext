@@ -1,7 +1,8 @@
 #pragma once
 
 #include "CGameObject.h"
-
+#include "../ObjectPooling/ObjectPool.h"
+#include "../Player/PowerUps/CPowerUpPickup.h"
 
 class CPowerUpSpawner : public CGameObject
 {
@@ -32,7 +33,7 @@ private:
 	Vector2 mSpawnIntervalRange = Vector2(3, 8);
 	Vector2 mSpawnXRange = Vector2(-230, 230);
 
-	std::vector<CGameObject*> mListOfPowerUps;
+	CGameObjectPool<CPowerUpPickup> mObjectPool;
 
 };
 

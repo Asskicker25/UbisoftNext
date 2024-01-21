@@ -5,33 +5,16 @@
 #include "../CPlayerManager.h"
 
 
-CPowerUpPickup::CPowerUpPickup(EPowerUp type) : CGameObject(), mPowerUpType{type}
+CPowerUpPickup::CPowerUpPickup() : CGameObject()
 {
-	std::string path = "Assets/Sprites/";
-	float x = 1;
 
-	switch (mPowerUpType)
-	{
-	case NONE:
-		break;
-	case MAGNIFY:
-		path += "Magnify.png";
-		break;
-	case DAMAGE_AMPLIFIER:
-		path += "Fish_strip4.png";
-		x = 4;
-		 break;
-	case EXPLOSIVE_IMPACT:
-		path += "Bomb_strip10.png";
-		x = 10;
-		break;
-	default:
-		break;
-	}
+	pSprite = App::CreateSprite("Assets/Sprites/PowerUp_Pickup_strip3.png", 3, 1);
 
-	pSprite = App::CreateSprite(path.c_str(), x, 1);
+	pSprite->CreateAnimation(0, 1, { 0 });
+	pSprite->CreateAnimation(1, 1, { 1 });
+	pSprite->CreateAnimation(2, 1, { 2 });
 
-	pPhysicsShape = new CPhysicsShape(this, mPowerUpType == EXPLOSIVE_IMPACT ? CIRCLE : BOX);
+	pPhysicsShape = new CPhysicsShape(this, BOX);
 
 	mCurrentSpeed = GetRandomFloatNumber(mSpeedRange.x, mSpeedRange.y);
 
@@ -77,6 +60,35 @@ void CPowerUpPickup::Cleanup()
 void CPowerUpPickup::OnDestroy()
 {
 	CGameObject::OnDestroy();
+}
+
+void CPowerUpPickup::CopyFromOther(CPowerUpPickup* other)
+{
+	mPowerUpSpawner = other->mPowerUpSpawner;
+	CGameObject::CopyFromOther(other);
+}
+
+void CPowerUpPickup::SetPowerUpType(EPowerUp type)
+{
+	switch (type)
+	{
+	case NONE:
+		break;
+	case MAGNIFY:
+		pSprite->SetAnimation(0);
+		break;
+	case DAMAGE_AMPLIFIER:
+		pSprite->SetAnimation(2);
+		break;
+	case EXPLOSIVE_IMPACT:
+		pSprite->SetAnimation(1);
+		break;
+	default:
+		break;
+	}
+
+	mPowerUpType = type;
+
 }
 
 void CPowerUpPickup::HandleCollisionCheck()
