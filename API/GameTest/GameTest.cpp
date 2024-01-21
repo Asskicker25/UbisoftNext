@@ -12,6 +12,8 @@
 #include "src/GameManager/GameStates/CMainMenuGameState.h"
 #include "src/GameManager/GameStates/CGameplayGameState.h"
 #include "src/GameManager/GameStates/CLevelCompleteGameState.h"
+#include "src/GameManager/GameStates/CControlsGameState.h"
+#include "src/GameManager/GameStates/CCreditsGameState.h"
 #include "src/LevelManager/CLevelManager.h"
 #include "src/Timer/CTimer.h"
 #include "src/TimerEvents/CTimerEventsHandler.h"
@@ -27,6 +29,8 @@ void Init()
 	pGameManager->AddState(MAIN_MENU, new CMainMenuGameState());
 	pGameManager->AddState(GAMEPLAY, new CGameplayGameState());
 	pGameManager->AddState(LEVEL_COMPLETE, new CLevelCompleteGameState());
+	pGameManager->AddState(CONTROLS, new CControlsGameState());
+	pGameManager->AddState(CREDITS, new CCreditsGameState());
 
 	pGameManager->ChangeState(MAIN_MENU);
 

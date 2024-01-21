@@ -18,6 +18,18 @@ void CMainMenuGameState::Start()
 	mStartUI->pSprite = App::CreateSprite("Assets/Sprites/Press_Start.png", 1, 1);
 	mStartUI->mIsUI = true;
 	mStartUI->SetPosition(mWindowCenterX, mWindowCenterY - 100, true);
+	
+	mControlsUI = new CGameObject();
+	mControlsUI->pSprite = App::CreateSprite("Assets/Sprites/ViewControls.png", 1, 1);
+	mControlsUI->mIsUI = true;
+	mControlsUI->SetPosition(mWindowCenterX, mWindowCenterY - 150, true);
+	
+	mCreditsUI = new CGameObject();
+	mCreditsUI->pSprite = App::CreateSprite("Assets/Sprites/ViewCredits.png", 1, 1);
+	mCreditsUI->mIsUI = true;
+	mCreditsUI->SetPosition(mWindowCenterX, mWindowCenterY - 200, true);
+
+
 
 }
 
@@ -30,21 +42,29 @@ void CMainMenuGameState::Update()
 
 		ChangeState(GAMEPLAY);
 	}
+	
+	if (App::GetController().CheckButton(XINPUT_GAMEPAD_A, true))
+	{
+		ChangeState(CONTROLS);
+	}
+
+	if (App::GetController().CheckButton(XINPUT_GAMEPAD_B, true))
+	{
+		ChangeState(CREDITS);
+	}
 }
 
 // Displays the main menu content on the screen.
 void CMainMenuGameState::Render()
 {
-	App::Print(mWindowCenterX, mWindowCenterY + mWindowCenterY /2, " Game Name ", 0, 1, 0, GLUT_BITMAP_TIMES_ROMAN_24);
-
-	App::Print(mWindowCenterX, mWindowCenterY - mWindowCenterY / 2,
-		" Press Enter/Start To Begin ", 0, 1, 0, GLUT_BITMAP_TIMES_ROMAN_24);
 }
 
 void CMainMenuGameState::Cleanup()
 {
 	mBg->Cleanup();
 	mStartUI->Cleanup();
+	mControlsUI->Cleanup();
+	mCreditsUI->Cleanup();
 }
 
 void CMainMenuGameState::Pause()

@@ -1,31 +1,29 @@
-#pragma once
 
+#pragma once
 #include "../CGameState.h"
 #include "../../Entities/CGameObject.h"
 
-class CMainMenuGameState : public CGameState
+class CCreditsGameState : public CGameState
 {
-
 public:
-	
-	// Inherited via CGameState
+	CCreditsGameState();
+
 	void Start() override;
 	void Update() override;
 	void Render() override;
+
 	void Cleanup() override;
 	void Pause() override;
 	void Resume() override;
 
+private:
 
-private: 
 	float mWindowCenterX = 0;
 	float mWindowCenterY = 0;
 
 	CGameObject* mBg = nullptr;
-	CGameObject* mStartUI = nullptr;
-	CGameObject* mControlsUI = nullptr;
-	CGameObject* mCreditsUI = nullptr;
-
-
+	CGameObject* mExitUI = nullptr;
 };
+
+
 

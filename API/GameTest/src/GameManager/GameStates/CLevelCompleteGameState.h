@@ -21,5 +21,7 @@ private:
 	float mWindowCenterY = 0;
 
 	CGameObject* mBg = nullptr;
+	CGameObject* mExitUI = nullptr;
+
 };
 

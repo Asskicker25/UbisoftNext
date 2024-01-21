@@ -74,6 +74,8 @@
     <ClCompile Include="src\Entities\CNightManager.cpp" />
     <ClCompile Include="src\ParticleSystem\CParticleSystem.cpp" />
     <ClCompile Include="src\Entities\CNumberUI.cpp" />
+    <ClCompile Include="src\GameManager\GameStates\CControlsGameState.cpp" />
+    <ClCompile Include="src\GameManager\GameStates\CCreditsGameState.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
@@ -161,6 +163,8 @@
     <ClInclude Include="src\Entities\CNightManager.h" />
     <ClInclude Include="src\ParticleSystem\CParticleSystem.h" />
     <ClInclude Include="src\Entities\CNumberUI.h" />
+    <ClInclude Include="src\GameManager\GameStates\CControlsGameState.h" />
+    <ClInclude Include="src\GameManager\GameStates\CCreditsGameState.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="NextAPI">
