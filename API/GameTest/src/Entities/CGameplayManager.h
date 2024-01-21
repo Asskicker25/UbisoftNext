@@ -36,24 +36,34 @@ public:
 	float GetWindForce();
 
 	CEvents OnTurnStart;
+	CEvents OnWallSwitch;
+
 	EGameplayState mCurrentState = PLAYER_AIM;
 
 	CPlayerHUD* pPlayerHud = nullptr;
 	CWindHUD* mWindHud = nullptr;
 	CPowerUpSpawner* mPowerUpSpawner = nullptr;
 
+
+	Vector2 mWallSwitchRoundRange = Vector2(2, 5);
+
+
 	int mCurrentTurn = 1;
-
+	int mCurrentRound = 0;
 	int mWindStrength = 5;
-
 	int mWindNoChangeCount = 0;
 	int mWindForceChangeCount = 1;
-
+	int mCurrentWallSwitchRound = 0;
+	
 	bool mCleanedUp = false;
 
 private:
 
 	void HandleWind();
+	void HandleRoundSwitch();
+
+	void CalculateRandomRound(int& mRandomRound);
+
 	float mWindDirection = 0;
 };
 

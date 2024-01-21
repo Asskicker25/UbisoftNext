@@ -82,13 +82,15 @@ void CLevelOne::Cleanup()
 		obj->Cleanup();
 	}
 
-	CPlayerManager::GetInstance().Cleanup();
-	CGameplayManager::GetInstance().Cleanup();
-
+	
 	CGameplayManager::GetInstance().OnTurnStart.UnSubscribe("Level_TurnStart");
 	CPlayerManager::GetInstance().OnShoot.UnSubscribe("Level_Shoot");
 	CPlayerManager::GetInstance().pProjectileFactory->OnProjectileFail.UnSubscribe("Player_Fail");
 	CPlayerManager::GetInstance().pProjectileFactory->OnProjectileSuccess.UnSubscribe("Player_Fail");
+	CGameplayManager::GetInstance().OnWallSwitch.UnSubscribe("Wall_Switch");
+	CPlayerManager::GetInstance().Cleanup();
+	CGameplayManager::GetInstance().Cleanup();
+
 }
 
 bool CLevelOne::IsLevelComplete()
@@ -119,14 +121,20 @@ void CLevelOne::HandleInput()
 
 void CLevelOne::HandleEnvironmentCreations()
 {
-	CWall* wall1 = new CWall();
+	wall1 = new CWall();
 	wall1->SetPosition(0, 600, true);
-	CWall* wall2 = new CWall();
+	wall1->mYRange = Vector2(400, 700);
+
+	wall2 = new CWall();
 	wall2->SetPosition(0, 300, true);
+	wall2->mYRange = Vector2(100, 350);
 
+	CGameplayManager::GetInstance().OnWallSwitch.Subscribe("Wall_Switch", [this]()
+		{
+			wall1->ChangePosition();
+			wall2->ChangePosition();
+		});
 
-	CArcDot* dot = new CArcDot();
-	dot->SetPosition(0, 200, true);
 
 	mEnvironmentObjects.push_back(wall1);
 	mEnvironmentObjects.push_back(wall2);

@@ -1,4 +1,6 @@
 #include "CWall.h"
+#include "../../Utilities/Random.h"
+#include "../../Tween/CTweenManager.h"
 
 CWall::CWall()
 {
@@ -31,4 +33,20 @@ void CWall::Cleanup()
 void CWall::OnDestroy()
 {
 	CGameObject::OnDestroy();
+}
+
+void CWall::ChangePosition()
+{
+	float x, y;
+
+	pSprite->GetPosition(x, y);
+
+	float yValue = GetRandomFloatNumber(mYRange.x, mYRange.y);
+
+	CTweenManager::GetInstance().AddFloatTween(y, yValue, 2, [this](float value)
+		{
+			float x, y;
+			pSprite->GetPosition(x, y);
+			pSprite->SetPosition(x, value);
+		});
 }

@@ -41,6 +41,9 @@ private:
 
 	CGameObject* mCurrentProjectile = nullptr;
 
+	CWall* wall1 = nullptr;
+	CWall* wall2 = nullptr;
+
 	std::vector<CGameObject* > mEnvironmentObjects;
 
 

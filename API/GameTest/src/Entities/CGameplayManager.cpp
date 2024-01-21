@@ -15,6 +15,7 @@ CGameplayManager& CGameplayManager::GetInstance()
 void CGameplayManager::Start()
 {
 	mCurrentTurn = 2;
+	mCleanedUp = false;
 
 	pPlayerHud = new CPlayerHUD();
 	mWindHud = new CWindHUD();
@@ -29,8 +30,12 @@ void CGameplayManager::Update()
 
 void CGameplayManager::Render()
 {
-	/*std::string message = "Wind : " + std::to_string(mWindDirection);
-	App::Print(500, 600, message.c_str(), 1.0f, 0.0f, 1.0f, GLUT_BITMAP_HELVETICA_10);*/
+	std::string message = "Round : " + std::to_string(mCurrentRound);
+	App::Print(500, 600, message.c_str(), 1.0f, 0.0f, 1.0f, GLUT_BITMAP_HELVETICA_10);
+
+	std::string wallSwitchMessage = "Wall Switch in : " + std::to_string(mCurrentWallSwitchRound - mCurrentRound);
+
+	App::Print(500, 500, wallSwitchMessage.c_str(), 1.0f, 0.0f, 1.0f, GLUT_BITMAP_HELVETICA_10);
 }
 
 void CGameplayManager::Cleanup()
@@ -47,6 +52,9 @@ void CGameplayManager::SwitchTurn()
 
 	mCurrentTurn = mCurrentTurn == 1 ? 2 : 1;
 
+	mCurrentRound = mCurrentTurn == 1 ? ++mCurrentRound : mCurrentRound;
+
+	HandleRoundSwitch();
 	HandleWind();
 
 	mWindHud->SetDirection(mWindDirection);
@@ -86,5 +94,24 @@ void CGameplayManager::HandleWind()
 
 	mWindDirection = GetRandomFloatNumber(-1.0f, 1.0f);
 	mWindNoChangeCount = 0;
+}
+
+void CGameplayManager::HandleRoundSwitch()
+{
+	if (mCurrentRound >= mCurrentWallSwitchRound)
+	{
+		if (mCurrentWallSwitchRound != 0)
+		{
+			OnWallSwitch.Invoke();
+		}
+		CalculateRandomRound(mCurrentWallSwitchRound);
+	}
+}
+
+void CGameplayManager::CalculateRandomRound(int& mRandomRound)
+{
+	mRandomRound = GetRandomIntNumber(mWallSwitchRoundRange.x, mWallSwitchRoundRange.y);
+
+	mRandomRound += mCurrentRound;
 }
 

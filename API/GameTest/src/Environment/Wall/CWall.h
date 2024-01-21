@@ -14,6 +14,9 @@ public:
 	virtual void Cleanup();
 	virtual void OnDestroy();
 
+	void ChangePosition();
+
+	Vector2 mYRange;
 
 };
 
