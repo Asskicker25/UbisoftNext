@@ -69,6 +69,9 @@ void CPlayer::Render()
 void CPlayer::Cleanup()
 {
 	CGameObject::Cleanup();
+	/*delete pSprite;
+	delete pPhysicsShape;
+	delete this;*/
 }
 
 void CPlayer::OnDestroy()
