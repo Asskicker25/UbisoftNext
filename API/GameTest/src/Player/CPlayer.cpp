@@ -82,6 +82,30 @@ void CPlayer::ReduceHealth(int reduceAmount)
 	if (mTotalHealth < 0) { mTotalHealth = 0; }
 }
 
+void CPlayer::AddPowerUp(EPowerUp type)
+{
+	switch (type)
+	{
+	case NONE:
+		break;
+
+	case MAGNIFY:
+		mMegaMagnify.second++;
+		break;
+
+	case DAMAGE_AMPLIFIER:
+		mDamageAmplifier.second++;
+		break;
+	
+	case EXPLOSIVE_IMPACT:
+		mExplosiveImpact.second++;
+		break;
+
+	default:
+		break;
+	}
+}
+
 bool CPlayer::IsPlayerDead()
 {
 	return mTotalHealth <= 0;

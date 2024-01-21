@@ -3,6 +3,7 @@
 #include "../Entities/CGameObject.h"
 
 #include "PowerUps/CBasePowerUp.h"
+#include "PowerUps/EPowerUp.h"
 
 enum EPlayerAnimState
 {
@@ -31,6 +32,7 @@ public:
 	int mMaxHealth = 5;
 
 	void ReduceHealth(int reduceAmount);
+	void AddPowerUp(EPowerUp type);
 
 	bool IsPlayerDead();
 	

@@ -29,7 +29,7 @@ private:
 
 	float mSpawnYValue = 750;
 
-	Vector2 mSpawnIntervalRange = Vector2(2, 5);
+	Vector2 mSpawnIntervalRange = Vector2(3, 8);
 	Vector2 mSpawnXRange = Vector2(-230, 230);
 
 	std::vector<CGameObject*> mListOfPowerUps;

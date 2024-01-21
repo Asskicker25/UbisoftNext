@@ -38,10 +38,13 @@ void CGameplayManager::Cleanup()
 	pPlayerHud->Cleanup();
 	mWindHud->Cleanup();
 	mPowerUpSpawner->Cleanup();
+	mCleanedUp = true;
 }
 
 void CGameplayManager::SwitchTurn()
 {
+	if (mCleanedUp) return;
+
 	mCurrentTurn = mCurrentTurn == 1 ? 2 : 1;
 
 	HandleWind();

@@ -19,10 +19,14 @@ public:
 
 	EPowerUp mPowerUpType = NONE;
 
-	Vector2 mSpeedRange = Vector2(50, 100);
+	Vector2 mSpeedRange = Vector2(50, 150);
 
 	float mCurrentSpeed = 0;
 
 	CPowerUpSpawner* mPowerUpSpawner;
+
+private:
+
+	void HandleCollisionCheck();
 };
 

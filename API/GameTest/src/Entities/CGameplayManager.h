@@ -49,6 +49,8 @@ public:
 	int mWindNoChangeCount = 0;
 	int mWindForceChangeCount = 1;
 
+	bool mCleanedUp = false;
+
 private:
 
 	void HandleWind();

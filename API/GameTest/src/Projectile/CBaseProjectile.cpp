@@ -3,8 +3,9 @@
 #include "../Utilities/Lerp.h"
 #include "../World/CWorld.h"
 
-CBaseProjectile::CBaseProjectile() : CGameObject()
+CBaseProjectile::CBaseProjectile() : CGameObject() 
 {
+	mTag = "Projectile";
 }
 
 void CBaseProjectile::Start()
