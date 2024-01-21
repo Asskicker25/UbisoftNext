@@ -121,5 +121,10 @@ void CPowerUpPickup::HandleCollisionCheck()
 		particle->mColorX = 0;
 		particle->mColorY = 0;
 		particle->mColorZ = 1;
+
+		CTimerEventsHandler::GetInstance().AddDelay([particle]()
+			{
+				particle->Cleanup();
+			},1);
 	}
 }

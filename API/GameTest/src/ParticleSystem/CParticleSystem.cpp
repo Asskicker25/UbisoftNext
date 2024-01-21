@@ -115,8 +115,12 @@ void CParticleSystem::Render()
 
 void CParticleSystem::Cleanup()
 {
+	mListOfParticles.clear();
+
+	CGameObject::Cleanup();
 }
 
 void CParticleSystem::OnDestroy()
 {
+	CGameObject::OnDestroy();
 }
