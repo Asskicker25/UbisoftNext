@@ -48,6 +48,7 @@ public:
 
 
 	Vector2 mWallSwitchRoundRange = Vector2(2, 5);
+	Vector2 mNightSwitchRoundRange = Vector2(4, 8);
 
 
 	int mCurrentTurn = 1;
@@ -56,6 +57,7 @@ public:
 	int mWindNoChangeCount = 0;
 	int mWindForceChangeCount = 1;
 	int mCurrentWallSwitchRound = 0;
+	int mCurrentNightSwitchRound = 0;
 	
 	bool mCleanedUp = false;
 

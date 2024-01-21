@@ -108,6 +108,14 @@ void CGameplayManager::HandleRoundSwitch()
 		}
 		CalculateRandomRound(mCurrentWallSwitchRound);
 	}
+
+	if (mCurrentRound >= mCurrentNightSwitchRound)
+	{
+		if (mCurrentNightSwitchRound != 0)
+		{
+			//mNightManager.
+		}
+	}
 }
 
 void CGameplayManager::CalculateRandomRound(int& mRandomRound)

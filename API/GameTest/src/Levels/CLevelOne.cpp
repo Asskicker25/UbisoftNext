@@ -263,7 +263,6 @@ void CLevelOne::HandleCameraMovement(bool currentPlayer)
 		[](float value)
 		{
 			CWorld::GetInstance().mOrigin.x = value;
-			CTweenManager::GetInstance();
 		}
 	);
 }

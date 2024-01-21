@@ -4,6 +4,9 @@
 #include "../Player/CPlayerManager.h"
 
 #include "../Tween/CTweenManager.h"
+#include "../TimerEvents/CTimerEventsHandler.h"
+#include <iostream>
+#include "../World/CWorld.h"
 
 CNightManager::CNightManager() : CGameObject()
 {
@@ -108,6 +111,13 @@ void CNightManager::OnProjectileHit()
 	CPlayer* player = CPlayerManager::GetInstance().GetOtherPlayer();
 
 	Vector2 pos = player->GetPosition();
+	pos.x -= 10;
+
+	mOriginInitPos = CWorld::GetInstance().mOrigin;
+
+	//mNightSprite->SetPosition(pos.x, pos.y);
+
+
 	/*if (diretion == 1)
 	{
 		pos.x -= 400 * diretion;
@@ -117,21 +127,35 @@ void CNightManager::OnProjectileHit()
 		pos.x -= 400 ;
 	}*/
 
-	pos.x -= 480;
+	//pos.x -= 480;
 
 	CTweenManager::GetInstance().AddFloatTween(nightPos.x, pos.x, 1, [this](float value)
 		{
 			Vector2 nightPos1 = mNightSprite->GetPosition();
 
+			Vector2 currentCamera = CWorld::GetInstance().mOrigin;
+
+			Vector2 offset = currentCamera - mOriginInitPos;
+
+			value -= offset.x;
+
 			mNightSprite->SetPosition(value, nightPos1.y);
 		});
+
 
 	CTweenManager::GetInstance().AddFloatTween(nightPos.y, pos.y, 1, [this](float value)
 		{
 			Vector2 nightPos1 = mNightSprite->GetPosition();
 
+			Vector2 currentCamera = CWorld::GetInstance().mOrigin;
+
+			Vector2 offset = currentCamera - mOriginInitPos;
+
+			value -= offset.y;
+
 			mNightSprite->SetPosition(nightPos1.x, value);
 		});
+
 
 
 }
