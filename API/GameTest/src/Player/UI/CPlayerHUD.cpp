@@ -11,7 +11,7 @@ CPlayerHUD::CPlayerHUD()
 	mExplosiveUI->pSprite = App::CreateSprite("Assets/Sprites/Bomb_strip10.png", 10, 1);
 
 	mMagnifyUI = new CPowerUpUI();
-	mMagnifyUI->pSprite = App::CreateSprite("Assets/Sprites/Magnify.png", 1, 1);
+	mMagnifyUI->pSprite = App::CreateSprite("Assets/Sprites/Magnify_Scaled.png", 1, 1);
 
 	mAmplifierUI = new CPowerUpUI();
 	mAmplifierUI->pSprite = App::CreateSprite("Assets/Sprites/Fish_strip4.png", 4, 1);
