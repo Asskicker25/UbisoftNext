@@ -68,6 +68,8 @@
     <ClCompile Include="src\Projectile\Projectiles\CDamageAmplifierProjectile.cpp" />
     <ClCompile Include="src\Projectile\Projectiles\CExplosiveImpactProjectile.cpp" />
     <ClCompile Include="src\Player\UI\CPowerUpUI.cpp" />
+    <ClCompile Include="src\Entities\CPowerUpSpawner.cpp" />
+    <ClCompile Include="src\Player\PowerUps\CPowerUpPickup.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
@@ -149,6 +151,8 @@
     <ClInclude Include="src\Projectile\Projectiles\CDamageAmplifierProjectile.h" />
     <ClInclude Include="src\Projectile\Projectiles\CExplosiveImpactProjectile.h" />
     <ClInclude Include="src\Player\UI\CPowerUpUI.h" />
+    <ClInclude Include="src\Entities\CPowerUpSpawner.h" />
+    <ClInclude Include="src\Player\PowerUps\CPowerUpPickup.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="NextAPI">

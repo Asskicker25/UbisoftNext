@@ -18,6 +18,7 @@ void CGameplayManager::Start()
 
 	pPlayerHud = new CPlayerHUD();
 	mWindHud = new CWindHUD();
+	mPowerUpSpawner = new CPowerUpSpawner();
 
 	SwitchTurn();
 }
@@ -35,6 +36,8 @@ void CGameplayManager::Render()
 void CGameplayManager::Cleanup()
 {
 	pPlayerHud->Cleanup();
+	mWindHud->Cleanup();
+	mPowerUpSpawner->Cleanup();
 }
 
 void CGameplayManager::SwitchTurn()

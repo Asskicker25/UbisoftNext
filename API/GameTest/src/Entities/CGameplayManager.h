@@ -3,6 +3,7 @@
 #include "../Events/Events.h"
 #include "../Player/UI/CPlayerHUD.h"
 #include "../Environment/WindUI/CWindHUD.h"
+#include "CPowerUpSpawner.h"
 
 enum EGameplayState
 {
@@ -39,6 +40,7 @@ public:
 
 	CPlayerHUD* pPlayerHud = nullptr;
 	CWindHUD* mWindHud = nullptr;
+	CPowerUpSpawner* mPowerUpSpawner = nullptr;
 
 	int mCurrentTurn = 1;
 

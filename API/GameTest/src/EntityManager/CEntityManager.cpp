@@ -32,6 +32,10 @@ void CEntityManager::Update()
 		// Update the entity.
 		it->second->Update();
 	}
+
+	/*for (std::string entityID : mListOfEntitiesToRemove)
+	{
+	}*/
 }
 
 void CEntityManager::Render()
@@ -83,8 +87,11 @@ void CEntityManager::AddEntity(std::string entityId, CEntity* entity)
 // Removes an entity from the entity manager.
 void CEntityManager::RemoveEntity(CEntity* entity)
 {
-	//mListOfEntities[entity->mEntityId]->Cleanup();
+	//mListOfEntitiesToRemove.push_back(entity->mEntityId);
 	mListOfEntities.erase(entity->mEntityId);
+
+	//mListOfEntities[entity->mEntityId]->Cleanup();
+	
 }
 
 bool CompareByOrder(const std::pair<std::string, CEntity*>& entity1, const std::pair<std::string, CEntity*>& entity2) {

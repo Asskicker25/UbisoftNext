@@ -53,6 +53,7 @@ private:
 
 	// Map to store entities with their unique IDs.
 	std::unordered_map<std::string, CEntity*> mListOfEntities;
+	std::vector< std::string> mListOfEntitiesToRemove;
 
 	// Count of registered entities.
 	int mEntityCount = 0;
