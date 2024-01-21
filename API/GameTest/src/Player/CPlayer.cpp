@@ -45,7 +45,7 @@ CPlayer::CPlayer(const std::string& spritePath, int controllerID) :
 
 	mMegaMagnify.second = 1;
 	mDamageAmplifier.second = 1;
-	mExplosiveImpact.second = 1;
+	mExplosiveImpact.second = 10;
 
 	pSprite->SetScale(0.5f);
 

@@ -13,6 +13,8 @@
 #include "../Environment/Ground/CGround.h"
 #include "../Player/Arc/CArcDot.h"
 
+#include "../ParticleSystem/CParticleSystem.h"
+
 void CLevelOne::Start()
 {
 
@@ -121,6 +123,14 @@ void CLevelOne::HandleInput()
 
 void CLevelOne::HandleEnvironmentCreations()
 {
+	/*CParticleSystem* particle = new CParticleSystem("Assets/Sprites/Explosion.png", 100, 6);
+	particle->SetPosition(-400, 400, true);
+	particle->mStartVelocityX = { -300, 300 };
+	particle->mStartVelocityY = { -300, 300 };
+	particle->mSpawnRadius = 10;
+	particle->mStartLifeTime = {3,5};
+	particle->mGravity = -5;*/
+
 	wall1 = new CWall();
 	wall1->SetPosition(0, 600, true);
 	wall1->mYRange = Vector2(400, 700);

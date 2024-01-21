@@ -5,6 +5,7 @@
 #include "../../Physics/Shapes/CPhysicsShapeCircle.h"
 #include "../../Player/CPlayerManager.h"
 #include "../../TimerEvents/CTimerEventsHandler.h"
+#include "../../ParticleSystem/CParticleSystem.h"
 
 CExplosiveImpactProjectile::CExplosiveImpactProjectile() : CBaseProjectile()
 {
@@ -67,12 +68,20 @@ void CExplosiveImpactProjectile::OnDestroy()
 
 void CExplosiveImpactProjectile::Explode(bool doDamage)
 {
+	/*CParticleSystem* particle = new CParticleSystem("Assets/Sprites/Explosion.png", 100, 6);
+	particle->mStartVelocityX = { -200, 200 };
+	particle->mStartVelocityY = { -200, 200 };
+	particle->mSpawnRadius = 1;
+	particle->mStartLifeTime = {1,1};
+	particle->mGravity = -5;*/
+
 
 	CGameObject* collider = new CGameObject();
 	collider->pSprite = App::CreateSprite("Assets/Sprites/Circle.png", 1, 1);
 	collider->pPhysicsShape = new CPhysicsShape(collider, CIRCLE);
 	collider->pPhysicsShape->pShape->SetScale(0.7f, 0.7f);
 	collider->mOpacity = 0.3f;
+	collider->pSprite->SetColor(1, 0.3, 0);
 
 
 	collider->pSprite->SetScale(3.0f);
@@ -83,8 +92,11 @@ void CExplosiveImpactProjectile::Explode(bool doDamage)
 	Vector2 pos = Vector2(x, y);
 
 	collider->SetPosition(pos.x, pos.y, true);
+	//particle->SetPosition(pos.x, pos.y, true);
 
 	std::vector<CGameObject* > collidedObjects;
+
+
 
 	if (doDamage)
 	{

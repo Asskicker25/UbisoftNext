@@ -3,6 +3,7 @@
 #include "../../Timer/CTimer.h"
 #include "../../Entities/CPowerUpSpawner.h"
 #include "../CPlayerManager.h"
+#include "../../ParticleSystem/CParticleSystem.h"
 
 
 CPowerUpPickup::CPowerUpPickup() : CGameObject()
@@ -101,5 +102,24 @@ void CPowerUpPickup::HandleCollisionCheck()
 	{
 		CPlayerManager::GetInstance().GetCurrentPlayer()->AddPowerUp(mPowerUpType);
 		mPowerUpSpawner->RemovePowerUp(this);
+
+		CParticleSystem* particle = new CParticleSystem("Assets/Sprites/Circle.png", 100, 1);
+
+		float x, y;
+
+		pSprite->GetPosition(x, y);
+
+		particle->SetPosition(x, y, true);
+		particle->pSprite->SetScale(0.0f);
+
+		particle->mStartVelocityX = { -300, 300 };
+		particle->mStartVelocityY = { -300, 300 };
+		particle->mSpawnRadius = 1;
+		particle->mStartLifeTime = {0.3,0.5};
+		particle->mGravity = -3;
+		particle->mScale = 0.05f;
+		particle->mColorX = 0;
+		particle->mColorY = 0;
+		particle->mColorZ = 1;
 	}
 }

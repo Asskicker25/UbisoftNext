@@ -64,6 +64,8 @@ void CPowerUpUI::SetCount(int count)
 {
 	mOpacity = count == 0 ? 0.2f : 1.0f;
 
+	if (count > 9) { count = 9; }
+
 	mCount->pSprite->SetAnimation(count);
 }
 
