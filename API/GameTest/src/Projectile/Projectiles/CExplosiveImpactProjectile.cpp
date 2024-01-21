@@ -105,6 +105,7 @@ void CExplosiveImpactProjectile::Explode(bool doDamage)
 		if (CheckCollisionWithTag(collider->pPhysicsShape, "Player", collidedObjects))
 		{
 			CPlayerManager::GetInstance().DamagePlayer(mDamageAmount);
+			CPlayerManager::GetInstance().CheckForDeath();
 		}
 	}
 

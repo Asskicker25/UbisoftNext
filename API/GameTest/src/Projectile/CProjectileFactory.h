@@ -7,6 +7,7 @@ class CProjectileFactory
 public:
 
 	CProjectileFactory();
+	~CProjectileFactory();
 
 	void Shoot(EProjectileType type, std::vector<Vector2>& arcPath);
 

@@ -48,6 +48,13 @@ CProjectileFactory::CProjectileFactory()
 
 }
 
+CProjectileFactory::~CProjectileFactory()
+{
+	mExplosiveImpactProjectile->Cleanup();
+	mDamageAmplifierProjectile->Cleanup();
+	mNormalProjectile->Cleanup();
+}
+
 void CProjectileFactory::Shoot(EProjectileType type, std::vector<Vector2>& arcPath)
 {
 	switch (type)

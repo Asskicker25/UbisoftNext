@@ -103,6 +103,8 @@ void CPlayerManager::Cleanup()
 
 	pPlayer_One->Cleanup();
 	pPlayer_Two->Cleanup();
+
+	delete pProjectileFactory;
 }
 
 CPlayer* CPlayerManager::GetCurrentPlayer()
@@ -294,11 +296,8 @@ void CPlayerManager::HandleProjectileHit(bool success)
 		GetOtherPlayer()->pSprite->SetAnimation(HIT_ONE);
 		DamagePlayer(pProjectileFactory->GetCurrentProjectile()->mDamageAmount);
 
-		if (GetOtherPlayer()->IsPlayerDead())
-		{
-			HandlePlayerDead();
-			return;
-		}
+		CheckForDeath();
+		return;
 	}
 	else
 	{
@@ -342,6 +341,15 @@ void CPlayerManager::DamagePlayer(int amount)
 {
 	GetOtherPlayer()->ReduceHealth(amount);
 	OnPlayerHit.Invoke();
+}
+
+void CPlayerManager::CheckForDeath()
+{
+	if (GetOtherPlayer()->IsPlayerDead())
+	{
+		HandlePlayerDead();
+		HandleSoundOnHit(true);
+	}
 }
 
 

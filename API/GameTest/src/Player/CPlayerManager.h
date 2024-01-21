@@ -25,6 +25,7 @@ public:
 	CPlayer* GetOtherPlayer();
 
 	void DamagePlayer(int amount);
+	void CheckForDeath();
 
 	bool GetPreviousArc(std::vector<Vector2>& prevArc);
 
