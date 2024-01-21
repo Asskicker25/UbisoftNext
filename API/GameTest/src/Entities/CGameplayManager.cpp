@@ -23,6 +23,7 @@ void CGameplayManager::Start()
 	mNightManager = new CNightManager();
 
 	SwitchTurn();
+	HandleRoundSwitch();
 }
 
 void CGameplayManager::Update()
@@ -37,6 +38,10 @@ void CGameplayManager::Render()
 	std::string wallSwitchMessage = "Wall Switch in : " + std::to_string(mCurrentWallSwitchRound - mCurrentRound);
 
 	App::Print(500, 500, wallSwitchMessage.c_str(), 1.0f, 0.0f, 1.0f, GLUT_BITMAP_HELVETICA_10);
+
+	std::string nightMessage = "Night in : " + std::to_string(mCurrentNightSwitchRound - mCurrentRound);
+
+	App::Print(500, 400, nightMessage.c_str(), 1.0f, 0.0f, 1.0f, GLUT_BITMAP_HELVETICA_10);
 }
 
 void CGameplayManager::Cleanup()
@@ -54,9 +59,7 @@ void CGameplayManager::SwitchTurn()
 
 	mCurrentTurn = mCurrentTurn == 1 ? 2 : 1;
 
-	mCurrentRound = mCurrentTurn == 1 ? ++mCurrentRound : mCurrentRound;
-
-	HandleRoundSwitch();
+	HandleRoundIncrement();
 	HandleWind();
 
 	mWindHud->SetDirection(mWindDirection);
@@ -100,27 +103,45 @@ void CGameplayManager::HandleWind()
 
 void CGameplayManager::HandleRoundSwitch()
 {
+	mNightManager->DeActivate();
+
 	if (mCurrentRound >= mCurrentWallSwitchRound)
 	{
 		if (mCurrentWallSwitchRound != 0)
 		{
 			OnWallSwitch.Invoke();
 		}
-		CalculateRandomRound(mCurrentWallSwitchRound);
+		CalculateRandomRound(mCurrentWallSwitchRound, mWallSwitchRoundRange.x, mWallSwitchRoundRange.y);
 	}
 
 	if (mCurrentRound >= mCurrentNightSwitchRound)
 	{
 		if (mCurrentNightSwitchRound != 0)
 		{
+			mNightManager->Activate();
 			//mNightManager.
 		}
+		CalculateRandomRound(mCurrentNightSwitchRound, mNightSwitchRoundRange.x, mNightSwitchRoundRange.y);
+	}
+
+
+
+}
+
+void CGameplayManager::HandleRoundIncrement()
+{
+
+	if (mCurrentTurn == 1)
+	{
+		++mCurrentRound;
+
+		HandleRoundSwitch();
 	}
 }
 
-void CGameplayManager::CalculateRandomRound(int& mRandomRound)
+void CGameplayManager::CalculateRandomRound(int& mRandomRound, int rangeX, int rangeY)
 {
-	mRandomRound = GetRandomIntNumber(mWallSwitchRoundRange.x, mWallSwitchRoundRange.y);
+	mRandomRound = GetRandomIntNumber(rangeX, rangeY);
 
 	mRandomRound += mCurrentRound;
 }

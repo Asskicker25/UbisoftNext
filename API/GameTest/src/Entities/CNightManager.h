@@ -15,9 +15,14 @@ public:
 	virtual void Cleanup();
 	virtual void OnDestroy();
 
+	void Activate();
+	void DeActivate();
+
 	CGameObject* mNightSprite = nullptr;
 
 private:
+
+
 	void OnTurnStart();
 	void OnFollowProjectile();
 	void HandleProjectileFollow();

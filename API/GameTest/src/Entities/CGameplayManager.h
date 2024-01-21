@@ -48,7 +48,7 @@ public:
 
 
 	Vector2 mWallSwitchRoundRange = Vector2(2, 5);
-	Vector2 mNightSwitchRoundRange = Vector2(4, 8);
+	Vector2 mNightSwitchRoundRange = Vector2(3, 6);
 
 
 	int mCurrentTurn = 1;
@@ -65,8 +65,9 @@ private:
 
 	void HandleWind();
 	void HandleRoundSwitch();
+	void HandleRoundIncrement();
 
-	void CalculateRandomRound(int& mRandomRound);
+	void CalculateRandomRound(int& mRandomRound, int rangeX, int rangeY);
 
 	float mWindDirection = 0;
 };

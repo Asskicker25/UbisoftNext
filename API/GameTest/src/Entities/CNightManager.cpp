@@ -10,6 +10,7 @@
 
 CNightManager::CNightManager() : CGameObject()
 {
+
 	mNightSprite = new CGameObject();
 
 	mNightSprite->pSprite = App::CreateSprite("Assets/Sprites/NightBG.png", 1, 1);
@@ -38,6 +39,8 @@ CNightManager::CNightManager() : CGameObject()
 		{
 			OnProjectileHit();
 		});
+
+	DeActivate();
 
 	//mNightSprite->pSprite->SetScale(0.1f);
 }
@@ -71,6 +74,18 @@ void CNightManager::Cleanup()
 void CNightManager::OnDestroy()
 {
 	CGameObject::OnDestroy();
+}
+
+void CNightManager::Activate()
+{
+	mNightSprite->mIsVisible = true;
+	mIsEnabled = true;
+}
+
+void CNightManager::DeActivate()
+{
+	mNightSprite->mIsVisible = false;
+	mIsEnabled = false;
 }
 
 void CNightManager::OnTurnStart()
@@ -115,19 +130,6 @@ void CNightManager::OnProjectileHit()
 
 	mOriginInitPos = CWorld::GetInstance().mOrigin;
 
-	//mNightSprite->SetPosition(pos.x, pos.y);
-
-
-	/*if (diretion == 1)
-	{
-		pos.x -= 400 * diretion;
-	}
-	else
-	{
-		pos.x -= 400 ;
-	}*/
-
-	//pos.x -= 480;
 
 	CTweenManager::GetInstance().AddFloatTween(nightPos.x, pos.x, 1, [this](float value)
 		{
