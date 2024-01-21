@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../CGameState.h"
+#include "../../Entities/CGameObject.h"
 
 class CMainMenuGameState : public CGameState
 {
@@ -19,6 +20,9 @@ public:
 private: 
 	float mWindowCenterX = 0;
 	float mWindowCenterY = 0;
+
+	CGameObject* mBg = nullptr;
+	CGameObject* mStartUI = nullptr;
 
 };
 

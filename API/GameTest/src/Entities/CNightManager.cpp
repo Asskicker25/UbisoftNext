@@ -65,8 +65,14 @@ void CNightManager::Cleanup()
 {
 	CGameplayManager::GetInstance().OnTurnStart.UnSubscribe("Night_Start");
 	CPlayerManager::GetInstance().OnShoot.UnSubscribe("Night_Follow");
-	CPlayerManager::GetInstance().pProjectileFactory->OnProjectileSuccess.UnSubscribe("ProjectileHit");
-	CPlayerManager::GetInstance().pProjectileFactory->OnProjectileFail.UnSubscribe("ProjectileHit");
+
+	 
+	if (CPlayerManager::GetInstance().pProjectileFactory != nullptr)
+	{
+		CPlayerManager::GetInstance().pProjectileFactory->OnProjectileSuccess.UnSubscribe("ProjectileHit");
+		CPlayerManager::GetInstance().pProjectileFactory->OnProjectileFail.UnSubscribe("ProjectileHit");
+	}
+	
 
 	mNightSprite->Cleanup();
 

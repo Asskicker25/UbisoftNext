@@ -7,6 +7,11 @@ void CLevelCompleteGameState::Start()
 {
 	mWindowCenterX = APP_VIRTUAL_WIDTH / 2;
 	mWindowCenterY = APP_VIRTUAL_HEIGHT / 2;
+	
+	mBg = new CGameObject();
+	mBg->pSprite = App::CreateSprite("Assets/Sprites/BG1.png", 1, 1);
+	mBg->mIsUI = true;
+	mBg->SetPosition(mWindowCenterX, mWindowCenterY, true);
 }
 
 // Handles user input to transition to the next level or return to the main menu.
@@ -34,6 +39,7 @@ void CLevelCompleteGameState::Render()
 
 void CLevelCompleteGameState::Cleanup()
 {
+	mBg->Cleanup();
 }
 
 void CLevelCompleteGameState::Pause()

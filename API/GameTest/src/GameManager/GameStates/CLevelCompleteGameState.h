@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../CGameState.h"
+#include "../../Entities/CGameObject.h"
 
 class CLevelCompleteGameState : public CGameState
 {
@@ -18,5 +19,7 @@ public:
 private:
 	float mWindowCenterX = 0;
 	float mWindowCenterY = 0;
+
+	CGameObject* mBg = nullptr;
 };
 

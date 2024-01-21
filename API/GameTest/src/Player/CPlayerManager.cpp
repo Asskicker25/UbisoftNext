@@ -105,6 +105,7 @@ void CPlayerManager::Cleanup()
 	pPlayer_Two->Cleanup();
 
 	delete pProjectileFactory;
+	pProjectileFactory = nullptr;
 }
 
 CPlayer* CPlayerManager::GetCurrentPlayer()

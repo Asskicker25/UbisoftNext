@@ -7,6 +7,18 @@ void CMainMenuGameState::Start()
 {
 	mWindowCenterX = APP_VIRTUAL_WIDTH / 2;
 	mWindowCenterY = APP_VIRTUAL_HEIGHT / 2;
+
+	mBg = new CGameObject();
+	mBg->pSprite = App::CreateSprite("Assets/Sprites/BG1.png",1,1);
+	mBg->mIsUI = true;
+	mBg->SetPosition(mWindowCenterX, mWindowCenterY, true);
+
+
+	mStartUI = new CGameObject();
+	mStartUI->pSprite = App::CreateSprite("Assets/Sprites/Press_Start.png", 1, 1);
+	mStartUI->mIsUI = true;
+	mStartUI->SetPosition(mWindowCenterX, mWindowCenterY - 100, true);
+
 }
 
 // Handles user input to transition to the gameplay state.
@@ -31,6 +43,8 @@ void CMainMenuGameState::Render()
 
 void CMainMenuGameState::Cleanup()
 {
+	mBg->Cleanup();
+	mStartUI->Cleanup();
 }
 
 void CMainMenuGameState::Pause()
