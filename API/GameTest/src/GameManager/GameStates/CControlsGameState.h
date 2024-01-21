@@ -20,6 +20,7 @@ private:
 	float mWindowCenterY = 0;
 
 	CGameObject* mBg = nullptr;
+	CGameObject* mControlsUI = nullptr;
 	CGameObject* mExitUI = nullptr;
 
 };

@@ -11,6 +11,7 @@ void CMainMenuGameState::Start()
 	mBg = new CGameObject();
 	mBg->pSprite = App::CreateSprite("Assets/Sprites/BG1.png",1,1);
 	mBg->mIsUI = true;
+	mBg->mOrder = -1;
 	mBg->SetPosition(mWindowCenterX, mWindowCenterY, true);
 
 	mTitle = new CGameObject();
