@@ -157,55 +157,69 @@ void CPlayerManager::HandleInput()
 	if (CGameplayManager::GetInstance().GetState() == PLAYER_AIM)
 	{
 		HandlePowerUpInput();
-		/*float x = App::GetController().GetLeftThumbStickX();
-
-		mAimDirection.x = Lerp(mAimDirection.x, x,
-			CTimer::GetInstance().mDeltaTime * mAimLerpSpeed);
-
-		mAimDirection.y = Lerp(mAimDirection.y, App::GetController().GetLeftThumbStickY(),
-			CTimer::GetInstance().mDeltaTime * mAimLerpSpeed);*/
 
 		mAimDirection.x = App::GetController().GetLeftThumbStickX();
 		mAimDirection.y = App::GetController().GetLeftThumbStickY();
 
 		mAimDirection.Normalize();
 
+		//if (mAimDirection.Magnitude() > 0.1f)
 		if (mAimDirection.Magnitude() > 0.1f)
 		{
+			mAimPressed = true;
 			GetCurrentPlayer()->pSprite->SetAnimation(AIM);
-
-			HandleAim();
-
-			if (App::GetController().CheckButton(XINPUT_GAMEPAD_RIGHT_SHOULDER, true))
-			{
-				GetCurrentPlayer()->pSprite->SetAnimation(THROW);
-
-				CGameplayManager::GetInstance().SetState(PLAYER_THROWING);
-
-				CTimerEventsHandler::GetInstance().AddDelay([this]()
-					{
-						HandleShoot();
-					},
-					mThrowingDuration);
-
-				CTimerEventsHandler::GetInstance().AddDelay([this]()
-					{
-						GetCurrentPlayer()->pSprite->SetAnimation(IDLE);
-					},
-					mThrowingDuration * 5);
-			}
 		}
 		else
 		{
 			GetCurrentPlayer()->pSprite->SetAnimation(TAUNT);
 		}
+
+		if (!mAimPressed) return;
+
+		HandleAim();
+
+		if (App::GetController().CheckButton(XINPUT_GAMEPAD_RIGHT_SHOULDER, true))
+		{
+			mAimPressed = false;
+
+			if (CGameplayManager::GetInstance().mCurrentTurn == 1)
+			{
+				mPlayerOnePrevAimY = mCurrentAimY;
+				mCurrentAimY = mPlayerTwoPrevAimY;
+			}
+			else
+			{
+				mPlayerTwoPrevAimY = mCurrentAimY;
+				mCurrentAimY = mPlayerOnePrevAimY;
+			}
+
+
+			GetCurrentPlayer()->pSprite->SetAnimation(THROW);
+
+			CGameplayManager::GetInstance().SetState(PLAYER_THROWING);
+
+			CTimerEventsHandler::GetInstance().AddDelay([this]()
+				{
+					HandleShoot();
+				},
+				mThrowingDuration);
+
+			CTimerEventsHandler::GetInstance().AddDelay([this]()
+				{
+					GetCurrentPlayer()->pSprite->SetAnimation(IDLE);
+				},
+				mThrowingDuration * 5);
+		}
+
 	}
 }
 
 
 void CPlayerManager::HandleAim()
 {
-	mCurrentAngle = std::atan2(mAimDirection.y, mAimDirection.x);
+	//mCurrentAngle = std::atan2(mAimDirection.y, mAimDirection.x);
+	mCurrentAimY += mAimDirection.y * CTimer::GetInstance().mDeltaTime;
+	mCurrentAngle = std::atan2(mCurrentAimY, CGameplayManager::GetInstance().mCurrentTurn == 1 ? 1 : -1);
 
 	mCurrentAngle = mCurrentAngle * 180.0 / PI;
 
@@ -223,7 +237,7 @@ void CPlayerManager::HandleAim()
 		}
 
 		if (mCurrentAngle > 180 - mAimMinAngle) { mCurrentAngle = 180 - mAimMinAngle; }
-		if (mCurrentAngle < 90 + ( 90 - mAimMaxAngle)) { mCurrentAngle = 90 + mAimMaxAngle; }
+		if (mCurrentAngle < 90 + (90 - mAimMaxAngle)) { mCurrentAngle = 90 + mAimMaxAngle; }
 	}
 
 
@@ -327,9 +341,8 @@ void CPlayerManager::RenderArc()
 {
 	if (CGameplayManager::GetInstance().GetState() == PLAYER_AIM)
 	{
-		if (mAimDirection.Magnitude() > 0.2f)
+		if (mAimPressed)
 		{
-
 			mCurrentArc->UpdatePositions(mCurrentArcPositions);
 
 			std::vector<Vector2> prevArc;
@@ -409,7 +422,7 @@ bool CPlayerManager::SwitchPowerUp(EPowerUp type)
 	switch (type)
 	{
 	case NONE:
-		
+
 		prevPowerUp = pCurrentPowerUp;
 
 		mProjectileType = NORMAL;

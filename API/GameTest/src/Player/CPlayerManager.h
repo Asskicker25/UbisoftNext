@@ -82,8 +82,14 @@ private:
 	float mAimMinAngle = 10.0f;
 	float mAimMaxAngle = 50.0f;
 
+	float mCurrentAimY = 0;
+	float mPlayerOnePrevAimY = 0.5f;
+	float mPlayerTwoPrevAimY = 0.5f;
+
 	float mForce = 117;
 
 	int mArcResolution = 50;
+
+	bool mAimPressed = false;
 };
 
