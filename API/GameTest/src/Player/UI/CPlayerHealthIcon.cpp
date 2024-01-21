@@ -3,6 +3,7 @@
 CPlayerHealthIcon::CPlayerHealthIcon() : CGameObject()
 {
 	mIsUI = true;
+	mOrder = 5;
 	pSprite = App::CreateSprite("Assets/Sprites/Heart_strip2.png", 2, 1);
 
 	pSprite->CreateAnimation(0, 1.0f / 6, { 0 });

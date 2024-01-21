@@ -18,6 +18,8 @@ CPowerUpPickup::CPowerUpPickup() : CGameObject()
 
 	mCurrentSpeed = GetRandomFloatNumber(mSpeedRange.x, mSpeedRange.y);
 
+	mOrder = 0;
+
 }
 
 void CPowerUpPickup::Start()

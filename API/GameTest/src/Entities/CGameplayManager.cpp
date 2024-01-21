@@ -20,6 +20,7 @@ void CGameplayManager::Start()
 	pPlayerHud = new CPlayerHUD();
 	mWindHud = new CWindHUD();
 	mPowerUpSpawner = new CPowerUpSpawner();
+	mNightManager = new CNightManager();
 
 	SwitchTurn();
 }
@@ -43,6 +44,7 @@ void CGameplayManager::Cleanup()
 	pPlayerHud->Cleanup();
 	mWindHud->Cleanup();
 	mPowerUpSpawner->Cleanup();
+	mNightManager->Cleanup();
 	mCleanedUp = true;
 }
 

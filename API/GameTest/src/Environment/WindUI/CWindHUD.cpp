@@ -5,6 +5,7 @@ CWindHUD::CWindHUD() : CGameObject()
 {
 	pSprite = App::CreateSprite("Assets/Sprites/Arrow.png", 1, 1);
 	mIsUI = true;
+	mOrder = 5;
 	
 	float x = (APP_VIRTUAL_WIDTH * 0.5f);
 	float y = APP_VIRTUAL_HEIGHT - 100;

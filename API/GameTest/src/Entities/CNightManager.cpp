@@ -1,0 +1,137 @@
+#include "CNightManager.h"
+
+#include "CGameplayManager.h"
+#include "../Player/CPlayerManager.h"
+
+#include "../Tween/CTweenManager.h"
+
+CNightManager::CNightManager() : CGameObject()
+{
+	mNightSprite = new CGameObject();
+
+	mNightSprite->pSprite = App::CreateSprite("Assets/Sprites/NightBG.png", 1, 1);
+	mNightSprite->SetPosition(-600, 250, true);
+	mNightSprite->mOpacity = 0.96f;
+	mNightSprite->mOrder = 1;
+	mNightSprite->pSprite->SetScale(3);
+
+	CGameplayManager::GetInstance().OnTurnStart.Subscribe("Night_Start", [this]()
+		{
+			OnTurnStart();
+		});
+
+	CPlayerManager::GetInstance().OnShoot.Subscribe("Night_Follow", [this]()
+		{
+			OnFollowProjectile();
+		});
+
+
+	CPlayerManager::GetInstance().pProjectileFactory->OnProjectileSuccess.Subscribe("ProjectileHit", [this]()
+		{
+			OnProjectileHit();
+		});
+
+	CPlayerManager::GetInstance().pProjectileFactory->OnProjectileFail.Subscribe("ProjectileHit", [this]()
+		{
+			OnProjectileHit();
+		});
+
+	//mNightSprite->pSprite->SetScale(0.1f);
+}
+
+void CNightManager::Start()
+{
+	CGameObject::Start();
+}
+
+void CNightManager::Update()
+{
+	HandleProjectileFollow();
+	CGameObject::Update();
+}
+
+void CNightManager::Render()
+{
+	CGameObject::Render();
+}
+
+void CNightManager::Cleanup()
+{
+	CGameplayManager::GetInstance().OnTurnStart.UnSubscribe("Night_Start");
+	CPlayerManager::GetInstance().OnShoot.UnSubscribe("Night_Follow");
+	CPlayerManager::GetInstance().pProjectileFactory->OnProjectileSuccess.UnSubscribe("ProjectileHit");
+	CPlayerManager::GetInstance().pProjectileFactory->OnProjectileFail.UnSubscribe("ProjectileHit");
+
+	CGameObject::Cleanup();
+}
+
+void CNightManager::OnDestroy()
+{
+	CGameObject::OnDestroy();
+}
+
+void CNightManager::OnTurnStart()
+{
+	CPlayer* player = CPlayerManager::GetInstance().GetCurrentPlayer();
+
+	Vector2 pos = player->GetPosition();
+	pos.x -= 10;
+
+	mNightSprite->SetPosition(pos.x, pos.y);
+}
+
+void CNightManager::OnFollowProjectile()
+{
+	mCanFollow = true;
+	mCurrentProjectile = CPlayerManager::GetInstance().pProjectileFactory->GetCurrentProjectile();
+}
+
+void CNightManager::HandleProjectileFollow()
+{
+	if (!mCanFollow) return;
+
+	Vector2 pos = mCurrentProjectile->GetPosition();
+
+	pos.x -= 10;
+
+	mNightSprite->SetPosition(pos.x, pos.y);
+}
+
+void CNightManager::OnProjectileHit()
+{
+	mCanFollow = false;
+
+
+
+	Vector2 nightPos = mNightSprite->GetPosition();
+
+	CPlayer* player = CPlayerManager::GetInstance().GetOtherPlayer();
+
+	Vector2 pos = player->GetPosition();
+	/*if (diretion == 1)
+	{
+		pos.x -= 400 * diretion;
+	}
+	else
+	{
+		pos.x -= 400 ;
+	}*/
+
+	pos.x -= 480;
+
+	CTweenManager::GetInstance().AddFloatTween(nightPos.x, pos.x, 1, [this](float value)
+		{
+			Vector2 nightPos1 = mNightSprite->GetPosition();
+
+			mNightSprite->SetPosition(value, nightPos1.y);
+		});
+
+	CTweenManager::GetInstance().AddFloatTween(nightPos.y, pos.y, 1, [this](float value)
+		{
+			Vector2 nightPos1 = mNightSprite->GetPosition();
+
+			mNightSprite->SetPosition(nightPos1.x, value);
+		});
+
+
+}

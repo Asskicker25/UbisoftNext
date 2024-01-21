@@ -9,11 +9,11 @@ CPowerUpUI::CPowerUpUI()
 	mSelected = new CGameObject();
 	mSelected->pSprite = App::CreateSprite("Assets/Sprites/Circle.png", 1, 1);
 	mSelected->mIsUI = true;
-	mSelected->mOrder = 1;
+	mSelected->mOrder = 2;
 	mSelected->mOpacity = 0.4f;
 	mSelected->mIsVisible = false;
 	mSelected->pSprite->SetScale(0.52);
-	mSelected->pSprite->SetColor(0, 0, 0);
+	mSelected->pSprite->SetColor(0.4, 0.4, 0.4);
 
 	mCount = new CGameObject();
 	mCount->pSprite = App::CreateSprite("Assets/Sprites/Numbers_strip10.png", 10, 1);

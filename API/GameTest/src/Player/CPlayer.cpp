@@ -19,6 +19,7 @@ CPlayer::CPlayer(const std::string& spritePath, int controllerID) :
 
 	mTotalHealth = mMaxHealth;
 	mTag = "Player";
+	mOrder = 2;
 
 	pSprite = App::CreateSprite(spritePath.c_str(), 35, 1);
 	//pSprite = App::CreateSprite("Assets/Sprites/Cat_strip35.png", 35, 1);

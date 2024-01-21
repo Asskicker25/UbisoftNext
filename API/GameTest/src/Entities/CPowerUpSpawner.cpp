@@ -5,6 +5,11 @@
 
 CPowerUpSpawner::CPowerUpSpawner() : CGameObject()
 {
+	CPowerUpPickup* base = new CPowerUpPickup();
+	base->mIsEnabled = false;
+	base->mIsVisible = false;
+	base->mPowerUpSpawner = this;
+	mObjectPool.SetPoolObject(base);
 }
 
 void CPowerUpSpawner::Start()
@@ -17,11 +22,7 @@ void CPowerUpSpawner::Start()
 	powerUp->SetPosition(mSpawnXRange.x, mSpawnYValue, true);
 	powerUp1->SetPosition(mSpawnXRange.y, mSpawnYValue, true);*/
 
-	CPowerUpPickup* base = new CPowerUpPickup();
-	base->mIsEnabled = false;
-	base->mIsVisible = false;
-	base->mPowerUpSpawner = this;
-	mObjectPool.SetPoolObject(base);
+	
 
 
 	SetRandomSpawnInterval();
