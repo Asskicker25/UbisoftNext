@@ -13,7 +13,9 @@ CWall::CWall()
 
 	pSprite->SetScale(1.3);
 
+
 	pPhysicsShape = new CPhysicsShape(this, BOX);
+	pPhysicsShape->pShape->SetScale(0.7f,0.7f);
 
 	mTag = "Environment";
 }

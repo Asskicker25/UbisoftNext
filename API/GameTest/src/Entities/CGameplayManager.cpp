@@ -17,6 +17,7 @@ void CGameplayManager::Start()
 {
 	mCurrentTurn = 2;
 	mCleanedUp = false;
+	mCurrentRound = 0;
 
 	pPlayerHud = new CPlayerHUD();
 	mWindHud = new CWindHUD();
@@ -26,14 +27,22 @@ void CGameplayManager::Start()
 	mRoundUI = new CGameObject();
 	mRoundUI->pSprite = App::CreateSprite("Assets/Sprites/Round.png", 1, 1);
 	mRoundUI->mIsUI = true;
-	mRoundUI->SetPosition(APP_VIRTUAL_WIDTH / 2, APP_VIRTUAL_HEIGHT - 150, true);
+	mRoundUI->SetPosition(APP_VIRTUAL_WIDTH / 2 - 10, APP_VIRTUAL_HEIGHT - 150, true);
 	mRoundUI->pSprite->SetScale(0.2f);
 
 	mRoundCountUI = new CNumberUI();
-	mRoundCountUI->SetPosition(mRoundCountUIX, APP_VIRTUAL_HEIGHT - 149, true);
+	mRoundCountUI->SetPosition(mRoundCountUIX - 10, APP_VIRTUAL_HEIGHT - 149, true);
 	mRoundCountUI->pSprite->SetScale(0.72);
 
+	mNightTextUI = new CGameObject();
+	mNightTextUI->pSprite = App::CreateSprite("Assets/Sprites/sprite5_Darkness_Approaches_In.png", 1, 1);
+	mNightTextUI->mIsUI = true;
+	mNightTextUI->SetPosition(130, APP_VIRTUAL_HEIGHT - 120, true);
+	mNightTextUI->pSprite->SetScale(0.4f);
 
+	mNightCountUI = new CNumberUI();
+	mNightCountUI->SetPosition(130 + 110, APP_VIRTUAL_HEIGHT - 115, true);
+	mNightCountUI->pSprite->SetScale(0.72);
 
 	SwitchTurn();
 	HandleRoundSwitch();
@@ -45,13 +54,13 @@ void CGameplayManager::Update()
 
 void CGameplayManager::Render()
 {
-	std::string wallSwitchMessage = "Wall Switch in : " + std::to_string(mCurrentWallSwitchRound - mCurrentRound);
+	/*std::string wallSwitchMessage = "Wall Switch in : " + std::to_string(mCurrentWallSwitchRound - mCurrentRound);
 
 	App::Print(500, 500, wallSwitchMessage.c_str(), 1.0f, 0.0f, 1.0f, GLUT_BITMAP_HELVETICA_10);
 
 	std::string nightMessage = "Night in : " + std::to_string(mCurrentNightSwitchRound - mCurrentRound);
 
-	App::Print(500, 450, nightMessage.c_str(), 1.0f, 0.0f, 1.0f, GLUT_BITMAP_HELVETICA_10);
+	App::Print(500, 450, nightMessage.c_str(), 1.0f, 0.0f, 1.0f, GLUT_BITMAP_HELVETICA_10);*/
 }
 
 void CGameplayManager::Cleanup()
@@ -63,6 +72,9 @@ void CGameplayManager::Cleanup()
 
 	mRoundCountUI->Cleanup();
 	mRoundUI->Cleanup();
+
+	mNightTextUI->Cleanup();
+	mNightCountUI->Cleanup();
 
 	mCleanedUp = true;
 }
@@ -120,6 +132,8 @@ void CGameplayManager::HandleWind()
 void CGameplayManager::HandleRoundSwitch()
 {
 	mNightManager->DeActivate();
+
+	mNightCountUI->SetNumber(mCurrentNightSwitchRound - mCurrentRound);
 
 	if (mCurrentRound >= mCurrentWallSwitchRound)
 	{

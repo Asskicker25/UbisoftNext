@@ -19,7 +19,7 @@ CWindHUD::CWindHUD() : CGameObject()
 	mWindText->pSprite = App::CreateSprite("Assets/Sprites/Wind.png", 1, 1);
 	mWindText->mIsUI = true;
 	mWindText->mOrder = 2;
-	mWindText->SetPosition(x, y + 50, true);
+	mWindText->SetPosition(x - 3, y + 50, true);
 	mWindText->pSprite->SetScale(0.4);
 }
 
@@ -50,7 +50,7 @@ void CWindHUD::Update()
 void CWindHUD::Render()
 {
 	CGameObject::Render();
-	App::Print(450, 600, ("Wind : " + std::to_string(mDirection)).c_str(), 0.0f, 0.0f, 0.0f, GLUT_BITMAP_HELVETICA_10);
+	/*App::Print(450, 600, ("Wind : " + std::to_string(mDirection)).c_str(), 0.0f, 0.0f, 0.0f, GLUT_BITMAP_HELVETICA_10);*/
 }
 
 void CWindHUD::SetDirection(float direction)

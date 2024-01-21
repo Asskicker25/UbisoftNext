@@ -55,7 +55,7 @@ public:
 
 
 	Vector2 mWallSwitchRoundRange = Vector2(2, 5);
-	Vector2 mNightSwitchRoundRange = Vector2(3, 6);
+	Vector2 mNightSwitchRoundRange = Vector2(3, 5);
 
 
 	float mRoundCountUIX = 550;

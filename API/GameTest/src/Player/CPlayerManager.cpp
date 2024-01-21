@@ -64,7 +64,7 @@ void CPlayerManager::Render()
 {
 	RenderArc();
 
-	std::string message = "Aim Angle : " + std::to_string(mCurrentAngle);
+	/*std::string message = "Aim Angle : " + std::to_string(mCurrentAngle);
 
 	App::Print(10, 70, message.c_str(), 0.3f, 0.0f, 1.0f, GLUT_BITMAP_HELVETICA_10);
 
@@ -88,7 +88,7 @@ void CPlayerManager::Render()
 	default:
 		break;
 	}
-	App::Print(10, 500, powerUpMessage.c_str(), 1.0f, 0.0f, 1.0f, GLUT_BITMAP_HELVETICA_10);
+	App::Print(10, 500, powerUpMessage.c_str(), 1.0f, 0.0f, 1.0f, GLUT_BITMAP_HELVETICA_10);*/
 
 }
 
@@ -223,6 +223,10 @@ void CPlayerManager::HandleAim()
 {
 	//mCurrentAngle = std::atan2(mAimDirection.y, mAimDirection.x);
 	mCurrentAimY += mAimDirection.y * CTimer::GetInstance().mDeltaTime;
+
+	if (mCurrentAimY > 1) { mCurrentAimY = 1; }
+	if (mCurrentAimY < 0) { mCurrentAimY = 0; }
+
 	mCurrentAngle = std::atan2(mCurrentAimY, CGameplayManager::GetInstance().mCurrentTurn == 1 ? 1 : -1);
 
 	mCurrentAngle = mCurrentAngle * 180.0 / PI;
