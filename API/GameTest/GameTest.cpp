@@ -38,6 +38,7 @@ void Init()
 void Update(float deltaTime)
 {
 	CTimer::GetInstance().mDeltaTime = deltaTime/1000.0f;
+	CTimer::GetInstance().mGameTime += deltaTime / 1000.0f;
 	pGameManager->Update();
 	CTimerEventsHandler::GetInstance().Update();
 	CTweenManager::GetInstance().Update();

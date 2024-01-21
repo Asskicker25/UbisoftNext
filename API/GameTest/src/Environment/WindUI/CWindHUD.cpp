@@ -1,5 +1,7 @@
 #include "CWindHUD.h"
 #include "../../Utilities/Remap.h"
+#include "../../Timer/CTimer.h"
+#include "../../Utilities/Lerp.h"
 
 CWindHUD::CWindHUD() : CGameObject()
 {
@@ -21,11 +23,31 @@ void CWindHUD::Start()
 void CWindHUD::Update()
 {
 	CGameObject::Update();
+
+	float angle = remap(mDirection, -1, 1, -180, 0) * PI / 180;
+
+	float direction = mDirection > 0 ? 1 : -1;
+
+	float intensity = std::abs(mDirection);
+
+	angle = direction == 1 ? 0 : -180;
+
+	angle += std::sin(CTimer::GetInstance().mGameTime * ((intensity + 0.1f) * 20)) * 8;
+
+	angle *= PI / 180;
+
+	pSprite->SetAngle(Lerp(pSprite->GetAngle(), angle, CTimer::GetInstance().mDeltaTime * 10.0f));
 }
 
 void CWindHUD::Render()
 {
 	CGameObject::Render();
+	App::Print(450, 600, ("Wind : " + std::to_string(mDirection)).c_str(), 0.0f, 0.0f, 0.0f, GLUT_BITMAP_HELVETICA_10);
+}
+
+void CWindHUD::SetDirection(float direction)
+{
+	mDirection = direction;
 }
 
 void CWindHUD::Cleanup()
@@ -38,11 +60,3 @@ void CWindHUD::OnDestroy()
 	CGameObject::OnDestroy();
 }
 
-void CWindHUD::SetDirection(float direction)
-{
-
-	float angle = remap(direction, -1, 1, -180, 0) * PI / 180;
-
-	pSprite->SetAngle(angle);
-
-}

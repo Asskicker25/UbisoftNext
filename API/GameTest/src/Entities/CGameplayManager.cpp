@@ -33,7 +33,7 @@ void CGameplayManager::Update()
 void CGameplayManager::Render()
 {
 	std::string message = "Round : " + std::to_string(mCurrentRound);
-	App::Print(500, 600, message.c_str(), 1.0f, 0.0f, 1.0f, GLUT_BITMAP_HELVETICA_10);
+	App::Print(500, 550, message.c_str(), 1.0f, 0.0f, 1.0f, GLUT_BITMAP_HELVETICA_10);
 
 	std::string wallSwitchMessage = "Wall Switch in : " + std::to_string(mCurrentWallSwitchRound - mCurrentRound);
 
@@ -41,7 +41,7 @@ void CGameplayManager::Render()
 
 	std::string nightMessage = "Night in : " + std::to_string(mCurrentNightSwitchRound - mCurrentRound);
 
-	App::Print(500, 400, nightMessage.c_str(), 1.0f, 0.0f, 1.0f, GLUT_BITMAP_HELVETICA_10);
+	App::Print(500, 450, nightMessage.c_str(), 1.0f, 0.0f, 1.0f, GLUT_BITMAP_HELVETICA_10);
 }
 
 void CGameplayManager::Cleanup()
@@ -93,6 +93,8 @@ void CGameplayManager::HandleWind()
 		if (random == 0)
 		{
 			mWindNoChangeCount++;
+
+			if (mWindDirection == 0) { mWindDirection = 0.1f; }
 			return;
 		}
 	}

@@ -15,6 +15,7 @@ public:
 
 	void SetDirection(float direction);
 
+	float mDirection = 0;
 
 };
 
