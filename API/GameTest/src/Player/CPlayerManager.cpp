@@ -104,6 +104,9 @@ void CPlayerManager::Cleanup()
 	pPlayer_One->Cleanup();
 	pPlayer_Two->Cleanup();
 
+	mPlayerOnePrevArc.clear();
+	mPlayerTwoPrevArc.clear();
+
 	//delete pProjectileFactory;
 	//pProjectileFactory = nullptr;
 }
