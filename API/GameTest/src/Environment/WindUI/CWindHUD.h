@@ -13,6 +13,7 @@ public:
 	virtual void Cleanup();
 	virtual void OnDestroy();
 
+	void SetDirection(float direction);
 
 
 };

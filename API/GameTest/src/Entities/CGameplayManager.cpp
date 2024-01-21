@@ -17,6 +17,7 @@ void CGameplayManager::Start()
 	mCurrentTurn = 2;
 
 	pPlayerHud = new CPlayerHUD();
+	mWindHud = new CWindHUD();
 
 	SwitchTurn();
 }
@@ -27,8 +28,8 @@ void CGameplayManager::Update()
 
 void CGameplayManager::Render()
 {
-	std::string message = "Wind : " + std::to_string(mWindDirection);
-	App::Print(500, 600, message.c_str(), 1.0f, 0.0f, 1.0f, GLUT_BITMAP_HELVETICA_10);
+	/*std::string message = "Wind : " + std::to_string(mWindDirection);
+	App::Print(500, 600, message.c_str(), 1.0f, 0.0f, 1.0f, GLUT_BITMAP_HELVETICA_10);*/
 }
 
 void CGameplayManager::Cleanup()
@@ -41,6 +42,8 @@ void CGameplayManager::SwitchTurn()
 	mCurrentTurn = mCurrentTurn == 1 ? 2 : 1;
 
 	HandleWind();
+
+	mWindHud->SetDirection(mWindDirection);
 
 	SetState(PLAYER_AIM);
 	OnTurnStart.Invoke();

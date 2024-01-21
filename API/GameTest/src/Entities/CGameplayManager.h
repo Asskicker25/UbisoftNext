@@ -2,6 +2,7 @@
 
 #include "../Events/Events.h"
 #include "../Player/UI/CPlayerHUD.h"
+#include "../Environment/WindUI/CWindHUD.h"
 
 enum EGameplayState
 {
@@ -36,19 +37,19 @@ public:
 	CEvents OnTurnStart;
 	EGameplayState mCurrentState = PLAYER_AIM;
 
-	CPlayerHUD* pPlayerHud;
+	CPlayerHUD* pPlayerHud = nullptr;
+	CWindHUD* mWindHud = nullptr;
 
 	int mCurrentTurn = 1;
 
 	int mWindStrength = 5;
 
 	int mWindNoChangeCount = 0;
-	int mWindForceChangeCount = 2;
+	int mWindForceChangeCount = 1;
 
 private:
 
 	void HandleWind();
-
 	float mWindDirection = 0;
 };
 
