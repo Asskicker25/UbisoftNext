@@ -296,8 +296,7 @@ void CPlayerManager::HandleProjectileHit(bool success)
 		GetOtherPlayer()->pSprite->SetAnimation(HIT_ONE);
 		DamagePlayer(pProjectileFactory->GetCurrentProjectile()->mDamageAmount);
 
-		CheckForDeath();
-		return;
+		if (CheckForDeath()) return;
 	}
 	else
 	{
@@ -343,13 +342,15 @@ void CPlayerManager::DamagePlayer(int amount)
 	OnPlayerHit.Invoke();
 }
 
-void CPlayerManager::CheckForDeath()
+bool CPlayerManager::CheckForDeath()
 {
 	if (GetOtherPlayer()->IsPlayerDead())
 	{
 		HandlePlayerDead();
 		HandleSoundOnHit(true);
+		return true;
 	}
+	return false;
 }
 
 
