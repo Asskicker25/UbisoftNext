@@ -56,6 +56,8 @@ public:
 	// Callback function triggered when transitioning to the next level.
 	CEvents OnNextLevel;
 
+	int mPlayerWon = 0;
+
 private:
 
 	std::vector<CBaseLevel*> mListOfLevels;					// Vector to store registered game levels.

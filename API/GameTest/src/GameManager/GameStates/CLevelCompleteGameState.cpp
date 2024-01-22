@@ -23,10 +23,23 @@ void CLevelCompleteGameState::Start()
 	mHeader = new CGameObject();
 	mHeader->pSprite = App::CreateSprite("Assets/Sprites/GameOver.png", 1, 1);
 	mHeader->mIsUI = true;
-	mHeader->SetPosition(mWindowCenterX, mWindowCenterY, true);
+	mHeader->SetPosition(mWindowCenterX, mWindowCenterY + 100, true);
 	mHeader->pSprite->SetScale(3.0f);
 
+
+	mPlayerWonIndex = CLevelManager::GetInstance().mPlayerWon;
 	
+	mPlayerWon = new CGameObject();
+	mPlayerWon->pSprite = App::CreateSprite("Assets/Sprites/PlayerWon_strip2.png", 2, 1);
+	mPlayerWon->mIsUI = true;
+
+	mPlayerWon->pSprite->CreateAnimation(1, 1, { 0 });
+	mPlayerWon->pSprite->CreateAnimation(2, 1, { 1 });
+
+	mPlayerWon->SetPosition(mWindowCenterX, mWindowCenterY - 50, true);
+	mPlayerWon->pSprite->SetScale(0.8f);
+
+	mPlayerWon->pSprite->SetAnimation(mPlayerWonIndex);
 }
 
 // Handles user input to transition to the next level or return to the main menu.
@@ -50,6 +63,8 @@ void CLevelCompleteGameState::Render()
 {
 	/*App::Print(mWindowCenterX, mWindowCenterY + mWindowCenterY / 2, "Level Complete ", 0, 1, 0, GLUT_BITMAP_TIMES_ROMAN_24);
 	App::Print(mWindowCenterX, mWindowCenterY, "Press Enter/Start to Next Level ", 0, 1, 0, GLUT_BITMAP_TIMES_ROMAN_24);*/
+
+	//App::Print(mWindowCenterX, mWindowCenterY,  std::to_string(mPlayerWonIndex).c_str(), 0, 1, 0, GLUT_BITMAP_TIMES_ROMAN_24);
 }
 
 void CLevelCompleteGameState::Cleanup()
@@ -57,6 +72,7 @@ void CLevelCompleteGameState::Cleanup()
 	mBg->Cleanup();
 	mExitUI->Cleanup();
 	mHeader->Cleanup();
+	mPlayerWon->Cleanup();
 }
 
 void CLevelCompleteGameState::Pause()

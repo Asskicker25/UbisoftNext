@@ -20,7 +20,10 @@ private:
 	float mWindowCenterX = 0;
 	float mWindowCenterY = 0;
 
+	int mPlayerWonIndex = 0;
+
 	CGameObject* mBg = nullptr;
+	CGameObject* mPlayerWon = nullptr;
 	CGameObject* mExitUI = nullptr;
 	CGameObject* mHeader = nullptr;
 

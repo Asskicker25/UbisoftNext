@@ -14,6 +14,7 @@
 #include "../Player/Arc/CArcDot.h"
 
 #include "../ParticleSystem/CParticleSystem.h"
+#include "../LevelManager/CLevelManager.h"
 
 void CLevelOne::Start()
 {
@@ -96,6 +97,7 @@ void CLevelOne::Cleanup()
 		obj->Cleanup();
 	}
 
+	CLevelManager::GetInstance().mPlayerWon = CGameplayManager::GetInstance().mCurrentTurn;
 	
 	CGameplayManager::GetInstance().OnTurnStart.UnSubscribe("Level_TurnStart");
 	CPlayerManager::GetInstance().OnShoot.UnSubscribe("Level_Shoot");
@@ -117,6 +119,7 @@ void CLevelOne::HandleInput()
 	if (App::GetController().CheckButton(XINPUT_GAMEPAD_START, true))
 	{
 		mIsLevelCompleted = true;
+		CLevelManager::GetInstance().mPlayerWon = 0;
 	}
 
 	//mCanCameraMove = App::GetController().CheckButton(XINPUT_GAMEPAD_A, false);

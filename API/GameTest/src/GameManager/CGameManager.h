@@ -35,6 +35,7 @@ public:
 	//   state - The enumerated value representing the new current game state.
 	void ChangeState(EGameState state);
 
+
 	// Cleans up resources and performs necessary tasks before exiting the game.
 	void Cleanup();
 
