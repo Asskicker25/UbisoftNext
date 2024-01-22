@@ -53,6 +53,7 @@ public:
 	CGameObject* mNightTextUI = nullptr;
 	CNumberUI* mNightCountUI = nullptr;
 
+	CGameObject* mPlayerTurnUI = nullptr;
 
 	Vector2 mWallSwitchRoundRange = Vector2(2, 5);
 	Vector2 mNightSwitchRoundRange = Vector2(3, 5);
@@ -75,6 +76,7 @@ private:
 	void HandleWind();
 	void HandleRoundSwitch();
 	void HandleRoundIncrement();
+	void HandleTurnText();
 
 	void CalculateRandomRound(int& mRandomRound, int rangeX, int rangeY);
 

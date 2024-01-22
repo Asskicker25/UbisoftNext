@@ -2,6 +2,7 @@
 #include "../Player/CPlayerManager.h"
 #include "../Utilities/Random.h"
 #include "CNumberUI.h"
+#include "../Tween/CTweenManager.h"
 
 CGameplayManager::CGameplayManager()
 {
@@ -44,6 +45,16 @@ void CGameplayManager::Start()
 	mNightCountUI->SetPosition(130 + 110, APP_VIRTUAL_HEIGHT - 115, true);
 	mNightCountUI->pSprite->SetScale(0.72);
 
+	mPlayerTurnUI = new CGameObject();
+	mPlayerTurnUI->mIsUI = true;
+	mPlayerTurnUI->pSprite = App::CreateSprite("Assets/Sprites/PlayerTurn_strip2.png", 2, 1);
+	mPlayerTurnUI->SetPosition(APP_VIRTUAL_WIDTH / 2, APP_VIRTUAL_HEIGHT -250, true);
+	mPlayerTurnUI->pSprite->CreateAnimation(0, 1, { 0 });
+	mPlayerTurnUI->pSprite->CreateAnimation(1, 1, { 1 });
+	mPlayerTurnUI->pSprite->SetAnimation(0);
+	mPlayerTurnUI->pSprite->SetScale(0);
+	mPlayerTurnUI->mOpacity = 0.85f;
+
 	SwitchTurn();
 	HandleRoundSwitch();
 }
@@ -76,6 +87,8 @@ void CGameplayManager::Cleanup()
 	mNightTextUI->Cleanup();
 	mNightCountUI->Cleanup();
 
+	mPlayerTurnUI->Cleanup();
+
 	mCurrentNightSwitchRound = 0;
 	mCurrentWallSwitchRound = 0;
 
@@ -90,6 +103,7 @@ void CGameplayManager::SwitchTurn()
 
 	HandleRoundIncrement();
 	HandleWind();
+	HandleTurnText();
 
 	mWindHud->SetDirection(mWindDirection);
 
@@ -172,6 +186,27 @@ void CGameplayManager::HandleRoundIncrement()
 
 		HandleRoundSwitch();
 	}
+}
+
+void CGameplayManager::HandleTurnText()
+{
+	mPlayerTurnUI->pSprite->SetAnimation(mCurrentTurn == 1 ? 0 : 1);
+
+	CTweenManager::GetInstance().AddFloatTween(0, 0.6, 1, [this](float value)
+		{
+			mPlayerTurnUI->pSprite->SetScale(value);
+			
+		});
+
+	CTimerEventsHandler::GetInstance().AddDelay([this]()
+		{
+			CTweenManager::GetInstance().AddFloatTween(0.6, 0, 1, [this](float value)
+				{
+					mPlayerTurnUI->pSprite->SetScale(value);
+				});
+		}, 2);
+
+
 }
 
 void CGameplayManager::CalculateRandomRound(int& mRandomRound, int rangeX, int rangeY)
