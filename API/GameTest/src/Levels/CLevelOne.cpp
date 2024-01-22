@@ -79,7 +79,7 @@ void CLevelOne::Render()
 {
 	std::string message = std::to_string(CWorld::GetInstance().mOrigin.x) + " , " + std::to_string(CWorld::GetInstance().mOrigin.y);
 
-	App::Print(10, 110, message.c_str(), 1.0f, 0.0f, 1.0f, GLUT_BITMAP_HELVETICA_10);
+	//App::Print(10, 110, message.c_str(), 1.0f, 0.0f, 1.0f, GLUT_BITMAP_HELVETICA_10);
 
 	CGameplayManager::GetInstance().Render();
 	CPlayerManager::GetInstance().Render();

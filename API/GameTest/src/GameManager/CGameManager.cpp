@@ -92,5 +92,5 @@ void CGameManager::PrintGameState()
 		break;
 	}
 
-	App::Print(10, 60, (mGameStateMessage + mGameStateString).c_str(), 1.0f, 0.0f, 1.0f, GLUT_BITMAP_HELVETICA_10);
+	//p::Print(10, 60, (mGameStateMessage + mGameStateString).c_str(), 1.0f, 0.0f, 1.0f, GLUT_BITMAP_HELVETICA_10);
 }
