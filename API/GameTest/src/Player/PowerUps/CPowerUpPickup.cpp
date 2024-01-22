@@ -122,6 +122,7 @@ void CPowerUpPickup::HandleCollisionCheck()
 		particle->mColorY = 0;
 		particle->mColorZ = 1;
 
+		App::PlaySound("Assets/Audio/Collect.wav");
 		CTimerEventsHandler::GetInstance().AddDelay([particle]()
 			{
 				particle->Cleanup();

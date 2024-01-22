@@ -199,14 +199,29 @@ void CLevelOne::HandleEnvironmentCreations()
 				ground1->pSprite->SetAnimation(2);
 			}
 
+			
 			if (j == 0 && i != -2)
 			{
+
 				ground1->pSprite->SetAnimation(1);
 			}
+
+			
+
 
 			if (j != 0 && i == -2)
 			{
 				ground1->pSprite->SetAnimation(5);
+			}
+
+			if (j != 3 && i == 7)
+			{
+				ground1->pSprite->SetAnimation(3);
+			}
+
+			if (i == 7 && j == 0)
+			{
+				ground1->pSprite->SetAnimation(0);
 			}
 
 		}
@@ -238,14 +253,27 @@ void CLevelOne::HandleEnvironmentCreations()
 				ground1->pSprite->SetAnimation(0);
 			}
 
+
 			if (j == 0 && i != -2)
 			{
 				ground1->pSprite->SetAnimation(1);
 			}
 
+			
+
 			if (j != 0 && i == -2)
 			{
 				ground1->pSprite->SetAnimation(3);
+			}
+
+			if (j != 3 && i == 7)
+			{
+				ground1->pSprite->SetAnimation(5);
+			}
+
+			if (i == 7 && j == 0)
+			{
+				ground1->pSprite->SetAnimation(2);
 			}
 
 		}

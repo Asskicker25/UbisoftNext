@@ -267,6 +267,7 @@ void CPlayerManager::HandleShoot()
 {
 	mAimDirection = Vector2(0, 0);
 
+
 	mCurrentArc->Disable();
 	mPrevArc->Disable();
 
@@ -287,6 +288,8 @@ void CPlayerManager::HandleShoot()
 	mCurrentArcPositions = arc.GetArc();
 
 	pProjectileFactory->Shoot(mProjectileType, mCurrentArcPositions);
+
+	App::PlaySound("Assets/Audio/Swish.wav");
 
 	OnShoot.Invoke();
 

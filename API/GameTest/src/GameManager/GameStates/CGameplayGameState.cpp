@@ -23,6 +23,8 @@ CGameplayGameState::~CGameplayGameState()
 void CGameplayGameState::Start()
 {
 	CLevelManager::GetInstance().StartLevel();
+	App::PlaySound("Assets/Audio/BGM.wav", true);
+
 }
 
 // Updates the current level in the gameplay state.
@@ -34,6 +36,7 @@ void CGameplayGameState::Update()
 	}*/
 
 	CLevelManager::GetInstance().Update();
+
 }
 
 // Renders the current level in the gameplay state.
@@ -44,6 +47,7 @@ void CGameplayGameState::Render()
 
 void CGameplayGameState::Cleanup()
 {
+	App::StopSound("Assets/Audio/BGM.wav");
 	CTweenManager::GetInstance().Cleanup();
 }
 

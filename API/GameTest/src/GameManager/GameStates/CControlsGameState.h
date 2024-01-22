@@ -22,6 +22,7 @@ private:
 	CGameObject* mBg = nullptr;
 	CGameObject* mControlsUI = nullptr;
 	CGameObject* mExitUI = nullptr;
+	CGameObject* mPowerUps = nullptr;
 
 };
 

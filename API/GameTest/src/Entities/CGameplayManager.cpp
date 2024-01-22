@@ -76,6 +76,9 @@ void CGameplayManager::Cleanup()
 	mNightTextUI->Cleanup();
 	mNightCountUI->Cleanup();
 
+	mCurrentNightSwitchRound = 0;
+	mCurrentWallSwitchRound = 0;
+
 	mCleanedUp = true;
 }
 
