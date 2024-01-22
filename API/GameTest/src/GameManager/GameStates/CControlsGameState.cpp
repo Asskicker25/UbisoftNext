@@ -31,7 +31,7 @@ void CControlsGameState::Start()
 	mPowerUps = new CGameObject();
 	mPowerUps->pSprite = App::CreateSprite("Assets/Sprites/PowerUpControls.png", 1, 1);
 	mPowerUps->mIsUI = true;
-	mPowerUps->SetPosition(mWindowCenterX + 250, mWindowCenterY , true);
+	mPowerUps->SetPosition(mWindowCenterX + 290, mWindowCenterY , true);
 
 	CEntityManager::GetInstance().SortEntities();
 
