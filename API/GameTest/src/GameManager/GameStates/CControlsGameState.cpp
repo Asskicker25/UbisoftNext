@@ -1,4 +1,5 @@
 #include "CControlsGameState.h"
+#include "../../EntityManager/CEntityManager.h"
 
 CControlsGameState::CControlsGameState()
 {
@@ -31,6 +32,9 @@ void CControlsGameState::Start()
 	mPowerUps->pSprite = App::CreateSprite("Assets/Sprites/PowerUpControls.png", 1, 1);
 	mPowerUps->mIsUI = true;
 	mPowerUps->SetPosition(mWindowCenterX + 250, mWindowCenterY , true);
+
+	CEntityManager::GetInstance().SortEntities();
+
 }
 
 void CControlsGameState::Update()

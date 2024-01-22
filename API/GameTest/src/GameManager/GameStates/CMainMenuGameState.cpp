@@ -1,6 +1,6 @@
 #include "CMainMenuGameState.h"
 #include "../../LevelManager/CLevelManager.h"
-
+#include "../../EntityManager/CEntityManager.h"
 
 // Initializes the main menu state.
 void CMainMenuGameState::Start()
@@ -35,7 +35,7 @@ void CMainMenuGameState::Start()
 	mCreditsUI->mIsUI = true;
 	mCreditsUI->SetPosition(mWindowCenterX, mWindowCenterY - 200, true);
 
-
+	CEntityManager::GetInstance().SortEntities();
 
 }
 

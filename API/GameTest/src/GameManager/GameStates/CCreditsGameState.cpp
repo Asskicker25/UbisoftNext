@@ -1,4 +1,5 @@
 #include "CCreditsGameState.h"
+#include "../../EntityManager/CEntityManager.h"
 
 CCreditsGameState::CCreditsGameState()
 {
@@ -25,6 +26,9 @@ void CCreditsGameState::Start()
 	mCreditsUI->pSprite = App::CreateSprite("Assets/Sprites/Credits.png", 1, 1);
 	mCreditsUI->mIsUI = true;
 	mCreditsUI->SetPosition(mWindowCenterX, mWindowCenterY , true);
+
+	CEntityManager::GetInstance().SortEntities();
+
 	
 }
 

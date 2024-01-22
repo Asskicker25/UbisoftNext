@@ -1,5 +1,6 @@
 #include "CLevelCompleteGameState.h"
 #include "../../LevelManager/CLevelManager.h"
+#include "../../EntityManager/CEntityManager.h"
 
 
 // Initializes the level complete state.
@@ -40,6 +41,9 @@ void CLevelCompleteGameState::Start()
 	mPlayerWon->pSprite->SetScale(0.8f);
 
 	mPlayerWon->pSprite->SetAnimation(mPlayerWonIndex);
+
+	CEntityManager::GetInstance().SortEntities();
+
 }
 
 // Handles user input to transition to the next level or return to the main menu.
